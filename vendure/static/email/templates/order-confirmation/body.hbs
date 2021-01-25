@@ -1,0 +1,99 @@
+<mjml>
+    <mj-head>
+        <mj-attributes>
+            <mj-all font-family="Arial, Verdana" color="#343434"/>
+        </mj-attributes>
+    </mj-head>
+    <mj-body>
+        <mj-section>
+            <mj-column>
+                <mj-image src="{{ logoUrl }}"></mj-image>
+                <mj-divider border-color="#343434"></mj-divider>
+
+                <mj-text>Bedankt voor je bestelling bij {{ channelName }}!</mj-text>
+
+            </mj-column>
+        </mj-section>
+
+        <mj-section>
+            <mj-column>
+                <mj-text font-weight="800" padding-bottom="0px">Dit heb je besteld:</mj-text>
+
+                <mj-table cellpadding="6px">
+                    {{#each order.lines }}
+                        <tr padding-bottom="0px">
+                            <td>{{ quantity }} x</td>
+                            <td>
+                                {{ productVariant.sku }} {{ productVariant.name }}
+                            </td>
+                            <td align="right">€ {{ formatMoney linePriceWithTax }}</td>
+                        </tr>
+                    {{/each}}
+
+                    <tr>
+                        <td>Verzendkosten</td>
+                        <td></td>
+                        <td align="right">€ {{ formatMoney order.shippingWithTax }}</td>
+                    </tr>
+
+                    <tr></tr>
+                </mj-table>
+                <mj-divider border-color="#343434" border-width="1px"></mj-divider>
+                <mj-table cellpadding="6px">
+
+                    <tr>
+                        <td>Totaal Excl.</td>
+                        <td align="right">€ {{ formatMoney summary.totalExVAT }}</td>
+                    </tr>
+                    {{#each summary.taxTotal}}
+                        <tr>
+                            <td>{{ @key }}% BTW</td>
+                            <td align="right">€ {{ formatMoney this }}</td>
+                        </tr>
+                    {{/each}}
+
+                    <tr>
+                        <td>Totaal BTW</td>
+                        <td align="right">€ {{ formatMoney summary.totalVAT }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Totaal Incl.</strong></td>
+                        <td align="right"><strong>€ {{ formatMoney summary.totalIncVAT }}</strong></td>
+                    </tr>
+
+                </mj-table>
+
+            </mj-column>
+        </mj-section>
+
+        <mj-section>
+            <mj-column>
+                <mj-text font-weight="800" padding-bottom="0px">Bezorgadres</mj-text>
+                {{#with order.shippingAddress }}
+                    {{#if company}}
+                        <mj-text padding-bottom="0px">{{ company }}</mj-text>{{/if}}
+                    {{#if streetLine1}}
+                        <mj-text padding-bottom="0px">{{ streetLine1 }} {{ streetLine2 }}</mj-text>{{/if}}
+                    {{#if postalCode}}
+                        <mj-text padding-bottom="0px">{{ postalCode }}, {{ city }}</mj-text>{{/if}}
+                    {{#if country}}
+                        <mj-text>{{ country }}</mj-text>{{/if}}
+                {{/with}}
+            </mj-column>
+            <mj-column>
+                <mj-text font-weight="800" padding-bottom="0px">Bestelling</mj-text>
+                <mj-text padding-bottom="0px">Nr. {{ order.code }}</mj-text>
+                <mj-text padding-bottom="0px">{{ formatDate order.orderPlacedAt }}</mj-text>
+            </mj-column>
+        </mj-section>
+
+        <mj-section>
+            <mj-column>
+                <mj-divider border-color="#343434"></mj-divider>
+                <mj-text>Vragen of opmerkingen? Neem contact op via {{ supportEmail }}</mj-text>
+            </mj-column>
+        </mj-section>
+
+
+    </mj-body>
+</mjml>
