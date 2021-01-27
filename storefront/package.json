@@ -1,0 +1,24 @@
+{
+  "name": "Wormenkwekerijwasse.nl-storefront",
+  "private": true,
+  "scripts": {
+    "serve": "yarn gridsome develop",
+    "serve:static": "yarn concurrently \"nodemon --ext js,vue --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
+    "serve:local": "export NODE_ENV=development && yarn gridsome develop"
+  },
+  "resolutions": {
+    "graphql": "^14.7.0"
+  },
+  "dependencies": {
+    "@gridsome/source-graphql": "*",
+    "graphql": "^14.7.0",
+    "graphql-request": "3.4.0",
+    "gridsome": "*"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "http-server": "^0.12.3",
+    "nodemon": "^2.0.7",
+    "webpack-bundle-analyzer": "^4.3.0"
+  }
+}

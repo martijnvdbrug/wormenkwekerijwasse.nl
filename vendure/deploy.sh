@@ -1,6 +1,6 @@
 #!/bin/bash
 export ENV_VARS=$(paste -sd, .env)
-gcloud run deploy shops-api \
+gcloud run deploy vendure \
             --quiet \
             --image "eu.gcr.io/wormenkwekerijwasse/vendure:latest" \
             --region "europe-west1" \

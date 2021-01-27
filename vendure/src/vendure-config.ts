@@ -9,11 +9,11 @@ import {
 import {AssetServerPlugin} from '@vendure/asset-server-plugin';
 import path from 'path';
 import {MolliePlugin} from './mollie-payment/mollie.plugin';
-import {GoogleStorageStrategy} from './google-storage-assets/google-storage-strategy';
-import {PublicStockPlugin} from './public-stock/public-stock.plugin';
-import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
-import {WebhookPlugin} from './webhook/webhook.plugin';
 import {AdminUiPlugin} from '@vendure/admin-ui-plugin';
+import {WebhookPlugin} from 'vendure-plugin-webhook';
+import {ReviewsPlugin} from './reviews/reviews-plugin';
+import {GoogleStorageStrategy} from 'vendure-plugin-google-storage-assets';
+import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -40,7 +40,7 @@ export const config: VendureConfig = {
     },
     dbConnectionOptions: {
         type: 'mysql',
-        synchronize: true,
+        synchronize: false,
         logging: false,
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
@@ -53,11 +53,12 @@ export const config: VendureConfig = {
     },
     customFields: {},
     plugins: [
+        ReviewsPlugin,
         WebhookPlugin.init({
             httpMethod: 'POST',
+            delay: 3000,
             events: [ProductEvent, ProductVariantChannelEvent, ProductVariantEvent]
         }),
-        PublicStockPlugin,
         MolliePlugin,
         AssetServerPlugin.init({
             storageStrategyFactory: () => new GoogleStorageStrategy('wassets'),

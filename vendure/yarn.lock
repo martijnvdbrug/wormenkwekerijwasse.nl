@@ -12180,6 +12180,18 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
+vendure-plugin-google-storage-assets@^0.18.6:
+  version "0.18.6"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-google-storage-assets/-/vendure-plugin-google-storage-assets-0.18.6.tgz#2b744a3cb029e5d445fde627c20e70fc5a0a8daf"
+  integrity sha512-W9pDsXBbChE6Gm5OJDdpVjE1lRtuN0AcY775s/lu1fOJTVxcuXQdQ4zOSUtFiKhF0brdjmJYNOKbTJHo+to0gA==
+  dependencies:
+    "@google-cloud/storage" "^5.3.0"
+
+vendure-plugin-webhook@^0.18.7:
+  version "0.18.7"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-webhook/-/vendure-plugin-webhook-0.18.7.tgz#c07b5e617024eb6d53dc8fe7362ef5ac38704167"
+  integrity sha512-G/yFWpKjKdX1ynWQus3Veue+qHwRBWcAIIAWNKsAufG3lFJi8o+Bns26xMD1eHPpfNDZ8Sh29UkQf3VO4VVqhg==
+
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"

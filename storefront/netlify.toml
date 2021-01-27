@@ -1,0 +1,4 @@
+[build]
+NODE_ENV = "production"
+NETLIFY_USE_YARN = true
+ignore = "git diff --quiet HEAD^ HEAD ./ ../_shared-components/"
