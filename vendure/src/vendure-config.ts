@@ -14,6 +14,7 @@ import {WebhookPlugin} from 'vendure-plugin-webhook';
 import {ReviewsPlugin} from './reviews/reviews-plugin';
 import {GoogleStorageStrategy} from 'vendure-plugin-google-storage-assets';
 import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
+import {PublicStockPlugin} from 'vendure-plugin-public-stock';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -54,6 +55,7 @@ export const config: VendureConfig = {
     customFields: {},
     plugins: [
         ReviewsPlugin,
+        PublicStockPlugin,
         WebhookPlugin.init({
             httpMethod: 'POST',
             delay: 3000,

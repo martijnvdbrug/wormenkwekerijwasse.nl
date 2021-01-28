@@ -12187,6 +12187,11 @@ vendure-plugin-google-storage-assets@^0.18.6:
   dependencies:
     "@google-cloud/storage" "^5.3.0"
 
+vendure-plugin-public-stock@^0.18.8:
+  version "0.18.8"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-public-stock/-/vendure-plugin-public-stock-0.18.8.tgz#c04beec10487926b99d4ed80a00f3c77298bf788"
+  integrity sha512-V2b1yxxfsISCH0eLnJfKGgFaoI0ogxzApdBYCyBpOP5Bpq6GiyvhdV2cJoqUC5qBtj4ixYKewf3tNO686+50zQ==
+
 vendure-plugin-webhook@^0.18.7:
   version "0.18.7"
   resolved "https://registry.yarnpkg.com/vendure-plugin-webhook/-/vendure-plugin-webhook-0.18.7.tgz#c07b5e617024eb6d53dc8fe7362ef5ac38704167"

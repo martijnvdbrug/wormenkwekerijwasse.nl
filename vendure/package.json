@@ -31,7 +31,8 @@
     "tmp": "^0.2.1",
     "typescript": "4.0.3",
     "vendure-plugin-google-storage-assets": "^0.18.6",
-    "vendure-plugin-webhook": "^0.18.7"
+    "vendure-plugin-webhook": "^0.18.7",
+    "vendure-plugin-public-stock": "^0.18.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",

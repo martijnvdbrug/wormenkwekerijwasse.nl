@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <p>Dit zou t moeten doen</p>
+    <p>Dit is category overview</p>
   </Layout>
 </template>
 
