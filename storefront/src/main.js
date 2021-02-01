@@ -2,7 +2,9 @@
 // The Client api can be used here. Learn more: gridsome.org/docs/client-api
 import Layout from '~/layouts/Default.vue'
 import {Vendure} from './vendure/vendure';
-import '~/styles.css'
+import '~/styles.css';
+import '@fontsource/nunito/400.css';
+import '@fontsource/nunito/800.css';
 
 export default function (Vue, {router, head, isClient}) {
     // Set default layout as a global component

@@ -2,16 +2,17 @@
   "name": "Wormenkwekerijwasse.nl-storefront",
   "private": true,
   "scripts": {
-    "serve:prod": "yarn gridsome develop",
     "scss": "node-sass src/styles.scss -o src/ --output-style compressed",
     "scss:watch": "yarn scss && yarn scss -w",
-    "serve:static": "yarn concurrently \"nodemon --ext js,vue --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
-    "serve:local": "yarn concurrently \"export NODE_ENV=development && yarn gridsome develop\" \"yarn scss:watch\""
+    "serve:prod": "yarn concurrently \"yarn gridsome develop\" \"yarn scss:watch\"",
+    "serve:static": "yarn concurrently \"nodemon --ext js,vue --ignore ./dist/ --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
+    "serve:local": "yarn concurrently \"export NODE_ENV=local && yarn gridsome develop\" \"yarn scss:watch\""
   },
   "resolutions": {
     "graphql": "^14.7.0"
   },
   "dependencies": {
+    "@fontsource/nunito": "^4.1.0",
     "@gridsome/source-graphql": "*",
     "foundation-sites": "^6.6.3",
     "graphql": "^14.7.0",
