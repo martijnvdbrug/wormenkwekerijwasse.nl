@@ -67,7 +67,7 @@
 
     </div>
 
-    <div style="padding: 10px;">
+    <div class="container">
       <slot/>
     </div>
 
@@ -113,5 +113,8 @@ export default {
 }
 .title-bar {
   padding: 10px;
+}
+.container {
+  padding: 30px 10px;
 }
 </style>

@@ -15,6 +15,7 @@ import {ReviewsPlugin} from './reviews/reviews-plugin';
 import {GoogleStorageStrategy} from 'vendure-plugin-google-storage-assets';
 import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
 import {PublicStockPlugin} from 'vendure-plugin-public-stock';
+import {setBranding} from '@vendure/ui-devkit/compiler';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -52,7 +53,11 @@ export const config: VendureConfig = {
     paymentOptions: {
         paymentMethodHandlers: [],
     },
-    customFields: {},
+    customFields: {
+        Product: [
+            {name: 'weight', type: 'int'},
+        ]
+    },
     plugins: [
         ReviewsPlugin,
         PublicStockPlugin,
@@ -89,12 +94,17 @@ export const config: VendureConfig = {
                         fromAddress: '"Webshop" <noreply@pinelab.studio>',
                     },
                 }),*/
-       // Production ready, precompiled admin UI
+        // Production ready, precompiled admin UI
         AdminUiPlugin.init({
-                    port: 3002,
-                    app: {
-                        path: path.join(__dirname, '__admin-ui/dist')
-                    },
-                }),
+            adminUiConfig: {
+                brand: 'Wormenkwekerij Wasse',
+                hideVendureBranding: false,
+                hideVersion: false,
+            },
+            port: 3002,
+            app: {
+                path: path.join(__dirname, '__admin-ui/dist'),
+            },
+        }),
     ],
 };

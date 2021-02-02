@@ -2,7 +2,7 @@
 
 $header-font-family: 'Nunito';
 $header-font-weight: 800;
-$header-color:  #5FAD56;
+$header-color: #5FAD56;
 $body-font-family: Nunito;
 $body-font-color: #363537;
 $body-background: #F6F6F8;
@@ -11,6 +11,9 @@ $topbar-submenu-background: #ffffff;
 $button-background-hover: #92c78e;
 $button-background: $header-color;
 $accordionmenu-arrow-color: $header-color;
+$global-radius: 10px;
+$card-border-radius: $global-radius;
+$button-radius: $global-radius;
 
 // Global styles
 @include foundation-global-styles;
@@ -95,6 +98,7 @@ label {
   height: 0;
   overflow: hidden;
 }
+
 .product-thumbnail img {
   display: table-cell;
   position: absolute;
@@ -126,14 +130,15 @@ label {
   position: relative;
   margin-right: -10px;
 }
+
 .shadowed {
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
-  -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
-  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .round {
-  border-radius: 10px;
+  border-radius: $global-radius;
   border: none;
 }
 
@@ -141,9 +146,9 @@ label {
   @include breakpoint(medium) {
     border-radius: 10px;
     border: none;
-    -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -151,11 +156,18 @@ label {
   color: $header-color;
 }
 
+.menu li {
+  @include breakpoint(small down) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
 .title-bar a {
   color: $header-color;
 }
 
-.dropdown.menu.medium-horizontal>li.is-dropdown-submenu-parent>a::after {
+.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
   border-color: $header-color transparent transparent;
 }
 
@@ -169,7 +181,7 @@ label {
 }
 
 .block-header {
-  margin-bottom: 0.2rem;
+  margin-bottom: 25px;
   @include breakpoint(small down) {
     margin-top: 20px;
   }
