@@ -15,7 +15,7 @@ import {ReviewsPlugin} from './reviews/reviews-plugin';
 import {GoogleStorageStrategy} from 'vendure-plugin-google-storage-assets';
 import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
 import {PublicStockPlugin} from 'vendure-plugin-public-stock';
-import {setBranding} from '@vendure/ui-devkit/compiler';
+import {ShippingByWeightPlugin} from './shipping-by-weight';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -53,13 +53,13 @@ export const config: VendureConfig = {
     paymentOptions: {
         paymentMethodHandlers: [],
     },
-    customFields: {
-        Product: [
-            {name: 'weight', type: 'int'},
-        ]
-    },
+    customFields: {},
+    /*    shippingOptions: {
+          shippingCalculators
+        },*/
     plugins: [
         ReviewsPlugin,
+        ShippingByWeightPlugin,
         PublicStockPlugin,
         WebhookPlugin.init({
             httpMethod: 'POST',

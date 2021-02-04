@@ -17,7 +17,7 @@ import {
     MutationUpdateProductReviewArgs,
     QueryProductReviewArgs,
     QueryProductReviewsArgs,
-} from '../generated-admin-types';
+} from '../../generated/generated-admin-types';
 
 @Resolver()
 export class ProductReviewAdminResolver {

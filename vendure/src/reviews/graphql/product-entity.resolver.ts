@@ -2,7 +2,7 @@ import { Args, Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { Api, ApiType, ListQueryBuilder, Product, TransactionalConnection } from '@vendure/core';
 
 import { ProductReview } from '../entities/product-review.entity';
-import { ProductReviewsArgs } from '../generated-shop-types';
+import { ProductReviewsArgs } from '../../generated/generated-shop-types';
 
 @Resolver('Product')
 export class ProductEntityResolver {

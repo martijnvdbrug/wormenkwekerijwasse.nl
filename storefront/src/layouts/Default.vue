@@ -30,17 +30,8 @@
             <li>
               <a href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
-                <li>
-                  <g-link to="/">Item 1A</g-link>
-                </li>
-                <li>
-                  <g-link to="/">Item 1A</g-link>
-                </li>
-                <li>
-                  <g-link to="/">Item 1A</g-link>
-                </li>
-                <li>
-                  <g-link to="/">Item 1A</g-link>
+                <li v-for="collection of $context.collections">
+                  <g-link :to="`/product-categorie/${collection.slug}`">{{ collection.name }}</g-link>
                 </li>
               </ul>
             </li>
@@ -105,9 +96,8 @@ export default {
 }
 
 .is-submenu-item {
-  padding-left: 20px;
+  padding: 20px 20px;
 }
-
 .mobile-cart {
   font-size: 1.3rem;
 }

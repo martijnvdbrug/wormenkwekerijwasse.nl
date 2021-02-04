@@ -11,7 +11,7 @@ import {
 } from '@vendure/core';
 
 import { ProductReview } from '../entities/product-review.entity';
-import { MutationSubmitProductReviewArgs, MutationVoteOnReviewArgs } from '../generated-shop-types';
+import { MutationSubmitProductReviewArgs, MutationVoteOnReviewArgs } from '../../generated/generated-shop-types';
 
 @Resolver()
 export class ProductReviewShopResolver {

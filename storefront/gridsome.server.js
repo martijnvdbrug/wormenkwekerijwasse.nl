@@ -31,8 +31,20 @@ module.exports = async function (api) {
 
         products = products.map(p => setCalculatedFields(p));
         products.map(p => p.soldOut = false); // For rendering nothing is soldOut
+        const featuredProducts = products.filter(p => p.facetValues.find(facetValue => facetValue.name === 'featured'));
+
 
         products.reverse();
+
+        /* -----------------  Home --------------------------------------------------------------------------- */
+        createPage({
+            path: `/`,
+            component: './src/templates/Index.vue',
+            context: {
+                featuredProducts,
+                collections
+            }
+        });
 
         /* -----------------  Product detail ---------------------------------------------------------------- */
         products.forEach((product) => {
@@ -44,16 +56,6 @@ module.exports = async function (api) {
                     previousPage: '/'
                 }
             })
-        });
-
-        /* -----------------  Home --------------------------------------------------------------------------- */
-        createPage({
-            path: `/`,
-            component: './src/templates/Index.vue',
-            context: {
-                featuredProducts: products,
-                collections
-            }
         });
 
         /* -----------------  Category overview ---------------------------------------------------------------- */

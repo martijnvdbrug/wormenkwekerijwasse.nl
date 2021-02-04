@@ -14,6 +14,7 @@ $accordionmenu-arrow-color: $header-color;
 $global-radius: 10px;
 $card-border-radius: $global-radius;
 $button-radius: $global-radius;
+$card-divider-background: white;
 
 // Global styles
 @include foundation-global-styles;
@@ -70,7 +71,8 @@ $button-radius: $global-radius;
 // @include foundation-float-classes;
 @include foundation-flex-classes;
 @include foundation-visibility-classes;
-// @include foundation-prototype-classes;
+@include foundation-prototype-classes;
+
 * {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
   -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
@@ -89,29 +91,6 @@ label {
   height: auto;
   min-height: 0;
   width: auto;
-}
-
-.product-thumbnail {
-  position: relative;
-  padding-bottom: 100%;
-  width: 100%;
-  height: 0;
-  overflow: hidden;
-}
-
-.product-thumbnail img {
-  display: table-cell;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  text-align: center;
-  vertical-align: middle;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
 }
 
 .small-font {
@@ -180,9 +159,13 @@ label {
   -webkit-box-shadow: 0 7px 0 $header-color, 0 14px 0 $header-color;
 }
 
-.block-header {
-  margin-bottom: 25px;
+.product-img {
+  object-fit: cover;
+  height: 200px;
+  @include breakpoint(medium down) {
+    height: 150px;
+  }
   @include breakpoint(small down) {
-    margin-top: 20px;
+    height: 100px;
   }
 }

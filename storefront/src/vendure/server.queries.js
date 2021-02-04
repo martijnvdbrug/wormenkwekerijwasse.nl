@@ -10,6 +10,9 @@ const productFields = `
             id
             preview
         }
+        facetValues {
+            name
+        }
         description
         variants {
             id
@@ -47,6 +50,9 @@ const collectionsQuery = `
                     name
                     slug
                     description
+                    featuredAsset {
+                        preview
+                    }
                     productVariants {
                         items {
                           product ${productFields}

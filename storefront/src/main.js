@@ -5,12 +5,12 @@ import {Vendure} from './vendure/vendure';
 import '~/styles.css';
 import '@fontsource/nunito/400.css';
 import '@fontsource/nunito/800.css';
-import TitledCard from './components/CategoryCard';
+import Card from './components/Card';
 
 export default function (Vue, {router, head, isClient}) {
     // Set default layout as a global component
     Vue.component('Layout', Layout);
-    Vue.component('CategoryCard', TitledCard);
+    Vue.component('Card', Card);
 
     // DNS prefetch for images from storage
     head.link.push({
