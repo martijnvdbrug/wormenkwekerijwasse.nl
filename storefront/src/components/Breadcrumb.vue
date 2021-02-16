@@ -8,6 +8,9 @@
 </template>
 <script>
 export default {
-  props: ['items']
+  props: ['items'],
+  mounted() {
+    console.log(this.items);
+  }
 }
 </script>

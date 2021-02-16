@@ -50,11 +50,11 @@ module.exports = async function (api) {
         /* -----------------  Product detail ---------------------------------------------------------------- */
         products.forEach((product) => {
 
-            const breadcrumb = [{name: 'Assortiment', slug: '/assortiment/'}];
+            const breadcrumb = [{name: 'Assortiment', url: '/'}];
             if (product.collections && product.collections[0]) {
                 breadcrumb.push({name: product.collections[0].name, url: `/${categoryPrefix}/${product.collections[0].slug}/`})
             }
-            breadcrumb.push({name: product.name, url: `/${product.slug}/`})
+            breadcrumb.push({name: product.name, url: `/${productPrefix}/${product.slug}/`})
 
             createPage({
                 path: `/${productPrefix}/${product.slug}/`,

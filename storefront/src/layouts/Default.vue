@@ -62,6 +62,24 @@
       <slot/>
     </div>
 
+    <div class="footer shadowed">
+      <div class="grid-x grid-margin-x">
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Assortiment</h4>
+          <g-link v-for="collection of $context.collections" :to="collection.slug">{{ collection.name }}<br></g-link>
+        </div>
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Contact</h4>
+          <g-link v-for="collection of $context.collections" :to="collection.slug">{{ collection.name }}<br></g-link>
+        </div>
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Nieuwsbrief</h4>
+          <p>Binnenkort kunt u zich hier aanmelden!</p>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </template>
 <script>
@@ -78,6 +96,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$static);
     $?.(document).foundation();
   }
 }
@@ -98,13 +117,21 @@ export default {
 .is-submenu-item {
   padding: 20px 20px;
 }
+
 .mobile-cart {
   font-size: 1.3rem;
 }
+
 .title-bar {
   padding: 10px;
 }
+
 .container {
   padding: 30px 10px;
+}
+
+.footer {
+  padding: 20px;
+  background: white;
 }
 </style>
