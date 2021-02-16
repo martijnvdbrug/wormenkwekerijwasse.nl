@@ -1,0 +1,75 @@
+<vdr-ab-right>
+    <button
+            class="btn btn-secondary"
+            *vdrIfPermissions="'UpdateCatalog'"
+            (click)="cancel()"
+    >
+        Cancel
+    </button>
+    <button
+            class="btn btn-primary"
+            (click)="save()"
+            [disabled]="detailForm.invalid || detailForm.pristine"
+    >
+        Save
+    </button>
+</vdr-ab-right>
+
+<form
+        class="form"
+        [formGroup]="detailForm"
+        (keydown.enter)="$event.preventDefault()"
+>
+
+    <vdr-form-field label="Featured asset" for="featuredAsset">
+        <div class="card">
+            <div class="card-img">
+                <div class="featured-asset">
+                    <img
+                            *ngIf="featuredAsset"
+                            [src]="featuredAsset | assetPreview:'small' "
+                            (click)="selectFeaturedAsset()"
+                    />
+                    <p *ngIf="featuredAssetUrl && !featuredAsset">{{ featuredAssetUrl }}</p>
+                    <div class="placeholder" *ngIf="!featuredAsset" (click)="selectFeaturedAsset()">
+                        <clr-icon shape="image" size="128"></clr-icon>
+                        <div>{{ 'catalog.no-featured-asset' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block"><ng-container ></ng-container></div>
+            <div class="card-footer" *vdrIfPermissions="'UpdateCatalog'">
+                <button class="btn" (click)="selectFeaturedAsset()">
+                    <clr-icon shape="attachment"></clr-icon>
+                    {{ 'asset.add-asset' | translate }}
+                </button>
+            </div>
+        </div>
+    </vdr-form-field>
+
+    <vdr-form-field label="Title" for="title">
+        <input
+                id="title"
+                type="text"
+                formControlName="title"
+                (input)="updateSlug($event.target.value)"
+        />
+    </vdr-form-field>
+    <vdr-form-field label="Slug" for="slug">
+        <input
+                id="slug"
+                type="text"
+                formControlName="slug"
+        />
+    </vdr-form-field>
+    <vdr-form-field label="SEO description ({{ descriptionWordCount }}) " for="description">
+        <textarea id="description" formControlName="description" style="width: 100%" (input)="countWords()"></textarea>
+    </vdr-form-field>
+    <vdr-rich-text-editor
+            id="contentBlockRte"
+            formControlName="body"
+            label="Content body"
+    ></vdr-rich-text-editor>
+
+
+</form>

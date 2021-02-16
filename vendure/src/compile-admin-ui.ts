@@ -2,10 +2,12 @@ import {compileUiExtensions, setBranding} from '@vendure/ui-devkit/compiler';
 import * as path from 'path';
 import {webhookAdminUi} from 'vendure-plugin-webhook';
 import {ReviewsPlugin} from './reviews/reviews-plugin';
+import {simpleCmsAdminUi} from './simple-cms/ui';
 
 compileUiExtensions({
     outputPath: path.join(__dirname, '__admin-ui'),
     extensions: [
+        simpleCmsAdminUi,
         webhookAdminUi,
         ReviewsPlugin.uiExtensions,
         setBranding({

@@ -84,6 +84,7 @@
             :img-alt="product.name"
             :link-to="`/product/${product.slug}/`"
             :title="product.name"
+            :price="product.defaultPrice"
         ></Card>
       </div>
 
@@ -92,9 +93,6 @@
 </template>
 
 <script>
-
-import AsyncImage from '../components/AsyncImage';
-
 export default {
   data() {
     return {
@@ -107,7 +105,6 @@ export default {
       return assetHolder?.featuredAsset?.preview;
     }
   },
-  components: {AsyncImage},
   created() {
     this.collections = this.$context.collections.slice(0, 8);
     this.products = this.$context.featuredProducts.slice(0, 8);

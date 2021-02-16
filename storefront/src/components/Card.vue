@@ -24,5 +24,6 @@ export default {
 .card h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
 }
 </style>

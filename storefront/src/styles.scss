@@ -79,6 +79,10 @@ $card-divider-background: white;
   outline: none !important;
 }
 
+.green {
+  color: $header-color;
+}
+
 textarea {
   resize: none;
 }
@@ -167,5 +171,11 @@ label {
   }
   @include breakpoint(small down) {
     height: 100px;
+  }
+}
+
+h5 {
+  @include breakpoint(small down) {
+    font-size: 0.9rem;
   }
 }

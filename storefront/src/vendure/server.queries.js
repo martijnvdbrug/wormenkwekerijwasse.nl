@@ -13,6 +13,10 @@ const productFields = `
         facetValues {
             name
         }
+       collections {
+            name
+            slug
+        } 
         description
         variants {
             id

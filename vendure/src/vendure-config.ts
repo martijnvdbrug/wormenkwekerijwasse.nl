@@ -16,6 +16,8 @@ import {GoogleStorageStrategy} from 'vendure-plugin-google-storage-assets';
 import {CustomStockAllocationStrategy} from './stock-allocation/custom-stock-allocation.strategy';
 import {PublicStockPlugin} from 'vendure-plugin-public-stock';
 import {ShippingByWeightPlugin} from './shipping-by-weight';
+import {SimpleCMSPlugin} from './simple-cms/simple-cms.plugin';
+import {SendcloudPlugin} from './sendcloud/sendcloud.plugin';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -54,13 +56,15 @@ export const config: VendureConfig = {
         paymentMethodHandlers: [],
     },
     customFields: {},
-    /*    shippingOptions: {
-          shippingCalculators
-        },*/
     plugins: [
         ReviewsPlugin,
+        SimpleCMSPlugin,
         ShippingByWeightPlugin,
         PublicStockPlugin,
+        SendcloudPlugin.init({
+            publicKey: process.env.SENDCLOUD_API_PUBLIC!,
+            secret: process.env.SENDCLOUD_API_SECRET!
+        }),
         WebhookPlugin.init({
             httpMethod: 'POST',
             delay: 3000,

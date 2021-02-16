@@ -1,0 +1,22 @@
+<vdr-ab-right>
+    <vdr-action-bar-items locationId="product-list"></vdr-action-bar-items>
+    <a class="btn btn-primary" [routerLink]="['./create']" *vdrIfPermissions="'CreateCatalog'">
+        <clr-icon shape="plus"></clr-icon>
+    </a>
+</vdr-ab-right>
+
+<br>
+<br>
+<br>
+<br>
+
+<table style="width: 80%;">
+    <tr *ngFor="let block of blocks">
+        <td [routerLink]="block.id"><a>{{ block.title }}</a></td>
+        <td>
+            <a class="btn btn-sml" (click)="delete(block.id)" >
+                <clr-icon shape="trash" class="is-danger"></clr-icon>
+            </a>
+        </td>
+    </tr>
+</table>

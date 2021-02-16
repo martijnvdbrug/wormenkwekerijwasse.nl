@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import {getSeoDescription} from '../vendure/seo-helpers';
+import {getSeoDescription} from '../seo-helpers';
 
 export default {
   props: ['productId'],
