@@ -1,5 +1,5 @@
 <template>
-  <layout>
+  <Layout>
 
     <div>
       <h1> Privacybeleid</h1>
@@ -97,5 +97,5 @@
 
       <p>Reikampen 6 <br>9415 RB<br>Hijken<br><br></p>
     </div>
-  </layout>
+  </Layout>
 </template>
