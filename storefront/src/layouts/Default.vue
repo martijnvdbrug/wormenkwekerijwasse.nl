@@ -11,9 +11,7 @@
           </g-link>
         </div>
         <div class="cell small-3 text-right">
-          <g-link to="/" aria-label="Shopping cart">
-            <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-4"></i>
-          </g-link>
+          <CartIcon/>
         </div>
       </div>
     </div>
@@ -30,8 +28,8 @@
             <li>
               <a href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
-                <li v-for="collection of $context.collections">
-                  <g-link :to="`/product-categorie/${collection.slug}`">{{ collection.name }}</g-link>
+                <li v-for="collection of collections">
+                  <g-link :to="`/${categoryPrefix}/${collection.slug}`">{{ collection.name }}</g-link>
                 </li>
               </ul>
             </li>
@@ -44,29 +42,67 @@
           </ul>
         </div>
         <div class="cell small-1 hide-for-small-only align-right">
-          <ul class="menu">
-            <li>
-              <g-link to="/" aria-label="Shopping cart">
-                <h5>
-                  <i class="fi-shopping-cart"></i>
-                </h5>
-              </g-link>
-            </li>
-          </ul>
+          <CartIcon/>
         </div>
       </div>
 
     </div>
 
     <div class="container">
+
+      <Breadcrumb v-if="$context.breadcrumb" :items="$context.breadcrumb"/>
+
       <slot/>
+    </div>
+
+    <div class="footer shadowed">
+      <div class="grid-x grid-margin-x">
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Assortiment</h4>
+          <p><g-link v-for="collection of $static.Vendure.collections.items" :to="`${categoryPrefix}/${collection.slug}`" v-bind:key="collection.slug">{{ collection.name }}<br></g-link></p>
+        </div>
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Contact</h4>
+          <p><a href="tel:0031 06 18 44 18 25">tel: 06 18 44 18 25</a></p>
+          <p><strong>Wormenkwekerij adres:</strong><br>
+          Wormenkwekerij Wasse<br>
+            9411 VP, Beilen<br>
+            Vorrelveen 6<br>
+          </p>
+          <p><strong>Factuur adres:</strong><br>
+            Reikampen 6<br>
+            9415 RB, Hijken<br>
+            Drenthe<br>
+            Kvk: 66626811<br>
+            Btw nr: NL001413015b26<br>
+          </p>
+        </div>
+        <div class="cell medium-12 large-4 text-center">
+          <h4>Afhalen is mogelijk op</h4>
+          <p>Maandag, Woensdag en Vrijdag van 10:00 uur tot 17:00 uur.</p>
+          <p>Buiten deze tijden alleen mogelijk op afspraak.</p>
+            <p>Telefonisch bereikbaar van:
+            ma-vrij 10:00 uur tot 18:00</p>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </template>
 <script>
+import CartIcon from '../components/CartIcon';
+import {categoryPrefix, getTopLevelCollections, productPrefix} from '../util';
+
 export default {
-  components: {},
+  components: {CartIcon},
+  data() {
+    return {
+      productPrefix,
+      categoryPrefix,
+      collections: []
+    }
+  },
   metaInfo() {
     return {
       meta: [
@@ -77,11 +113,34 @@ export default {
       ]
     }
   },
+  created() {
+    this.collections = getTopLevelCollections(this.$static.Vendure.collections.items);
+  },
   mounted() {
     $?.(document).foundation();
   }
 }
 </script>
+<static-query>
+{
+  Vendure {
+    collections {
+      items {
+          id
+          name
+          slug
+          description
+          children {
+            id
+            name
+            slug
+            description
+          }
+      }
+    }
+  }
+}
+</static-query>
 <style>
 .menu h5 {
   margin-bottom: 0;
@@ -98,13 +157,21 @@ export default {
 .is-submenu-item {
   padding: 20px 20px;
 }
+
 .mobile-cart {
   font-size: 1.3rem;
 }
+
 .title-bar {
   padding: 10px;
 }
+
 .container {
   padding: 30px 10px;
+}
+
+.footer {
+  padding: 20px;
+  background: white;
 }
 </style>

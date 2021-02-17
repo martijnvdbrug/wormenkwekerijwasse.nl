@@ -1,7 +1,5 @@
 <template>
   <Layout>
-    <Breadcrumb :items="$context.breadcrumb"/>
-
     <div class="card shadowed article-card">
       <div class="card-section">
         <h1> {{ $context.product.name }} </h1>
@@ -11,7 +9,7 @@
         <div class="grid-x grid-margin-x">
 
           <div class="cell small-12 medium-6 margin-bottom-2">
-            <AsyncImage :src="getPreview(asset)" :alt="$context.product.name"/>
+            <AsyncImage :src="getPreview(asset)" :alt="$context.product.name" style="width: 100%;"/>
             <div v-if="assets && assets.length > 1" class="grid-x small-up-5" style="margin-right: -6px;">
               <div class="cell asset" v-for="asset of assets">
                 <div class="product-thumbnail" v-on:click="selectAsset(asset)">
@@ -52,7 +50,7 @@
         <Card
             :img="getPreview(product.featuredAsset)"
             :img-alt="product.name"
-            :link-to="`/product/${product.slug}/`"
+            :link-to="`/${productPrefix}/${product.slug}/`"
             :title="product.name"
             :price="product.defaultPrice"
         ></Card>
@@ -64,7 +62,7 @@
 
 <script>
 import {getMetaInfo} from '../seo-helpers';
-
+import {productPrefix} from '../util';
 export default {
   metaInfo() {
     return getMetaInfo(this.$context.product);
@@ -74,7 +72,8 @@ export default {
       asset: {},
       assets: {},
       selectedVariant: {},
-      products: []
+      products: [],
+      productPrefix
     }
   },
   methods: {
@@ -109,7 +108,7 @@ export default {
     },
     load() { // Load variant, assets and selectedAsset
       const variant = this.$context.product.variants.find(v => v.available > 0) || this.$context.product.variants[0];
-      this.selectVariant(variant.id);
+      this.selectVariant(variant?.id);
       this.asset = this.selectedVariant.featuredAsset || this.getDefaultAsset(this.$context.product)
       this.assets = this.getAssets(this.selectedVariant);
     },

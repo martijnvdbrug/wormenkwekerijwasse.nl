@@ -68,7 +68,7 @@
   </ClientOnly>
 </template>
 <script>
-import NumberInput from './NumberInput';
+import NumberInput from '../NumberInput';
 
 export default {
   components: {

@@ -1,8 +1,8 @@
 <template>
   <div>
     <span class="badge alert cart-badge">{{ nrOfItems }}</span>
-    <g-link class="button" to="/cart/" aria-label="Shopping cart">
-      <i class="fi-shopping-cart"></i>
+    <g-link to="/winkelmand/" aria-label="Shopping cart">
+      <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-4"></i>
     </g-link>
   </div>
 </template>
@@ -21,3 +21,8 @@ export default {
   },
 }
 </script>
+<style>
+.fi-shopping-cart {
+  color: #5FAD56;
+}
+</style>
