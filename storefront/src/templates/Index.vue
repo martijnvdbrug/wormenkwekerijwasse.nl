@@ -58,14 +58,14 @@
         <h5>In ons assortiment: </h5>
       </div>
     </div>
-    <div class="grid-x grid-margin-x grid-margin-y small-up-2 medium-up-4">
 
+    <div class="grid-x grid-margin-x grid-margin-y small-up-2 medium-up-4">
 
       <div v-for="collection of collections" class="cell">
         <Card
             :img="asset(collection)"
             :img-alt="collection.name"
-            :link-to="`/product-categorie/${collection.slug}/`"
+            :link-to="`/${categoryPrefix}/${collection.slug}/`"
             :title="collection.name"
         ></Card>
       </div>
@@ -78,11 +78,11 @@
     </div>
     <div class="grid-x grid-margin-x grid-margin-y small-up-2 medium-up-4">
 
-      <div v-for="product of products" class="cell">
+      <div v-for="product of $context.featuredProducts" class="cell">
         <Card
             :img="asset(product)"
             :img-alt="product.name"
-            :link-to="`/product/${product.slug}/`"
+            :link-to="`/${productPrefix}/${product.slug}/`"
             :title="product.name"
             :price="product.defaultPrice"
         ></Card>
@@ -93,11 +93,13 @@
 </template>
 
 <script>
+import {categoryPrefix, productPrefix} from '../util';
+
 export default {
   data() {
     return {
       collections: [],
-      products: [],
+      productPrefix, categoryPrefix
     }
   },
   methods: {
@@ -107,7 +109,6 @@ export default {
   },
   created() {
     this.collections = this.$context.collections.slice(0, 8);
-    this.products = this.$context.featuredProducts.slice(0, 8);
   }
 }
 </script>
@@ -115,7 +116,8 @@ export default {
 .article-card {
   height: 100%;
 }
-.article-card img{
+
+.article-card img {
   height: 100%;
   object-fit: cover;
 }

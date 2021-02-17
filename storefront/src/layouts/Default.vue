@@ -11,10 +11,7 @@
           </g-link>
         </div>
         <div class="cell small-3 text-right">
-          <span class="badge alert cart-badge">{{ nrOfItems }}</span>
-          <g-link to="/winkelmand/" aria-label="Shopping cart">
-            <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-4"></i>
-          </g-link>
+          <CartIcon/>
         </div>
       </div>
     </div>
@@ -31,8 +28,8 @@
             <li>
               <a href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
-                <li v-for="collection of $static.Vendure.collections.items">
-                  <g-link :to="`/product-categorie/${collection.slug}`">{{ collection.name }}</g-link>
+                <li v-for="collection of collections">
+                  <g-link :to="`/${categoryPrefix}/${collection.slug}`">{{ collection.name }}</g-link>
                 </li>
               </ul>
             </li>
@@ -52,6 +49,9 @@
     </div>
 
     <div class="container">
+
+      <Breadcrumb v-if="$context.breadcrumb" :items="$context.breadcrumb"/>
+
       <slot/>
     </div>
 
@@ -59,15 +59,15 @@
       <div class="grid-x grid-margin-x">
         <div class="cell medium-12 large-4 text-center">
           <h4>Assortiment</h4>
-          <g-link v-for="collection of $static.Vendure.collections.items" :to="collection.slug" v-bind:key="collection.slug">{{ collection.name }}<br></g-link>
+          <p><g-link v-for="collection of $static.Vendure.collections.items" :to="`${categoryPrefix}/${collection.slug}`" v-bind:key="collection.slug">{{ collection.name }}<br></g-link></p>
         </div>
         <div class="cell medium-12 large-4 text-center">
           <h4>Contact</h4>
-          <a href="tel:0031 06 18 44 18 25">tel: 06 18 44 18 25</a>
+          <p><a href="tel:0031 06 18 44 18 25">tel: 06 18 44 18 25</a></p>
           <p><strong>Wormenkwekerij adres:</strong><br>
           Wormenkwekerij Wasse<br>
             9411 VP, Beilen<br>
-            Vorrelveen 6,<br>
+            Vorrelveen 6<br>
           </p>
           <p><strong>Factuur adres:</strong><br>
             Reikampen 6<br>
@@ -92,9 +92,17 @@
 </template>
 <script>
 import CartIcon from '../components/CartIcon';
+import {categoryPrefix, getTopLevelCollections, productPrefix} from '../util';
 
 export default {
   components: {CartIcon},
+  data() {
+    return {
+      productPrefix,
+      categoryPrefix,
+      collections: []
+    }
+  },
   metaInfo() {
     return {
       meta: [
@@ -105,8 +113,10 @@ export default {
       ]
     }
   },
+  created() {
+    this.collections = getTopLevelCollections(this.$static.Vendure.collections.items);
+  },
   mounted() {
-    console.log(this.$static);
     $?.(document).foundation();
   }
 }
@@ -120,6 +130,12 @@ export default {
           name
           slug
           description
+          children {
+            id
+            name
+            slug
+            description
+          }
       }
     }
   }

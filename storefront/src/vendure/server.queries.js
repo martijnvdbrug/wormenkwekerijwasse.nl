@@ -16,6 +16,10 @@ const productFields = `
        collections {
             name
             slug
+            parent {
+                name
+                slug
+            }
         } 
         description
         variants {
@@ -45,11 +49,7 @@ const productsQuery = `{
     }
 }`;
 
-const collectionsQuery = `
-    {
-        Vendure {
-            collections {
-                items {
+const collectionFields = `
                     id
                     name
                     slug
@@ -61,7 +61,17 @@ const collectionsQuery = `
                         items {
                           product ${productFields}
                         }
-                      }
+                    }`;
+
+const collectionsQuery = `
+    {
+        Vendure {
+            collections {
+                items {
+                    ${collectionFields}
+                    children {
+                        ${collectionFields}
+                    }
                 }
             }
         }
