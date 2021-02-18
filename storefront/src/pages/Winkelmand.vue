@@ -130,6 +130,7 @@ export default {
 <style>
 .cart-thumbnail {
   height: 60px;
+  width: 60px;
   padding-bottom: 10px;
   padding-top: 10px;
 }
