@@ -31,7 +31,7 @@ export function toParcelInput(order: Order, variants: ProductVariant[]): ParcelI
 }
 
 /**
- * @param variant including correspon
+ * @param variant including correspondiing product
  * @param line
  */
 export function toParcelInputItem(line: OrderLine, variant: ProductVariant): ParcelInputItem {

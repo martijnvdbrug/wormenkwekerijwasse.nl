@@ -20,7 +20,7 @@
           <div class="grid-x grid-margin-x">
 
             <div class="cell">
-              <div class="card shadowed article-card">
+              <div class="card shadowed">
 
                 <div class="card-section" v-if="orderLines > 0">
 
