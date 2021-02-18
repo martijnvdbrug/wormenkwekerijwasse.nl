@@ -1,11 +1,31 @@
 <template>
-  <div>
-    <p>Je wordt doorgestuurd naar het betaal platform...</p>
-
-    <ClientOnly>
-      <p class="alert" v-if="error" v-html="error"></p>
-    </ClientOnly>
-  </div>
+  <Layout>
+    <div class="text-center">
+      <p v-if="!error">Je wordt doorgestuurd naar het betaal platform...</p>
+      <ClientOnly>
+        <div v-if="error" class="alert">
+          <p>Er is iets misgegaan, neem contact met ons op</p>
+          <p v-html="error"></p>
+        </div>
+      </ClientOnly>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </Layout>
 </template>
 <script>
 export default {
@@ -15,6 +35,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.error)
     const states = await this.$vendure.getNextOrderStates();
     if (states?.indexOf('ArrangingPayment') > -1) {
       await this.$vendure.transitionOrderToState('ArrangingPayment');
@@ -33,3 +54,8 @@ export default {
   }
 }
 </script>
+<style>
+.alert {
+  color: red;
+}
+</style>

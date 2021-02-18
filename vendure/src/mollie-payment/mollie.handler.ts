@@ -10,10 +10,10 @@ export const molliePaymentHandler = new PaymentMethodHandler({
         value: 'Mollie payment',
     }],
     args: {
-        channelKeys: {
-            type: 'string', list: true, description: [{
+        apiKey: {
+            type: 'string', list: false, description: [{
                 languageCode: LanguageCode.en,
-                value: 'Use this format: CHANNELTOKEN=MOLLIEKEY,REDIRECT_URL',
+                value: 'Use this format: MOLLIEKEY=REDIRECT_URL',
             }]
         }
     },
@@ -21,7 +21,7 @@ export const molliePaymentHandler = new PaymentMethodHandler({
     /** This is called when the `addPaymentToOrder` mutation is executed */
     createPayment: async (ctx, order,amount,  args, metadata): Promise<CreatePaymentResult> => {
         try {
-             let {apiKey, host} = MollieHelper.getConfig(args.channelKeys, metadata.channel);
+             let {apiKey, host} = MollieHelper.getConfig(args.apiKey);
              if (host && !host.endsWith('/')) {
                  host = `${host}/`; // append slash if
              }
@@ -36,7 +36,7 @@ export const molliePaymentHandler = new PaymentMethodHandler({
                 },
                 description: `Bestelling ${order.code}`,
                 redirectUrl: `${host}order/${order.code}`,
-                webhookUrl: `${process.env.VENDURE_HOST}/payments/mollie/${metadata.channel}`
+                webhookUrl: `${process.env.VENDURE_HOST}/payments/mollie`
             });
             return {
                 amount: order.totalWithTax,
@@ -49,6 +49,7 @@ export const molliePaymentHandler = new PaymentMethodHandler({
                 },
             };
         } catch (err) {
+            console.log(err);
             return {
                 amount: order.totalWithTax,
                 state: 'Declined' as const,

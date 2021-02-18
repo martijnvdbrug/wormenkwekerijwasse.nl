@@ -6,11 +6,12 @@
         <div class="cell show-for-large large-2"></div>
         <div class="cell small-12 large-8">
 
-          <h4>Dit zit er in je winkelmand:</h4>
-
-          <div class="grid-x grid-padding-x text-right">
-            <div class="cell text-right">
-              <g-link class="button" to="/gegevens/">
+          <div class="grid-x grid-padding-x">
+            <div class="cell small-10 text-left">
+              <h1>Dit zit er in je winkelmand:</h1>
+            </div>
+            <div class="cell small-2" style="position: relative;">
+              <g-link class="button" to="/gegevens/" style="position: absolute; bottom: 0; right: 0;">
                 Bestellen
               </g-link>
             </div>
@@ -51,7 +52,22 @@
                       <td>
                         <NumberInput :value="line.quantity" v-on:numberChange="updateQuantity(line.id, $event)"/>
                       </td>
-                      <td>{{ line.productVariant.priceWithTax | euro }}</td>
+                      <td>{{ line.linePriceWithTax | euro }}</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr style="padding-top: 30px;">
+                      <td></td>
+                      <td></td>
+                      <td><p>Verzendkosten: </p></td>
+                      <td><p> {{ activeOrder.shippingWithTax | euro }}</p></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td><p>Totaal: </p></td>
+                      <td><p><strong> {{ activeOrder.totalWithTax | euro }}</strong></p></td>
                     </tr>
                   </table>
 
@@ -83,6 +99,7 @@
 
 <script>
 import NumberInput from '../components/NumberInput';
+
 export default {
   components: {NumberInput},
   methods: {
@@ -120,7 +137,6 @@ export default {
 .cart-variant {
   color: gray;
 }
-
 th {
   text-align: left;
 }

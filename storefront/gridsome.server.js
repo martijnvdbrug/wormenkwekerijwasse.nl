@@ -1,7 +1,7 @@
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer/lib/BundleAnalyzerPlugin');
 const {categoryPrefix, productPrefix, getTopLevelCollections} = require('./src/util');
 const {setCalculatedFields, deduplicate} = require('./src/vendure/vendure');
-const {productsQuery, collectionsQuery} = require('./src/vendure/server.queries');
+const {productsQuery, collectionsQuery, availableCountriesQuery} = require('./src/vendure/server.queries');
 
 module.exports = async function (api) {
 
@@ -26,10 +26,12 @@ module.exports = async function (api) {
     api.createPages(async ({createPage, graphql}) => {
         let [
             {data: {Vendure: {products: {items: products}}}},
-            {data: {Vendure: {collections: {items: collections}}}}
+            {data: {Vendure: {collections: {items: collections}}}},
+            {data: {Vendure: {availableCountries}}}
         ] = await Promise.all([
             graphql(productsQuery),
-            graphql(collectionsQuery)
+            graphql(collectionsQuery),
+            graphql(availableCountriesQuery)
         ]);
 
         collections = getTopLevelCollections(collections);
@@ -135,6 +137,16 @@ module.exports = async function (api) {
                 });
             });
         });
+
+        /* --------------------- Customer details page ----------------------------*/
+        createPage({
+            path: `/gegevens/`,
+            component: './src/templates/Gegevens.vue',
+            context: {
+                availableCountries
+            }
+        });
+
     })
 
 

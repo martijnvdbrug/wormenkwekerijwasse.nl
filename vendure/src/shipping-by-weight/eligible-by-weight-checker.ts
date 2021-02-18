@@ -24,7 +24,6 @@ export const eligibleByWeightChecker = new ShippingEligibilityChecker({
         const productIds = order.lines.map(line => line.productVariant.productId);
         const products = await connection.findByIdsInChannel(ctx, Product, productIds, ctx.channelId, {});
         const totalOrderWeight = ShippingWeightUtil.calculateOrderWeight(order, products);
-        console.log(`${totalOrderWeight} > ${args.minWeight} && ${totalOrderWeight} < ${args.maxWeight} = ${(totalOrderWeight >= args.minWeight && totalOrderWeight < args.maxWeight)}`)
         return totalOrderWeight >= args.minWeight && totalOrderWeight < args.maxWeight;
     },
 });
