@@ -127,7 +127,7 @@ class Vendure {
     }
 
     validateResult(order) {
-        if ((order)?.errorCode) {
+        if (order && (order).errorCode) {
             throw Error(order.message);
         }
     }
