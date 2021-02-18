@@ -12,7 +12,7 @@
       <a class="hollow button" data-close aria-label="Close modal" type="button" style="width: 100%; margin-top: 30px;">
         Verder winkelen
       </a>
-      <g-link class="button" to="/cart/" data-close aria-label="Close modal" type="button" style="width: 100%;">
+      <g-link class="button" to="/winkelmand/" data-close aria-label="Close modal" type="button" style="width: 100%;">
         <i class="fi-shopping-cart"></i>
         Bestellen
       </g-link>

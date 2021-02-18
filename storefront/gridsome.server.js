@@ -21,6 +21,8 @@ module.exports = async function (api) {
             .use(BundleAnalyzerPlugin, [{analyzerMode: 'static'}])
     })*/
 
+    api.chainWebpack(config => config.mode('development'));
+
     api.createPages(async ({createPage, graphql}) => {
         let [
             {data: {Vendure: {products: {items: products}}}},
