@@ -1,10 +1,12 @@
-import {Order} from '@vendure/core';
+import {Order, Product} from '@vendure/core';
 
 export namespace ShippingWeightUtil {
 
-    export function calculateOrderWeight(order: Order): number {
+    export function calculateOrderWeight(order: Order, products: Product[]): number {
         return order.lines.reduce((acc, line) => {
-            const lineWeight = (line.productVariant.product.customFields as any).weight * line.quantity;
+            const product = products.find(p => p.id === line.productVariant.productId);
+            const weight = (product.customFields as any).weight || 0;
+            const lineWeight = weight * line.quantity;
             return acc + lineWeight;
         }, 0);
     }

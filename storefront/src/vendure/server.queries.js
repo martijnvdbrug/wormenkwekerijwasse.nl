@@ -49,6 +49,15 @@ const productsQuery = `{
     }
 }`;
 
+const availableCountriesQuery = `{
+    Vendure {
+        availableCountries{
+          name
+          code
+        }
+    }
+}`;
+
 const collectionFields = `
                     id
                     name
@@ -81,5 +90,6 @@ const collectionsQuery = `
 module.exports = {
     productsQuery,
     productFields,
-    collectionsQuery
+    collectionsQuery,
+    availableCountriesQuery
 };

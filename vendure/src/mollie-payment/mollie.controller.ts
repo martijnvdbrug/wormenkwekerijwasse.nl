@@ -10,14 +10,14 @@ export class MollieController {
     constructor(private orderService: OrderService, private connection: Connection, private channelService: ChannelService, private paymentStateMachine: PaymentStateMachine) {
     }
 
-    @Post('mollie/:channelToken')
-    async webhook(@Param('channelToken') channelToken: string, @Body() body: any): Promise<void> {
-        const ctx = await this.createContext(channelToken)
-        console.log(`Received payment for ${channelToken}`);
-        const {apiKey} = await MollieHelper.getConfigAsync(channelToken, this.connection);
+    @Post('mollie')
+    async webhook(@Body() body: any): Promise<void> {
+        const ctx = await this.createContext()
+        console.log(`Received payment for default channel`);
+        const {apiKey} = await MollieHelper.getConfigAsync(this.connection);
         const client = createMollieClient({apiKey});
         const molliePayment = await client.payments.get(body.id);
-        console.log(`Payment for channel ${channelToken}, orderCode ${molliePayment.metadata.orderCode} has status ${molliePayment.status}`);
+        console.log(`Payment for orderCode ${molliePayment.metadata.orderCode} has status ${molliePayment.status}`);
         // find payment in DB by id
         const dbPayment = await this.connection.getRepository(Payment).findOneOrFail({where: {transactionId: molliePayment.id}});
         if (molliePayment.status === PaymentStatus.paid) {
@@ -30,8 +30,8 @@ export class MollieController {
         }
     }
 
-    private async createContext(channelToken: string): Promise<RequestContext> {
-        const channel = await this.channelService.getChannelFromToken(channelToken);
+    private async createContext(): Promise<RequestContext> {
+        const channel = await this.channelService.getDefaultChannel();
         return new RequestContext({
             apiType: 'admin',
             isAuthorized: true,

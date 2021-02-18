@@ -35,7 +35,10 @@ export function toParcelInput(order: Order, variants: ProductVariant[]): ParcelI
  * @param line
  */
 export function toParcelInputItem(line: OrderLine, variant: ProductVariant): ParcelInputItem {
-    const weightPerUnit = ((variant.product.customFields as any)?.weight || 0) / 1000;
+    let weightPerUnit = ((variant.product.customFields as any)?.weight || 0) / 1000;
+    if (weightPerUnit < 0.001) {
+        weightPerUnit = 0.001;
+    }
     return {
         description: `${variant.product.name} ${variant.name}`,
         quantity: 2,

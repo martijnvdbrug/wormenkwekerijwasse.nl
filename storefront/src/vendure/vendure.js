@@ -80,6 +80,7 @@ class Vendure {
     async adjustOrderLine(orderLineId, quantity) {
         const {adjustOrderLine: activeOrder} = await this.request(adjustOrderLineMutation, {orderLineId, quantity});
         this.validateResult(activeOrder);
+        await this.setLowestShippingMethod();
         this.$store.activeOrder = activeOrder;
         return activeOrder;
     }
@@ -110,7 +111,6 @@ class Vendure {
     }
 
     async addPaymentToOrder(input) {
-        input.metadata.channel = process.env.GRIDSOME_VENDURE_TOKEN;
         const {addPaymentToOrder} = await this.request(addPaymentToOrderMutation, {input});
         this.validateResult(addPaymentToOrder);
         this.$store.activeOrder = addPaymentToOrder;
@@ -127,7 +127,7 @@ class Vendure {
     }
 
     validateResult(order) {
-        if ((order).errorCode) {
+        if ((order)?.errorCode) {
             throw Error(order.message);
         }
     }
