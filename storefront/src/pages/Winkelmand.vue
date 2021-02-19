@@ -57,7 +57,14 @@
                     <tr>
                       <td>&nbsp;</td>
                     </tr>
-                    <tr style="padding-top: 30px;">
+                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                      <td></td>
+                      <td></td>
+                      <td><p>{{ tax.taxRate }}% BTW </p></td>
+                      <td><p> {{ tax.taxTotal | euro}}</p></td>
+                    </tr>
+                    <tr>
+                    <tr>
                       <td></td>
                       <td></td>
                       <td><p>Verzendkosten: </p></td>

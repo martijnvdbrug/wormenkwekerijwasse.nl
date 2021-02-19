@@ -33,7 +33,7 @@ export default {
   methods: {
     set(newValue) {
       const value = parseInt(newValue);
-      if (value > 0 && value < 1000) {
+      if (value >= 0 && value < 1000) {
         this.number = value;
         this.$emit('numberChange', this.number)
       }

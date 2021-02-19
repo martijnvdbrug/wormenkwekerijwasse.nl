@@ -42,6 +42,12 @@
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
+                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                      <td></td>
+                      <td></td>
+                      <td><p>{{ tax.taxRate }}% BTW </p></td>
+                      <td><p> {{ tax.taxTotal | euro}}</p></td>
+                    </tr>
                     <tr>
                       <td>Verzendkosten:</td>
                       <td></td>
@@ -83,6 +89,7 @@ export default {
     let pollingCount = 0;
     try {
       while (this.order?.state !== 'PaymentSettled') {
+        console.log(this.order?.state);
         if (pollingCount > 10) {
           this.error = 'Er is iets misgegaan, neem contact met ons op.';
           break;

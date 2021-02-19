@@ -56,6 +56,12 @@ const orderFields = `
       errorMessage
       metadata
     }
+    taxSummary {
+        description
+        taxRate
+        taxBase
+        taxTotal        
+    }
   }
 `;
 

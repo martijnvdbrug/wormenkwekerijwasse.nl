@@ -36,7 +36,7 @@ export class SendcloudService {
 
     async syncToSendloud(ctx: RequestContext, order: Order): Promise<Parcel> {
         const variantIds = order.lines.map(l => l.productVariant.id);
-        const variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, variantIds, ctx.channelId, {relations: ['product']});
+        const variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, variantIds, ctx.channelId, {relations: ['translations', 'product', 'product.translations']});
         return this.client.createParcel(toParcelInput(order, variants));
     }
 
