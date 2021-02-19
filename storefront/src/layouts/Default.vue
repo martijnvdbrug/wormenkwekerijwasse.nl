@@ -117,7 +117,7 @@ export default {
     this.collections = getTopLevelCollections(this.$static.Vendure.collections.items);
   },
   mounted() {
-    $?.(document).foundation();
+    // $?.(document).foundation(); This is causing problems
   }
 }
 </script>
@@ -173,5 +173,18 @@ export default {
 .footer {
   padding: 20px;
   background: white;
+}
+.no-js .top-bar {
+  display: none;
+}
+
+@media screen and (min-width: 40em) {
+  .no-js .top-bar {
+    display: block;
+  }
+
+  .no-js .title-bar {
+    display: none;
+  }
 }
 </style>

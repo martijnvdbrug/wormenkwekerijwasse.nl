@@ -118,7 +118,9 @@ export default {
     this.products = this.$context.featuredProducts?.slice(0, 8) || [];
   },
   async mounted() {
+    console.log(JSON.stringify(this.$context.product));
     this.$context.product = await this.$vendure.getProduct(this.$context.product.slug);
+    console.log(JSON.stringify(this.$context.product));
     this.load();
   }
 }

@@ -5,8 +5,8 @@
     "scss": "node-sass src/styles.scss -o src/ --output-style compressed",
     "scss:watch": "yarn scss && yarn scss -w",
     "serve:prod": "yarn concurrently \"yarn gridsome develop\" \"yarn scss:watch\"",
-    "serve:static": "yarn concurrently \"nodemon --ext js,vue --ignore ./dist/ --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
-    "serve:local": "yarn concurrently \"export NODE_ENV=develop && yarn gridsome develop\" \"yarn scss:watch\""
+    "serve:static": "yarn concurrently \"nodemon --ext js,vue --ignore ./dist/ --exec 'rm -rf ./dist/ && yarn gridsome build && yarn http-server ./dist/'\"",
+    "serve:local": "yarn concurrently \"export NODE_ENV=development && yarn gridsome develop\" \"yarn scss:watch\""
   },
   "resolutions": {
     "graphql": "^14.7.0"
