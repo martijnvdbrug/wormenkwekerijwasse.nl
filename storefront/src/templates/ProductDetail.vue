@@ -9,7 +9,7 @@
         <div class="grid-x grid-margin-x">
 
           <div class="cell small-12 medium-6 margin-bottom-2">
-            <AsyncImage :src="getPreview(asset)" :alt="$context.product.name" style="width: 100%;"/>
+            <AsyncImage :src="getPreview(asset)" :alt="$context.product.name" style="width: 100%; height: 300px;"/>
             <div v-if="assets && assets.length > 1" class="grid-x small-up-5" style="margin-right: -6px;">
               <div class="cell asset" v-for="asset of assets">
                 <div class="product-thumbnail" v-on:click="selectAsset(asset)">
@@ -74,6 +74,12 @@ export default {
       selectedVariant: {},
       products: [],
       productPrefix
+    }
+  },
+  watch: {
+    '$route'() {
+      // Vue component not always re-mounted
+      this.load();
     }
   },
   methods: {

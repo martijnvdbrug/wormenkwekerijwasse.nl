@@ -116,8 +116,16 @@ export default {
   created() {
     this.collections = getTopLevelCollections(this.$static.Vendure.collections.items);
   },
+  watch: {
+    '$route'() {
+      // Vue component not always re-mounted
+      if (process.env.isClient) {
+        $?.(document).foundation();
+      }
+    }
+  },
   mounted() {
-    // $?.(document).foundation(); This is causing problems
+    $?.(document).foundation();
   }
 }
 </script>
