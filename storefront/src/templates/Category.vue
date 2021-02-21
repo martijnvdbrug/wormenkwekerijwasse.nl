@@ -4,7 +4,7 @@
     <div class="grid-x grid-margin-x grid-margin-y">
       <div class="cell">
         <h1>{{ $context.collection.name }}</h1>
-        <p v-html="$context.collection.description"></p>
+        <div v-html="$context.collection.description"></div>
       </div>
     </div>
 

@@ -63,7 +63,7 @@
         </div>
         <div class="cell medium-12 large-4 text-center">
           <h4>Contact</h4>
-          <p><a href="tel:0031 06 18 44 18 25">tel: 06 18 44 18 25</a></p>
+          <p><a href="tel:00310618441825">tel: 06 18 44 18 25</a></p>
           <p><strong>Wormenkwekerij adres:</strong><br>
           Wormenkwekerij Wasse<br>
             9411 VP, Beilen<br>

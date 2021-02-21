@@ -5,7 +5,7 @@
       <ClientOnly>
         <div v-if="error" class="alert">
           <p>Er is iets misgegaan, neem contact met ons op</p>
-          <p v-html="error"></p>
+          <div v-html="error"></div>
         </div>
       </ClientOnly>
     </div>

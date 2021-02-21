@@ -3,7 +3,7 @@
     <p>Je wordt doorgestuurd naar het betaal platform...</p>
 
     <ClientOnly>
-      <p class="alert" v-if="error" v-html="error"></p>
+      <div class="alert" v-if="error" v-html="error"></div>
     </ClientOnly>
   </div>
 </template>
