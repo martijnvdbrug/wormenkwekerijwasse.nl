@@ -29,7 +29,10 @@
               <a href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
                 <li v-for="collection of collections">
-                  <g-link :to="`/${categoryPrefix}/${collection.slug}`">{{ collection.name }}</g-link>
+                  <g-link :to="`/${categoryPrefix}/${collection.slug}`">{{
+                      collection.name
+                    }}
+                  </g-link>
                 </li>
               </ul>
             </li>
@@ -59,13 +62,16 @@
       <div class="grid-x grid-margin-x">
         <div class="cell medium-12 large-4 text-center">
           <h4>Assortiment</h4>
-          <p><g-link v-for="collection of $static.Vendure.collections.items" :to="`${categoryPrefix}/${collection.slug}`" v-bind:key="collection.slug">{{ collection.name }}<br></g-link></p>
+          <p>
+            <g-link v-for="collection of $static.Vendure.collections.items" :to="`${categoryPrefix}/${collection.slug}`"
+                    v-bind:key="collection.slug">{{ collection.name }}<br></g-link>
+          </p>
         </div>
         <div class="cell medium-12 large-4 text-center">
           <h4>Contact</h4>
           <p><a href="tel:00310618441825">tel: 06 18 44 18 25</a></p>
           <p><strong>Wormenkwekerij adres:</strong><br>
-          Wormenkwekerij Wasse<br>
+            Wormenkwekerij Wasse<br>
             9411 VP, Beilen<br>
             Vorrelveen 6<br>
           </p>
@@ -81,7 +87,7 @@
           <h4>Afhalen is mogelijk op</h4>
           <p>Maandag, Woensdag en Vrijdag van 10:00 uur tot 17:00 uur.</p>
           <p>Buiten deze tijden alleen mogelijk op afspraak.</p>
-            <p>Telefonisch bereikbaar van:
+          <p>Telefonisch bereikbaar van:
             ma-vrij 10:00 uur tot 18:00</p>
         </div>
       </div>
@@ -96,6 +102,9 @@ import {categoryPrefix, getTopLevelCollections, productPrefix} from '../util';
 
 export default {
   components: {CartIcon},
+  mixins: [
+    require('../mixins/load-foundation'),
+  ],
   data() {
     return {
       productPrefix,
@@ -115,17 +124,6 @@ export default {
   },
   created() {
     this.collections = getTopLevelCollections(this.$static.Vendure.collections.items);
-  },
-  watch: {
-    '$route'() {
-      // Vue component not always re-mounted
-      if (process.env.isClient) {
-        $?.(document).foundation();
-      }
-    }
-  },
-  mounted() {
-    $?.(document).foundation();
   }
 }
 </script>
@@ -182,6 +180,7 @@ export default {
   padding: 20px;
   background: white;
 }
+
 .no-js .top-bar {
   display: none;
 }

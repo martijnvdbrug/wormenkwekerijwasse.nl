@@ -4,6 +4,7 @@
       <div class="card-section">
         <h1> {{ $context.product.name }} </h1>
       </div>
+
       <div class="card-section">
 
         <div class="grid-x grid-margin-x">
@@ -63,6 +64,7 @@
 <script>
 import {getMetaInfo} from '../seo-helpers';
 import {productPrefix} from '../util';
+
 export default {
   metaInfo() {
     return getMetaInfo(this.$context.product);
