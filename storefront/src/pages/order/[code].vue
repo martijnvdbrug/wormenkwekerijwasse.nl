@@ -42,7 +42,7 @@
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
-                    <tr v-for="discount in activeOrder.discounts">
+                    <tr v-for="discount in order.discounts">
                       <td></td>
                       <td></td>
                       <td><h6>{{ discount.description }}</h6></td>
