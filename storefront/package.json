@@ -6,7 +6,7 @@
     "scss:watch": "yarn scss && yarn scss -w",
     "serve:prod": "yarn concurrently \"yarn gridsome develop\" \"yarn scss:watch\"",
     "serve:static": "yarn concurrently \"nodemon --ext js,vue --ignore ./dist/ --exec 'rm -rf ./dist/ && yarn gridsome build && yarn http-server -c-1 ./dist/'\"",
-    "serve:local": "yarn concurrently \"export NODE_ENV=development && yarn gridsome develop\" \"yarn scss:watch\""
+    "serve:local": "yarn concurrently \"nodemon --ext js,vue --ignore ./dist/ --exec 'rm -rf ./dist/ && export NODE_ENV=development && yarn gridsome build && yarn http-server -c-1 ./dist/'\""
   },
   "resolutions": {
     "graphql": "^14.7.0"

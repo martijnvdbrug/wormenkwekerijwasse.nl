@@ -34,6 +34,10 @@
                 <br>
 
                 <table style="text-align: right;">
+                  <tr v-for="discount in activeOrder.discounts">
+                    <td><h6>{{ discount.description }}</h6></td>
+                    <td><h6>{{ discount.amount | euro }}</h6></td>
+                  </tr>
                   <tr>
                     <td><p>Subtotaal: </p></td>
                     <td><p> {{ activeOrder.subTotalWithTax | euro }}</p></td>

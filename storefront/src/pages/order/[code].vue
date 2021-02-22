@@ -19,7 +19,7 @@
             <div class="cell small-12 large-8">
 
               <h1>Bedankt!</h1>
-              <p>Dit heb je besteld:</p>
+              <p>Dit heeft u besteld:</p>
 
               <div class="card shadowed" style="padding: 20px;">
                 <div class="table-scroll">
@@ -42,11 +42,11 @@
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
-                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                    <tr v-for="discount in activeOrder.discounts">
                       <td></td>
                       <td></td>
-                      <td><p>{{ tax.taxRate }}% BTW </p></td>
-                      <td><p> {{ tax.taxTotal | euro}}</p></td>
+                      <td><h6>{{ discount.description }}</h6></td>
+                      <td><h6>{{ discount.amount | euro }}</h6></td>
                     </tr>
                     <tr>
                       <td>Verzendkosten:</td>
@@ -57,6 +57,12 @@
                       <td>Totaal:</td>
                       <td></td>
                       <td>{{ order.totalWithTax | euro }}</td>
+                    </tr>
+                    <tr v-for="tax of order.taxSummary" style="color: gray;">
+                      <td></td>
+                      <td></td>
+                      <td><p>{{ tax.taxRate }}% BTW </p></td>
+                      <td><p> {{ tax.taxTotal | euro }}</p></td>
                     </tr>
                     </tbody>
                   </table>

@@ -21,7 +21,7 @@ export class ContentBlock extends VendureEntity {
     featuredImage?: string
     @Column({nullable: true})
     featuredImageId?: string
-    @Column()
+    @Column('longtext')
     body!: string
     @Column()
     description!: string

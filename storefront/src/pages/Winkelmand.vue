@@ -52,18 +52,17 @@
                       <td>
                         <NumberInput :value="line.quantity" v-on:numberChange="updateQuantity(line.id, $event)"/>
                       </td>
-                      <td>{{ line.linePriceWithTax | euro }}</td>
+                      <td><p>{{ line.linePriceWithTax | euro }}</p></td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>
                     </tr>
-                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                    <tr v-for="discount in activeOrder.discounts">
                       <td></td>
                       <td></td>
-                      <td><p>{{ tax.taxRate }}% BTW </p></td>
-                      <td><p> {{ tax.taxTotal | euro}}</p></td>
+                      <td><h6>{{ discount.description }}</h6></td>
+                      <td><h6>{{ discount.amount | euro }}</h6></td>
                     </tr>
-                    <tr>
                     <tr>
                       <td></td>
                       <td></td>
@@ -76,8 +75,15 @@
                       <td><p>Totaal: </p></td>
                       <td><p><strong> {{ activeOrder.totalWithTax | euro }}</strong></p></td>
                     </tr>
+                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                      <td></td>
+                      <td></td>
+                      <td><p>{{ tax.taxRate }}% BTW </p></td>
+                      <td><p> {{ tax.taxTotal | euro}}</p></td>
+                    </tr>
                   </table>
 
+                  <p style="color: gray; font-size: 0.9rem;">Verzendkosten worden in de volgende stap verrekend</p>
 
                   <div class="grid-x grid-padding-x text-right">
                     <div class="cell text-right">
@@ -90,7 +96,7 @@
                 </div>
 
                 <div class="card-section" v-if="emptyBasket">
-                  <p>Je hebt nog niks in je winkelmand...</p>
+                  <p>U hebt nog niks in uw winkelmand...</p>
                 </div>
 
               </div>
@@ -138,6 +144,7 @@ export default {
 .cart-thumbnail {
   height: 60px;
   width: 60px;
+  min-width: 60px;
   padding-bottom: 10px;
   padding-top: 10px;
 }

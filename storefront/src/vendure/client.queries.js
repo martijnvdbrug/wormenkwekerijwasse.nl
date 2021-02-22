@@ -57,10 +57,14 @@ const orderFields = `
       metadata
     }
     taxSummary {
-        description
-        taxRate
-        taxBase
-        taxTotal        
+      description
+      taxRate
+      taxBase
+      taxTotal        
+    }
+    discounts {
+     description
+     amount
     }
   }
 `;
