@@ -113,12 +113,4 @@ export default {
 }
 </script>
 <style>
-.article-card {
-  height: 100%;
-}
-
-.article-card img {
-  height: 100%;
-  object-fit: cover;
-}
 </style>

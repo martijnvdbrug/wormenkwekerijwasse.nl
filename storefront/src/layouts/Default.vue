@@ -37,7 +37,7 @@
               </ul>
             </li>
             <li>
-              <g-link to="/"><h5>Advies & informatie </h5></g-link>
+              <g-link to="/informatie/"><h5>Advies & informatie </h5></g-link>
             </li>
             <li>
               <g-link to="/"><h5>Contact</h5></g-link>

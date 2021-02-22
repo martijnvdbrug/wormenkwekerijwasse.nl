@@ -58,6 +58,21 @@ const availableCountriesQuery = `{
     }
 }`;
 
+const allBlogsQuery = `{
+    Vendure {
+            simpleContentBlocks {
+              id
+              createdAt
+              author
+              title
+              slug
+              featuredImage
+              description
+              body
+            }
+    }
+}`;
+
 const collectionFields = `
                     id
                     name
@@ -91,5 +106,6 @@ module.exports = {
     productsQuery,
     productFields,
     collectionsQuery,
-    availableCountriesQuery
+    availableCountriesQuery,
+    allBlogsQuery
 };

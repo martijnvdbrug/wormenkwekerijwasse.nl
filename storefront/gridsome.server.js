@@ -1,4 +1,5 @@
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer/lib/BundleAnalyzerPlugin');
+const {allBlogsQuery} = require('./src/vendure/server.queries');
 const {categoryPrefix, productPrefix, getTopLevelCollections} = require('./src/util');
 const {setCalculatedFields, deduplicate} = require('./src/vendure/vendure');
 const {productsQuery, collectionsQuery, availableCountriesQuery} = require('./src/vendure/server.queries');
@@ -27,11 +28,13 @@ module.exports = async function (api) {
         let [
             {data: {Vendure: {products: {items: products}}}},
             {data: {Vendure: {collections: {items: collections}}}},
-            {data: {Vendure: {availableCountries}}}
+            {data: {Vendure: {availableCountries}}},
+            {data: {Vendure: {simpleContentBlocks}}}
         ] = await Promise.all([
             graphql(productsQuery),
             graphql(collectionsQuery),
-            graphql(availableCountriesQuery)
+            graphql(availableCountriesQuery),
+            graphql(allBlogsQuery)
         ]);
 
         collections = getTopLevelCollections(collections);
@@ -146,6 +149,30 @@ module.exports = async function (api) {
                 availableCountries
             }
         });
+
+        /* --------------------- Articles ----------------------------*/
+        createPage({
+            path: `/informatie/`,
+            component: './src/templates/Informatie.vue',
+            context: {
+                blogs: simpleContentBlocks
+            }
+        });
+
+        simpleContentBlocks.forEach(blog => {
+            const breadcrumb = [
+                {name: 'Advies & informatie', url: '/informatie/'},
+                {name: blog.title , url: blog.slug }
+                ];
+            createPage({
+                path: `/informatie/${blog.slug}`,
+                component: './src/templates/Artikel.vue',
+                context: {
+                    blog,
+                    breadcrumb
+                }
+            });
+        })
 
     })
 

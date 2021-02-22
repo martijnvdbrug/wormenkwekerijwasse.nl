@@ -1,3 +1,5 @@
 /order/* /order/_code.html 200
 /admin/* https://vendure-kfmzg3trkq-ew.a.run.app/admin/ 302
 /winkel/ -> /assortiment/ 302
+/informatie-2/ -> /informatie/ 302
+/nieuws/ -> /informatie/ 302

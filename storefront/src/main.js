@@ -39,6 +39,13 @@ export default function (Vue, {router, head, isClient}) {
         }
         return currencyString;
     });
+
+    // Add date filter for global use
+    Vue.filter('date', function (value) {
+        const date = new Date(value);
+        const month = date.toLocaleString('nl-NL', {month: "long"});
+        return `${month} ${date.getFullYear()}`
+    });
     // Set global store and vendure service
     if (isClient) {
         const store = Vue.observable({
