@@ -4,7 +4,7 @@
       <span class="badge alert cart-badge">{{ nrOfItems }}</span>
     </g-link>
     <g-link to="/winkelmand/" aria-label="Shopping cart">
-      <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-4"></i>
+      <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-1"></i>
     </g-link>
   </div>
 </template>
@@ -26,5 +26,9 @@ export default {
 <style>
 .fi-shopping-cart {
   color: #5FAD56;
+}
+.cart-badge {
+  position: relative;
+  margin-right: -10px;
 }
 </style>
