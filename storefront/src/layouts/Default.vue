@@ -160,15 +160,12 @@ export default {
   margin-bottom: 0;
 }
 
-.menu a {
+menu ul > li.is-dropdown-submenu-parent.opens-right > a {
   padding: 0 3rem;
 }
 
 .title-bar {
   background: white;
-}
-
-.title-bar {
   padding: 10px;
 }
 

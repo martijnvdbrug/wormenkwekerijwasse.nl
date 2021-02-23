@@ -134,13 +134,6 @@ label {
   color: $header-color;
 }
 
-.menu li {
-  @include breakpoint(small down) {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-
 .title-bar a {
   color: $header-color;
 }
