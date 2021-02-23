@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>Wormenkwekerij Wasse advies en Informatie</h1>
+    <h1>Wormenkwekerij Wasse advies en informatie</h1>
     <br>
 
     <div class="grid-x grid-margin-x small-up-1 medium-up-3 large-up-4">

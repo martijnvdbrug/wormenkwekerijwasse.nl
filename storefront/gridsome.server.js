@@ -169,7 +169,8 @@ module.exports = async function (api) {
                 component: './src/templates/Artikel.vue',
                 context: {
                     blog,
-                    breadcrumb
+                    breadcrumb,
+                    collections
                 }
             });
         })

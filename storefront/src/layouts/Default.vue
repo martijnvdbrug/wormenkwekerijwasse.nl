@@ -33,6 +33,12 @@
                       collection.name
                     }}
                   </g-link>
+                  <g-link v-for="subCollection of collection.children"
+                          class="is-submenu-item"
+                          style="padding-left: 30px;"
+                          :to="`/${categoryPrefix}/${subCollection.slug}`">
+                    {{ subCollection.name }}
+                  </g-link>
                 </li>
               </ul>
             </li>
@@ -40,7 +46,7 @@
               <g-link to="/informatie/"><h5>Advies & informatie </h5></g-link>
             </li>
             <li>
-              <g-link to="/"><h5>Contact</h5></g-link>
+              <a href="#contact"><h5>Contact</h5></a>
             </li>
           </ul>
         </div>
@@ -67,9 +73,10 @@
                     v-bind:key="collection.slug">{{ collection.name }}<br></g-link>
           </p>
         </div>
-        <div class="cell medium-12 large-4 text-center">
+        <div class="cell medium-12 large-4 text-center" id="contact">
           <h4>Contact</h4>
-          <p><a href="tel:00310618441825">tel: 06 18 44 18 25</a></p>
+          <p><a href="tel:00310618441825">06 18441825</a></p>
+          <p><a href="mailto:info@wormenkwekerijwasse.nl">info@wormenkwekerijwasse.nl</a></p>
           <p><strong>Wormenkwekerij adres:</strong><br>
             Wormenkwekerij Wasse<br>
             9411 VP, Beilen<br>
@@ -82,6 +89,7 @@
             Kvk: 66626811<br>
             Btw nr: NL001413015b26<br>
           </p>
+          <p><strong><a href="/privacy-beleid/">Privacy beleid</a></strong></p>
         </div>
         <div class="cell medium-12 large-4 text-center">
           <h4>Afhalen is mogelijk op</h4>
@@ -153,19 +161,11 @@ export default {
 }
 
 .menu a {
-  padding: 0 3rem !important;
+  padding: 0 3rem;
 }
 
 .title-bar {
   background: white;
-}
-
-.is-submenu-item {
-  padding: 20px 20px;
-}
-
-.mobile-cart {
-  font-size: 1.3rem;
 }
 
 .title-bar {

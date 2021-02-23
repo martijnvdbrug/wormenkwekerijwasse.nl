@@ -1,6 +1,8 @@
 <template>
   <div>
-    <span class="badge alert cart-badge">{{ nrOfItems }}</span>
+    <g-link to="/winkelmand/" aria-label="Shopping cart">
+      <span class="badge alert cart-badge">{{ nrOfItems }}</span>
+    </g-link>
     <g-link to="/winkelmand/" aria-label="Shopping cart">
       <i class="fi-shopping-cart mobile-cart" data-fa-transform="down-4"></i>
     </g-link>

@@ -3,7 +3,7 @@ export ENV_VARS=$(paste -sd, .env)
 gcloud run deploy vendure \
             --quiet \
             --image "eu.gcr.io/wormenkwekerijwasse/vendure:latest" \
-            --region "europe-west1" \
+            --region "europe-west4" \
             --platform "managed" \
             --allow-unauthenticated \
             --memory=1G \
