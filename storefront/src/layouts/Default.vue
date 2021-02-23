@@ -26,10 +26,10 @@
         <div class="cell small-8">
           <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
             <li>
-              <a href="#"><h5>Assortiment</h5></a>
+              <a class="menu-item" href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
                 <li v-for="collection of collections">
-                  <g-link :to="`/${categoryPrefix}/${collection.slug}`">{{
+                  <g-link class="menu-item" :to="`/${categoryPrefix}/${collection.slug}`">{{
                       collection.name
                     }}
                   </g-link>
@@ -43,10 +43,10 @@
               </ul>
             </li>
             <li>
-              <g-link to="/informatie/"><h5>Advies & informatie </h5></g-link>
+              <g-link class="menu-item" to="/informatie/"><h5>Advies & informatie </h5></g-link>
             </li>
             <li>
-              <a href="#contact"><h5>Contact</h5></a>
+              <a class="menu-item" href="#contact"><h5>Contact</h5></a>
             </li>
           </ul>
         </div>
@@ -160,8 +160,8 @@ export default {
   margin-bottom: 0;
 }
 
-menu ul > li.is-dropdown-submenu-parent.opens-right > a {
-  padding: 0 3rem;
+.menu-item {
+  padding: 0 3rem !important;
 }
 
 .title-bar {
