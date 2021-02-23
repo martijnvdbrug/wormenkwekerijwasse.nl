@@ -19,7 +19,10 @@ export class SimpleCmsService {
     }
 
     async findAll(ctx: RequestContext): Promise<ContentBlock[]> {
-        return this.repo.find({channelId: ctx.channelId as string});
+        return this.repo.find({
+            where: {channelId: ctx.channelId as string},
+            order: {createdAt: 'DESC'}
+        } );
     }
 
     @Allow(Permission.UpdateCatalog)
