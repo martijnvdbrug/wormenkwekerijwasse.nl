@@ -7,17 +7,17 @@
     <mj-body>
         <mj-section>
             <mj-column>
-                <mj-image src="{{ logoUrl }}"></mj-image>
+                <mj-image src="https://wormenkwekerijwasse.netlify.app/logo-wormenkwekerijwasse.png" ></mj-image>
                 <mj-divider border-color="#343434"></mj-divider>
 
-                <mj-text>Bedankt voor je bestelling bij {{ channelName }}!</mj-text>
+                <mj-text>Bedankt voor uw bestelling bij Wormenkwekerij Wasse!</mj-text>
 
             </mj-column>
         </mj-section>
 
         <mj-section>
             <mj-column>
-                <mj-text font-weight="800" padding-bottom="0px">Dit heb je besteld:</mj-text>
+                <mj-text font-weight="800" padding-bottom="0px">Dit heeft u besteld:</mj-text>
 
                 <mj-table cellpadding="6px">
                     {{#each order.lines }}
@@ -53,7 +53,7 @@
                     {{/each}}
 
                     <tr>
-                        <td>Totaal BTW</td>
+                        <td color="">Totaal BTW</td>
                         <td align="right">€ {{ formatMoney summary.totalVAT }}</td>
                     </tr>
                     <tr>
@@ -90,10 +90,9 @@
         <mj-section>
             <mj-column>
                 <mj-divider border-color="#343434"></mj-divider>
-                <mj-text>Vragen of opmerkingen? Neem contact op via {{ supportEmail }}</mj-text>
+                <mj-text>Vragen of opmerkingen? Neem contact op via <a href="mailto:info@wormenkwekerijwasse.nl">info@wormenkwekerijwasse.nl</a></mj-text>
             </mj-column>
         </mj-section>
-
 
     </mj-body>
 </mjml>

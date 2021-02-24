@@ -121,7 +121,7 @@ label {
 }
 
 .mobile-accordion {
-  @include breakpoint(medium) {
+  @include breakpoint(large) {
     border-radius: 10px;
     border: none;
     -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -134,11 +134,29 @@ label {
   color: $header-color;
 }
 
+.menu li {
+  @include breakpoint(medium down) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.is-submenu-item {
+  padding: 10px 0 10px 10px !important;
+  @include breakpoint(medium down) {
+    padding: 10px 0 20px 20px !important;
+  }
+}
+
+.sub-collection {
+  padding: 20px 0 20px 70px !important;
+}
+
 .title-bar a {
   color: $header-color;
 }
 
-.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+.dropdown.menu.large-horizontal > li.is-dropdown-submenu-parent > a::after {
   border-color: $header-color transparent transparent;
 }
 
@@ -167,7 +185,7 @@ label {
 }
 
 h5 {
-  @include breakpoint(small down) {
+  @include breakpoint(medium down) {
     font-size: 0.9rem;
   }
 }

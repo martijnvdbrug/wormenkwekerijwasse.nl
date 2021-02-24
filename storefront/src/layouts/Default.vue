@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="title-bar shadowed" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+    <div class="title-bar shadowed" data-responsive-toggle="responsive-menu" data-hide-for="large">
       <div class="grid-x align-bottom">
         <div class="cell small-3">
           <button class="menu-icon" type="button" data-toggle="responsive-menu" style="margin-bottom: 8px;"></button>
@@ -19,12 +19,12 @@
     <div class="top-bar shadowed" id="responsive-menu">
 
       <div class="grid-x align-bottom" style="width:100%">
-        <div class="cell small-3 hide-for-small-only">
+        <div class="cell small-3 hide-for-medium-only">
           <g-link to="/"><img src="/logo-wormenkwekerijwasse.png" alt="Wormenkwekerij Wasse" style="height: 100px;"/>
           </g-link>
         </div>
         <div class="cell small-8">
-          <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
+          <ul class="vertical large-horizontal menu" data-responsive-menu="accordion large-dropdown">
             <li>
               <a class="menu-item" href="#"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
@@ -34,8 +34,7 @@
                     }}
                   </g-link>
                   <g-link v-for="subCollection of collection.children"
-                          class="is-submenu-item"
-                          style="padding-left: 30px;"
+                          class="sub-collection"
                           :to="`/${categoryPrefix}/${subCollection.slug}`">
                     {{ subCollection.name }}
                   </g-link>
@@ -50,7 +49,7 @@
             </li>
           </ul>
         </div>
-        <div class="cell small-1 hide-for-small-only align-right">
+        <div class="cell small-1 hide-for-medium-only align-right">
           <CartIcon/>
         </div>
       </div>
