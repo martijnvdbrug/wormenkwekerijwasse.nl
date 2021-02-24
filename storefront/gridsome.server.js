@@ -67,6 +67,8 @@ module.exports = async function (api) {
             }
             breadcrumb.push({name: product.name, url: `/${productPrefix}/${product.slug}/`})
 
+
+
             createPage({
                 path: `/${productPrefix}/${product.slug}/`,
                 component: './src/templates/ProductDetail.vue',
@@ -74,6 +76,7 @@ module.exports = async function (api) {
                     product,
                     breadcrumb,
                     featuredProducts,
+                    reviews: product.reviews.items
                 }
             })
         });

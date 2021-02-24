@@ -37,6 +37,19 @@ const productFields = `
                 preview
             }
         }
+          reviewsHistogram {
+            bin
+            frequency
+          }
+          reviews {
+            items {
+              createdAt
+              summary
+              body
+              rating
+              authorName
+            }
+         }
     }
 `;
 

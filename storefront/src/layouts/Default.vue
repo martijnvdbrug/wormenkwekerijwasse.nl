@@ -35,6 +35,7 @@
                   </g-link>
                   <g-link v-for="subCollection of collection.children"
                           class="sub-collection"
+                          :key="subCollection.slug"
                           :to="`/${categoryPrefix}/${subCollection.slug}`">
                     {{ subCollection.name }}
                   </g-link>
@@ -58,9 +59,18 @@
 
     <div class="container">
 
-      <Breadcrumb v-if="$context.breadcrumb" :items="$context.breadcrumb"/>
+      <div class="grid-x">
+        <div class="cell show-for-large large-1"></div>
+        <div class="cell large-10">
 
-      <slot/>
+          <Breadcrumb v-if="$context.breadcrumb" :items="$context.breadcrumb"/>
+
+          <slot/>
+        </div>
+        <div class="cell show-for-large large-1"></div>
+      </div>
+
+
     </div>
 
     <div class="footer shadowed">
@@ -136,22 +146,22 @@ export default {
 </script>
 <static-query>
 {
-  Vendure {
-    collections {
-      items {
-          id
-          name
-          slug
-          description
-          children {
-            id
-            name
-            slug
-            description
-          }
-      }
-    }
-  }
+Vendure {
+collections {
+items {
+id
+name
+slug
+description
+children {
+id
+name
+slug
+description
+}
+}
+}
+}
 }
 </static-query>
 <style>

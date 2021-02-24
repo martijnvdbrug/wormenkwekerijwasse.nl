@@ -1,8 +1,17 @@
 <template>
   <Layout>
 
+    <h1>{{ $context.blog.title }}</h1>
+    <p style="color: gray;">{{ $context.blog.createdAt | date }} door {{ $context.blog.author }}</p>
     <div class="grid-x grid-margin-x">
-      <div class="cell show-for-large large-2">
+      <div class="cell small-12 large-8">
+        <div class="card shadowed">
+          <AsyncImage :src="$context.blog.featuredImage" style="object-fit: cover; height: 300px;"/>
+          <div class="card-section" v-html="$context.blog.body">
+          </div>
+        </div>
+      </div>
+      <div class="cell show-for-large large-4">
         <div class="card shadowed">
           <div class="card-section">
             <h6>Bekijk ook ons assortiment:</h6>
@@ -14,27 +23,11 @@
                     collection.name
                   }}
                 </g-link>
-                <g-link v-for="subCollection of collection.children"
-                        class="is-submenu-item"
-                        style="padding-left: 30px;"
-                        :to="`/${categoryPrefix}/${subCollection.slug}`">
-                  {{ subCollection.name }}
-                </g-link>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="cell small-12 large-8">
-
-        <h1>{{ $context.blog.title }}</h1>
-        <div class="card shadowed">
-          <AsyncImage :src="$context.blog.featuredImage" style="object-fit: cover; height: 300px;"/>
-          <div class="card-section" v-html="$context.blog.body">
-          </div>
-        </div>
-      </div>
-      <div class="cell show-for-large large-2"></div>
     </div>
 
   </Layout>

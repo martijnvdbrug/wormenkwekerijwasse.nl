@@ -1,26 +1,27 @@
 <template>
   <div>
     <form v-if="!alreadySubmitted" v-on:submit.prevent="submit()">
+      <label>Hoeveel sterren geeft u dit product?*</label>
       <fieldset>
-    <span class="star-cb-group">
-      <input type="radio" id="rating-5" name="rating" value="5" v-model="rating"/>
-      <label for="rating-5">5</label>
-      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" v-model="rating"/>
-      <label for="rating-4">4</label>
-      <input type="radio" id="rating-3" name="rating" value="3" v-model="rating"/>
-      <label for="rating-3">3</label>
-      <input type="radio" id="rating-2" name="rating" value="2" v-model="rating"/>
-      <label for="rating-2">2</label>
-      <input type="radio" id="rating-1" name="rating" value="1" v-model="rating"/>
-      <label for="rating-1">1</label>
-      <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" v-model="rating"/>
-      <label for="rating-0">0</label>
-    </span>
+        <span class="star-cb-group">
+          <input type="radio" id="rating-5" name="rating" value="5" v-model="rating"/>
+          <label for="rating-5">5</label>
+          <input type="radio" id="rating-4" name="rating" value="4" checked="checked" v-model="rating"/>
+          <label for="rating-4">4</label>
+          <input type="radio" id="rating-3" name="rating" value="3" v-model="rating"/>
+          <label for="rating-3">3</label>
+          <input type="radio" id="rating-2" name="rating" value="2" v-model="rating"/>
+          <label for="rating-2">2</label>
+          <input type="radio" id="rating-1" name="rating" value="1" v-model="rating"/>
+          <label for="rating-1">1</label>
+          <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" v-model="rating"/>
+          <label for="rating-0">0</label>
+        </span>
       </fieldset>
       <label>Naam*
         <input type="text" name="name" v-model="authorName" required>
       </label>
-      <label>Wat vind je van dit product?*
+      <label>Wat vind u van dit product?*
         <textarea name="body" rows="4" v-model="body" required>
       </textarea>
       </label>
@@ -30,7 +31,7 @@
       </label>
       <input :disabled="disableSubmit" type="submit" class="button" value="Verzenden">
     </form>
-    <p v-else>Bedankt voor je review!</p>
+    <p v-else>Bedankt voor uw review!</p>
   </div>
 </template>
 <script>
