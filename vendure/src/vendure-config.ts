@@ -18,6 +18,8 @@ import {PublicStockPlugin} from 'vendure-plugin-public-stock';
 import {ShippingByWeightPlugin} from './shipping-by-weight';
 import {SimpleCMSPlugin} from './simple-cms/simple-cms.plugin';
 import {SendcloudPlugin} from './sendcloud/sendcloud.plugin';
+import {EmailPlugin} from '@vendure/email-plugin';
+import {orderConfirmationHandler} from './email/email.handlers';
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -79,25 +81,25 @@ export const config: VendureConfig = {
         }),
         DefaultJobQueuePlugin,
         DefaultSearchPlugin,
-        /*        EmailPlugin.init({
-                    transport: {
-                        type: 'smtp',
-                        host: 'smtp.zoho.eu',
-                        port: 587,
-                        secure: false,
-                        logging: true,
-                        debug: true,
-                        auth: {
-                            user: 'noreply@pinelab.studio',
-                            pass: process.env.ZOHO_PASS as string,
-                        }
-                    },
-                    handlers: shopsMailHandlers,
-                    templatePath: path.join(__dirname, '../static/email/templates'),
-                    globalTemplateVars: {
-                        fromAddress: '"Webshop" <noreply@pinelab.studio>',
-                    },
-                }),*/
+        EmailPlugin.init({
+            transport: {
+                type: 'smtp',
+                host: 'smtp.zoho.eu',
+                port: 587,
+                secure: false,
+                logging: true,
+                debug: true,
+                auth: {
+                    user: 'noreply@pinelab.studio',
+                    pass: process.env.ZOHO_PASS as string,
+                }
+            },
+            handlers: [orderConfirmationHandler],
+            templatePath: path.join(__dirname, '../static/email/templates'),
+            globalTemplateVars: {
+                fromAddress: '"Wormenkwekerij Wasse" <noreply@pinelab.studio>',
+            },
+        }),
         // Production ready, precompiled admin UI
         AdminUiPlugin.init({
             adminUiConfig: {
