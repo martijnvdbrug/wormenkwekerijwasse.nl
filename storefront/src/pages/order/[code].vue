@@ -59,9 +59,9 @@
                       <td>{{ order.totalWithTax | euro }}</td>
                     </tr>
                     <tr v-for="tax of order.taxSummary" style="color: gray;">
-                      <td><p>{{ tax.taxRate }}% BTW </p></td>
+                      <td>{{ tax.taxRate }}% BTW </td>
                       <td></td>
-                      <td><p> {{ tax.taxTotal | euro }}</p></td>
+                      <td>{{ tax.taxTotal | euro }}</td>
                     </tr>
                     </tbody>
                   </table>
