@@ -51,6 +51,7 @@ class Vendure {
     async setLowestShippingMethod() {
         const methods = await this.getEligibleShippingMethods();
         const [defaultMethod] = methods
+            .filter(method => method.name.indexOf('Afhalen') === -1)
             .sort((a, b) => a.priceWithTax - b.priceWithTax);
         if (defaultMethod) {
             await this.setOrderShippingMethod(defaultMethod.id);

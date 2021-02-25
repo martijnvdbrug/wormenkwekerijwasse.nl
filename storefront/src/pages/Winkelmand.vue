@@ -2,110 +2,106 @@
   <Layout>
     <ClientOnly>
 
-      <div class="grid-x grid-margin-x">
-        <div class="cell show-for-large large-2"></div>
-        <div class="cell small-12 large-8">
 
-          <div class="grid-x grid-padding-x">
-            <div class="cell small-10 text-left">
-              <h1>Dit zit er in je winkelmand:</h1>
-            </div>
-            <div class="cell small-2" style="position: relative;">
-              <g-link class="button" to="/gegevens/" style="position: absolute; bottom: 0; right: 0;">
-                Bestellen
-              </g-link>
-            </div>
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-10 text-left">
+            <h1>Dit zit er in je winkelmand:</h1>
           </div>
+          <div class="cell small-2" style="position: relative;">
+            <g-link class="button" to="/gegevens/" style="position: absolute; bottom: 0; right: 0;">
+              Bestellen
+            </g-link>
+          </div>
+        </div>
 
-          <div class="grid-x grid-margin-x">
+        <div class="grid-x grid-margin-x">
 
-            <div class="cell">
-              <div class="card shadowed">
+          <div class="cell">
+            <div class="card shadowed">
 
-                <div class="card-section" v-if="orderLines > 0">
+              <div class="card-section" v-if="orderLines > 0">
 
-                  <div class="grid-x grid-padding-x text-right">
-                    <div class="cell text-right">
-                      <p>Totaal: <strong> {{ activeOrder.totalWithTax | euro }}</strong></p>
-                    </div>
+                <div class="grid-x grid-padding-x text-right">
+                  <div class="cell text-right">
+                    <p>Totaal: <strong> {{ activeOrder.totalWithTax | euro }}</strong></p>
                   </div>
-
-                  <br>
-
-                  <table>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th>Aantal</th>
-                      <th>Totaalprijs</th>
-                    </tr>
-                    <tr v-for="line in activeOrder.lines" style="padding-bottom: 10px;">
-                      <td>
-                        <img class="cart-thumbnail" :src="getPreview(line.featuredAsset)"
-                             :alt="line.productVariant.name">
-                      </td>
-                      <td>{{ line.productVariant.product.name }}
-                        <span v-if="line.productVariant.name !== line.productVariant.product.name" class="cart-variant"><br> {{
-                            line.productVariant.name
-                          }}&nbsp;</span>
-                      </td>
-                      <td>
-                        <NumberInput :value="line.quantity" v-on:numberChange="updateQuantity(line.id, $event)"/>
-                      </td>
-                      <td><p>{{ line.linePriceWithTax | euro }}</p></td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr v-for="discount in activeOrder.discounts">
-                      <td></td>
-                      <td></td>
-                      <td><h6>{{ discount.description }}</h6></td>
-                      <td><h6>{{ discount.amount | euro }}</h6></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td><p>Verzendkosten: </p></td>
-                      <td><p> {{ activeOrder.shippingWithTax | euro }}</p></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td><p>Totaal: </p></td>
-                      <td><p><strong> {{ activeOrder.totalWithTax | euro }}</strong></p></td>
-                    </tr>
-                    <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
-                      <td></td>
-                      <td></td>
-                      <td><p>{{ tax.taxRate }}% BTW </p></td>
-                      <td><p> {{ tax.taxTotal | euro}}</p></td>
-                    </tr>
-                  </table>
-
-                  <p style="color: gray; font-size: 0.9rem;">Verzendkosten worden in de volgende stap verrekend</p>
-
-                  <div class="grid-x grid-padding-x text-right">
-                    <div class="cell text-right">
-                      <g-link class="button" to="/gegevens/">
-                        Bestellen
-                      </g-link>
-                    </div>
-                  </div>
-
                 </div>
 
-                <div class="card-section" v-if="emptyBasket">
-                  <p>U hebt nog niks in uw winkelmand...</p>
+                <br>
+
+                <table>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Aantal</th>
+                    <th>Totaalprijs</th>
+                  </tr>
+                  <tr v-for="line in activeOrder.lines" style="padding-bottom: 10px;">
+                    <td>
+                      <img class="cart-thumbnail" :src="getPreview(line.featuredAsset)"
+                           :alt="line.productVariant.name">
+                    </td>
+                    <td>{{ line.productVariant.product.name }}
+                      <span v-if="line.productVariant.name !== line.productVariant.product.name"
+                            class="cart-variant"><br> {{
+                          line.productVariant.name
+                        }}&nbsp;</span>
+                    </td>
+                    <td>
+                      <NumberInput :value="line.quantity" v-on:numberChange="updateQuantity(line.id, $event)"/>
+                    </td>
+                    <td><p>{{ line.linePriceWithTax | euro }}</p></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr v-for="discount in activeOrder.discounts">
+                    <td></td>
+                    <td></td>
+                    <td><h6>{{ discount.description }}</h6></td>
+                    <td><h6>{{ discount.amount | euro }}</h6></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td><p>Verzendkosten: </p></td>
+                    <td><p> {{ activeOrder.shippingWithTax | euro }}</p></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td><p>Totaal: </p></td>
+                    <td><p><strong> {{ activeOrder.totalWithTax | euro }}</strong></p></td>
+                  </tr>
+                  <tr v-for="tax of activeOrder.taxSummary" style="color: gray;">
+                    <td></td>
+                    <td></td>
+                    <td><p>{{ tax.taxRate }}% BTW </p></td>
+                    <td><p> {{ tax.taxTotal | euro }}</p></td>
+                  </tr>
+                </table>
+
+                <p style="color: gray; font-size: 0.9rem;">Verzendkosten worden in de volgende stap verrekend</p>
+
+                <div class="grid-x grid-padding-x text-right">
+                  <div class="cell text-right">
+                    <g-link class="button" to="/gegevens/">
+                      Bestellen
+                    </g-link>
+                  </div>
                 </div>
 
               </div>
 
+              <div class="card-section" v-if="emptyBasket">
+                <p>U hebt nog niks in uw winkelmand...</p>
+              </div>
+
             </div>
+
           </div>
         </div>
-        <div class="cell show-for-large large-2"></div>
-      </div>
+
     </ClientOnly>
   </Layout>
 </template>
@@ -152,6 +148,7 @@ export default {
 .cart-variant {
   color: gray;
 }
+
 th {
   text-align: left;
 }

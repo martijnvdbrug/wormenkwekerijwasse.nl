@@ -99,6 +99,7 @@
             Btw nr: NL001413015b26<br>
           </p>
           <p><strong><a href="/privacy-beleid/">Privacy beleid</a></strong></p>
+          <p><strong><a href="/verzendkosten/">Verzendkosten</a></strong></p>
         </div>
         <div class="cell medium-12 large-4 text-center">
           <h4>Afhalen is mogelijk op</h4>
