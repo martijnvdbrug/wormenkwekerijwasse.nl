@@ -6,8 +6,8 @@
       <div class="cell small-12 medium-6 margin-bottom-2">
         <div class="card shadowed article-card">
           <div class="responsive-embed" style="height: 315px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/cLblUjpFdfU?autoplay=1" frameborder="0"
-                    allow="autoplay; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/cLblUjpFdfU" frameborder="0"
+                    allow="picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="card-section">
             <h5>Welkom bij Wormenkwekerij Wasse!</h5>
@@ -22,31 +22,12 @@
 
       <div class="cell small-6 medium-3 margin-bottom-2">
 
-        <div class="card shadowed article-card">
-          <div class="card-divider">
-            <h4>Laatste nieuws</h4>
-          </div>
-          <AsyncImage src="/img/zand.jpeg"/>
-          <div class="card-section">
-            <h5>Nieuws artikel 1</h5>
-            <p>Hier kun je de laatste nieuws artikelen plaatsen</p>
-            <p>Dit gebeurt er als er meer content is is</p>
-          </div>
-        </div>
+        <BlogPreview :blog="$context.blogs[0]" />
 
       </div>
       <div class="cell small-6 medium-3 margin-bottom-2">
 
-        <div class="card shadowed article-card">
-          <div class="card-divider">
-            <h4>Laatste nieuws</h4>
-          </div>
-          <AsyncImage src="/img/zand.jpeg"/>
-          <div class="card-section">
-            <h5>Nieuws artikel 2</h5>
-            <p>Hier kun je de laatste nieuws artikelen plaatsen</p>
-          </div>
-        </div>
+        <BlogPreview :blog="$context.blogs[1]" />
 
       </div>
 
@@ -94,8 +75,10 @@
 
 <script>
 import {categoryPrefix, productPrefix} from '../util';
+import BlogPreview from '../components/BlogPreview';
 
 export default {
+  components: {BlogPreview},
   data() {
     return {
       collections: [],

@@ -50,7 +50,8 @@ module.exports = async function (api) {
             component: './src/templates/Index.vue',
             context: {
                 featuredProducts,
-                collections
+                collections,
+                blogs: simpleContentBlocks.slice(0,2)
             }
         });
 

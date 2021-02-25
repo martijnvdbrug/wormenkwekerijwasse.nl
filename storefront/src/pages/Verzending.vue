@@ -25,6 +25,7 @@
                   <label :for="method.id">
                     <input type="radio" name="shippingMethod" :value="method.id" :id="method.id"
                            v-on:change="select($event.target.value)"
+                           v-model="currentlySelected"
                            :checked="selectedMethod.id === method.id">
                     {{ method.name }} ({{ method.priceWithTax | euro }})
                   </label>
@@ -53,7 +54,7 @@
                   <tr>
                     <td></td>
                     <td>
-                      <g-link class="button" to="/betaling/">
+                      <g-link class="button" to="/betaling/" :disabled="!hasSelected">
                         € Betalen
                       </g-link>
                     </td>
@@ -76,7 +77,8 @@
 export default {
   data() {
     return {
-      methods: []
+      methods: [],
+      currentlySelected: ''
     }
   },
   computed: {
@@ -85,7 +87,11 @@ export default {
     },
     activeOrder() {
       return this.$store?.activeOrder || {};
+    },
+    hasSelected() {
+      return !!this.currentlySelected
     }
+
   },
   methods: {
     async select(methodId) {
