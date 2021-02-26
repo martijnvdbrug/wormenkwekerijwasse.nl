@@ -19,7 +19,7 @@
     <div class="top-bar shadowed" id="responsive-menu">
 
       <div class="grid-x align-bottom" style="width:100%">
-        <div class="cell small-3 hide-for-medium-only">
+        <div class="cell small-3 hide-for-medium-only hide-for-small-only">
           <g-link to="/"><img src="/logo-wormenkwekerijwasse.png" alt="Wormenkwekerij Wasse" style="height: 100px;"/>
           </g-link>
         </div>
@@ -50,7 +50,7 @@
             </li>
           </ul>
         </div>
-        <div class="cell small-1 hide-for-medium-only align-right">
+        <div class="cell small-1 hide-for-medium-only hide-for-small-only align-right">
           <CartIcon/>
         </div>
       </div>
