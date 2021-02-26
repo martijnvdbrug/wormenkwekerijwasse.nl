@@ -36,12 +36,15 @@
 import {categoryPrefix} from '../util';
 
 export default {
+  mixins: [require('../mixins/load-foundation')],
   data() {
     return {categoryPrefix}
   },
   mounted() {
     // Parse Embedded content in found in <pre> tags
-    document.querySelector('pre').innerHTML = document.querySelector('pre').textContent;
+    if (document.querySelector('pre')?.textContent) {
+      document.querySelector('pre').innerHTML = document.querySelector('pre').textContent;
+    }
   },
 }
 </script>

@@ -18,6 +18,7 @@
 <script>
 import BlogPreview from '../components/BlogPreview';
 export default {
+  mixins: [require('../mixins/load-foundation')],
   components: {BlogPreview}
 }
 </script>

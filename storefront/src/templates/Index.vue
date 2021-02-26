@@ -78,6 +78,7 @@ import {categoryPrefix, productPrefix} from '../util';
 import BlogPreview from '../components/BlogPreview';
 
 export default {
+  mixins: [require('../mixins/load-foundation')],
   components: {BlogPreview},
   data() {
     return {

@@ -114,6 +114,7 @@ import ShowStarRating from '../components/ShowStarRating';
 import MiniShowStarRating from '../components/MiniShowStarRating';
 
 export default {
+  // Foundation is loaded in child component BuyButton
   components: {MiniShowStarRating, ShowStarRating, SubmitReviewComponent},
   metaInfo() {
     return getMetaInfo(this.$context.product);

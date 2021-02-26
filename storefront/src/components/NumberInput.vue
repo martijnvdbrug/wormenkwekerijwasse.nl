@@ -19,6 +19,7 @@
 </template>
 <script>
 export default {
+  mixins: [require('../mixins/load-foundation')],
   props: ['value'],
   watch: { // Watch for changes for parent to stay in sync
     value(newValue, oldValue) {

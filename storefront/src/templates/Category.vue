@@ -56,6 +56,7 @@
 import {categoryPrefix, productPrefix} from '../util';
 
 export default {
+  mixins: [require('../mixins/load-foundation')],
   components: {},
   data() {
     return {productPrefix, categoryPrefix}

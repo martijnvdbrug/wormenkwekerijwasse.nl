@@ -120,9 +120,6 @@ import {categoryPrefix, getTopLevelCollections, productPrefix} from '../util';
 
 export default {
   components: {CartIcon},
-  mixins: [
-    require('../mixins/load-foundation'),
-  ],
   data() {
     return {
       productPrefix,

@@ -109,6 +109,7 @@
 
 <script>
 export default {
+  mixins: [require('../mixins/load-foundation')],
   data() {
     return {
       customer: {

@@ -75,6 +75,7 @@
 
 
 export default {
+  mixins: [require('../mixins/load-foundation')],
   data() {
     return {
       methods: [],

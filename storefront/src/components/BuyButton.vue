@@ -25,6 +25,7 @@
 
 export default {
   props: ['variant'],
+  mixins: [require('../mixins/load-foundation')],
   data() {
     return {
       soldOut: false,
@@ -49,13 +50,7 @@ export default {
   },
   async mounted() {
     this.isSoldOut(this.variant);
-    if (process.env.isClient) {
-      // THis is for refresh on this page
-      window.onload = function () {
-        $(document).foundation();
-      }
-    }
-    $(document).foundation(); // this is for when you land here from other page
+    // $(document).foundation(); // this is for when you land here from other page
   }
 }
 </script>
