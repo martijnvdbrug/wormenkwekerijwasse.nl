@@ -30,6 +30,16 @@
                         </tr>
                     {{/each}}
 
+                    {{#each order.discounts }}
+                        <tr padding-bottom="0px">
+                            <td></td>
+                            <td>
+                                {{ description }}
+                            </td>
+                            <td align="right">€ {{ formatMoney amount }}</td>
+                        </tr>
+                    {{/each}}
+
                     <tr>
                         <td>Verzendkosten</td>
                         <td></td>
