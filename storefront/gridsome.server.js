@@ -25,6 +25,7 @@ module.exports = async function (api) {
     api.chainWebpack(config => config.mode('development'));
 
     api.createPages(async ({createPage, graphql}) => {
+
         let [
             {data: {Vendure: {products: {items: products}}}},
             {data: {Vendure: {collections: {items: collections}}}},
@@ -36,6 +37,7 @@ module.exports = async function (api) {
             graphql(availableCountriesQuery),
             graphql(allBlogsQuery)
         ]);
+
 
         collections = getTopLevelCollections(collections);
 
@@ -77,7 +79,6 @@ module.exports = async function (api) {
                     product,
                     breadcrumb,
                     featuredProducts,
-                    reviews: product.reviews.items
                 }
             })
         });

@@ -29,13 +29,20 @@
                 <ClientOnly>
                   <BuyButton ref="buyButton" :variant="this.selectedVariant"></BuyButton>
                 </ClientOnly>
-                <select v-if="$context.product.variants.length > 1" v-on:change="selectVariant($event.target.value)"
-                        aria-label="Selectable editions">
-                  <option v-for="variant of $context.product.variants" :value="variant.id"
-                          :selected="selectedVariant.id === variant.id">
-                    {{ variant.name }}
-                  </option>
-                </select>
+                <div v-if="$context.product.optionGroups.length > 0">
+
+                  <div v-for="group of $context.product.optionGroups">
+                    <label :for="group.name">{{ group.name }}</label>
+                    <select v-on:change="selectOption()"
+                            :id="group.name"
+                            v-model="optionGroups[group.id]"
+                            aria-label="Selectable options">
+                      <option v-for="option of group.options" :value="option.id">
+                        {{ option.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
                 <div v-html="$context.product.description" class="product-description"></div>
               </div>
             </div>
@@ -51,7 +58,8 @@
           <div class="card-section">
             <div>
               <h2> Reviews </h2>
-              <ShowStarRating :rating="$context.product.reviews.averageRating" :nr-of-reviews="$context.product.reviews.totalItems"/>
+              <ShowStarRating :rating="$context.product.reviews.averageRating"
+                              :nr-of-reviews="$context.product.reviews.totalItems"/>
             </div>
             <div v-for="review of reviewPreviews" class="review-preview">
               <p class="review-subtitle">
@@ -93,15 +101,15 @@
 
     <!-- All reviews -->
     <div id="all-reviews" class="grid-x grid-margin-x grid-margin-y">
-      <div class="cell"><br><br><h5>{{ nrOfReviews }} reviews</h5>
+      <div class="cell"><br><br><h5>{{ $context.product.reviews.totalItems }} reviews</h5>
       </div>
     </div>
     <div class="grid-x grid-margin-x grid-margin-y">
       <div class="cell">
         <div class="card shadowed article-card">
-          <div v-if="$context.reviews && $context.reviews.length > 0" class="card-section">
+          <div v-if="$context.product.reviews.totalItems > 0" class="card-section">
 
-            <div v-for="review of $context.reviews">
+            <div v-for="review of $context.product.reviews.items">
               <p class="review-subtitle">
                 {{ review.authorName }}
               </p>
@@ -115,7 +123,8 @@
 
           </div>
           <div v-else class="card-section">
-            <p> Er zijn nog geen reviews geschreven over dit product. <a href="#review-summary">Schrijf als eerste een review</a></p>
+            <p> Er zijn nog geen reviews geschreven over dit product. <a href="#review-summary">Schrijf als eerste een
+              review</a></p>
           </div>
 
         </div>
@@ -134,7 +143,7 @@ import MiniShowStarRating from '../components/MiniShowStarRating';
 
 export default {
   // Foundation is loaded in child component BuyButton
-  components: {MiniShowStarRating, ShowStarRating, SubmitReviewComponent},
+  components: { MiniShowStarRating, ShowStarRating, SubmitReviewComponent},
   metaInfo() {
     return getMetaInfo(this.$context.product);
   },
@@ -148,6 +157,7 @@ export default {
       asset: {},
       assets: {},
       selectedVariant: {},
+      optionGroups: {},
       products: [],
       productPrefix,
       nrOfReviews: 0,
@@ -161,6 +171,11 @@ export default {
     }
   },
   methods: {
+    selectOption() {
+      // Find variant where every groupId has value optionId
+      const variant = this.$context.product.variants.find(v => !!v.options.every(o => o.id === this.optionGroups[o.groupId]));
+      this.selectVariant(variant)
+    },
     getPreview(asset) {
       return asset?.preview
     },
@@ -181,18 +196,19 @@ export default {
       }
       return this.$context.product.assets.slice(0, 5);
     },
-    selectVariant(variantId) {
-      const newVariant = this.$context.product.variants.find(v => v.id === variantId);
+    selectVariant(newVariant) {
       if (!newVariant) {
         return;
       }
+      console.log(`Selected variant`, newVariant.name);
       this.selectedVariant = newVariant;
+      newVariant.options.forEach(o => this.optionGroups[o.groupId] = o.id);
       this.assets = this.getAssets(this.selectedVariant);
       this.selectAsset(this.assets?.[0])
     },
     load() { // Load variant, assets and selectedAsset
       const variant = this.$context.product.variants.find(v => v.available > 0) || this.$context.product.variants[0];
-      this.selectVariant(variant?.id);
+      this.selectVariant(variant);
       this.asset = this.selectedVariant.featuredAsset || this.getDefaultAsset(this.$context.product)
       this.assets = this.getAssets(this.selectedVariant);
     },

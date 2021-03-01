@@ -40,7 +40,7 @@ export function toParcelInputItem(line: OrderLine, variant: ProductVariant): Par
         weightPerUnit = 0.001;
     }
     return {
-        description: `${variant.product.translations?.[0]?.name} ${variant.translations?.[0]?.name}`,
+        description: variant.translations?.[0]?.name,
         quantity: 2,
         weight: weightPerUnit.toFixed(3),
         sku: variant.sku,

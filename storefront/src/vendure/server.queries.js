@@ -1,4 +1,4 @@
-const productFields = `
+const allProductFields = `
 {
   id
     name
@@ -28,6 +28,10 @@ const productFields = `
       priceWithTax
       productId
       available
+      options {
+        id
+        groupId
+      }
       assets {
         id
         preview
@@ -49,14 +53,42 @@ const productFields = `
       totalItems
       averageRating
     }
-  }
-`;
+    optionGroups {
+      id
+      name
+      options {
+        id
+        name
+      }
+    }
+  }`;
+
+const minimalProductFields = `{
+      id
+      name
+      slug
+      featuredAsset {
+        id
+        preview
+      }
+      description
+      variants {
+        id
+        name
+        priceWithTax
+        productId
+        featuredAsset {
+          id
+          preview
+        }
+      }
+}`
 
 const productsQuery = `{
     Vendure {
         products {
             items
-            ${productFields}
+            ${allProductFields}
         }
     }
 }`;
@@ -95,7 +127,7 @@ const collectionFields = `
                     }
                     productVariants {
                         items {
-                          product ${productFields}
+                          product ${minimalProductFields}
                         }
                     }`;
 
@@ -116,7 +148,7 @@ const collectionsQuery = `
 
 module.exports = {
     productsQuery,
-    productFields,
+    productFields: allProductFields,
     collectionsQuery,
     availableCountriesQuery,
     allBlogsQuery

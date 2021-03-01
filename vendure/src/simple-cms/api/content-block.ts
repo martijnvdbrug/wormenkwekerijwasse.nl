@@ -23,7 +23,7 @@ export class ContentBlock extends VendureEntity {
     featuredImageId?: string
     @Column('longtext')
     body!: string
-    @Column()
+    @Column('longtext')
     description!: string
 
     constructor(input?: DeepPartial<ContentBlock>) {
