@@ -47,7 +47,7 @@
       <div class="cell large-4">
 
         <!-- Review summary -->
-        <div class="card shadowed article-card">
+        <div class="card shadowed article-card" id="review-summary">
           <div class="card-section">
             <div>
               <h2> Reviews </h2>
@@ -60,7 +60,9 @@
               <MiniShowStarRating :rating="review.rating"/>
               <p>{{ review.summary }}</p>
             </div>
-            <a href="#all-reviews">Meer reviews...</a>
+            <a v-if="reviewPreviews && reviewPreviews.length > 0" href="#all-reviews">
+              Meer reviews...
+            </a>
           </div>
 
           <div class="card-section">
@@ -97,7 +99,7 @@
     <div class="grid-x grid-margin-x grid-margin-y">
       <div class="cell">
         <div class="card shadowed article-card">
-          <div class="card-section">
+          <div v-if="$context.reviews && $context.reviews.length > 0" class="card-section">
 
             <div v-for="review of $context.reviews">
               <p class="review-subtitle">
@@ -105,10 +107,17 @@
               </p>
               <MiniShowStarRating :rating="review.rating"/>
               <p>{{ review.body }}</p>
-              <p class="review-response">{{ review.response }}</p>
+              <div v-if="review.response" class="review-response">
+                <p class="review-subtitle">Antwoord van Wormenkwekerij Wasse</p>
+                <p>{{ review.response }}</p>
+              </div>
             </div>
 
           </div>
+          <div v-else class="card-section">
+            <p> Er zijn nog geen reviews geschreven over dit product. <a href="#review-summary">Schrijf als eerste een review</a></p>
+          </div>
+
         </div>
       </div>
     </div>

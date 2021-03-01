@@ -50,7 +50,7 @@ const productFields = `
       averageRating
     }
   }
-}`;
+`;
 
 const productsQuery = `{
     Vendure {
