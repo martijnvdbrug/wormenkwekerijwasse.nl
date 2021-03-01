@@ -23,6 +23,7 @@ export const commonApiExtensions = gql`
     type ProductReviewList implements PaginatedList {
         items: [ProductReview!]!
         totalItems: Int!
+        averageRating: Float!
     }
 
     type ProductReviewHistogramItem {

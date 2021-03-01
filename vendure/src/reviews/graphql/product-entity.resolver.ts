@@ -2,15 +2,15 @@ import { Args, Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { Api, ApiType, ListQueryBuilder, Product, TransactionalConnection } from '@vendure/core';
 
 import { ProductReview } from '../entities/product-review.entity';
-import { ProductReviewsArgs } from '../../generated/generated-shop-types';
+import {ProductReviewList, ProductReviewsArgs} from '../../generated/generated-shop-types';
 
 @Resolver('Product')
 export class ProductEntityResolver {
     constructor(private listQueryBuilder: ListQueryBuilder, private connection: TransactionalConnection) {}
 
     @ResolveField()
-    reviews(@Api() apiType: ApiType, @Parent() product: Product, @Args() args: ProductReviewsArgs) {
-        return this.listQueryBuilder
+    async reviews(@Api() apiType: ApiType, @Parent() product: Product, @Args() args: ProductReviewsArgs) {
+        const {items, totalItems} = await this.listQueryBuilder
             .build(ProductReview, args.options || undefined, {
                 where: {
                     product,
@@ -23,6 +23,18 @@ export class ProductEntityResolver {
                 items,
                 totalItems,
             }));
+        // FIXME, does not support paginating yet, just calculate average of `items`
+        let averageRating = 0;
+        if (items?.length > 0) {
+            const cummulativeRating = items.map(r => r.rating)?.reduce((total, rating) => total + rating);
+            averageRating = cummulativeRating / items.length;
+            averageRating = Math.round(averageRating * 10 / 10 );
+        }
+        return {
+            items,
+            totalItems,
+            averageRating
+        }
     }
 
     @ResolveField()
