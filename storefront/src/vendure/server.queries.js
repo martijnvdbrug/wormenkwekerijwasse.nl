@@ -1,57 +1,56 @@
 const productFields = `
-    {
-        id
+{
+  id
+    name
+    slug
+    assets {
+      preview
+    }
+    featuredAsset {
+      id
+      preview
+    }
+    facetValues {
+      name
+    }
+    collections {
+      name
+      slug
+      parent {
         name
         slug
-        assets {
-            preview
-        }
-        featuredAsset {
-            id
-            preview
-        }
-        facetValues {
-            name
-        }
-       collections {
-            name
-            slug
-            parent {
-                name
-                slug
-            }
-        } 
-        description
-        variants {
-            id
-            name
-            priceWithTax
-            productId
-            available
-            assets {
-                id
-                preview
-            }
-            featuredAsset {
-                id
-                preview
-            }
-        }
-          reviewsHistogram {
-            bin
-            frequency
-          }
-          reviews {
-            items {
-              createdAt
-              summary
-              body
-              rating
-              authorName
-            }
-         }
+      }
     }
-`;
+    description
+    variants {
+      id
+      name
+      priceWithTax
+      productId
+      available
+      assets {
+        id
+        preview
+      }
+      featuredAsset {
+        id
+        preview
+      }
+    }
+    reviews {
+      items {
+        createdAt
+        summary
+        body
+        rating
+        authorName
+        response
+      }
+      totalItems
+      averageRating
+    }
+  }
+}`;
 
 const productsQuery = `{
     Vendure {

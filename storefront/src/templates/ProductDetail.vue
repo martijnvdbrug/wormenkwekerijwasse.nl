@@ -51,11 +51,11 @@
           <div class="card-section">
             <div>
               <h2> Reviews </h2>
-              <ShowStarRating :rating="rating" :nr-of-reviews="nrOfReviews"/>
+              <ShowStarRating :rating="$context.product.reviews.averageRating" :nr-of-reviews="$context.product.reviews.totalItems"/>
             </div>
             <div v-for="review of reviewPreviews" class="review-preview">
               <p class="review-subtitle">
-                {{ review.createdAt | date }} door {{ review.authorName }}
+                {{ review.authorName }}
               </p>
               <MiniShowStarRating :rating="review.rating"/>
               <p>{{ review.summary }}</p>
@@ -91,13 +91,23 @@
 
     <!-- All reviews -->
     <div id="all-reviews" class="grid-x grid-margin-x grid-margin-y">
-      <div class="cell"><br><br><h5>Alle reviews:</h5></div>
+      <div class="cell"><br><br><h5>{{ nrOfReviews }} reviews</h5>
+      </div>
     </div>
     <div class="grid-x grid-margin-x grid-margin-y">
       <div class="cell">
         <div class="card shadowed article-card">
           <div class="card-section">
-            <p>Hier zijn binnekort alle reviews te lezen</p>
+
+            <div v-for="review of $context.reviews">
+              <p class="review-subtitle">
+                {{ review.authorName }}
+              </p>
+              <MiniShowStarRating :rating="review.rating"/>
+              <p>{{ review.body }}</p>
+              <p class="review-response">{{ review.response }}</p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -120,14 +130,8 @@ export default {
     return getMetaInfo(this.$context.product);
   },
   computed: {
-    nrOfReviews() {
-      return this.$context.product?.reviewsHistogram?.[0]?.frequency || 0
-    },
-    rating() {
-      return this.$context.product?.reviewsHistogram?.[0]?.bin || 0
-    },
     reviewPreviews() {
-      return this.$context?.reviews?.slice(0,2) || []
+      return this.$context?.reviews?.slice(0, 2) || []
     }
   },
   data() {
@@ -136,7 +140,9 @@ export default {
       assets: {},
       selectedVariant: {},
       products: [],
-      productPrefix
+      productPrefix,
+      nrOfReviews: 0,
+      rating: 5
     }
   },
   watch: {
@@ -196,11 +202,13 @@ export default {
 .review-preview {
   font-size: 0.8rem;
 }
+
 .review-subtitle {
   color: gray;
   padding-top: 10px;
   margin-bottom: 0;
 }
+
 .asset {
   padding: 6px 6px 0 0;
 }
@@ -236,5 +244,14 @@ export default {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.card-section {
+  flex: none;
+}
+
+.review-response {
+  margin-left: 20px;
+  font-style: italic;
 }
 </style>

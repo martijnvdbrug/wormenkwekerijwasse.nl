@@ -5,9 +5,7 @@
       <div class="empty-stars"></div>
       <div class="full-stars" :style="`width:${this.ratingPercentage}%`"></div>
     </div>
-    <br>
-    <br>
-    <span>( {{ nrOfReviews }} reviews )</span>
+    <span>( {{ nrOfReviews }} )</span>
   </div>
   <div v-else>
     <p>Er zijn nog geen reviews voor dit product</p>

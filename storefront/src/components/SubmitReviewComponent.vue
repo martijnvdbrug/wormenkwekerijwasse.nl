@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       body: undefined,
-      rating: 4,
+      rating: 5,
       authorName: undefined,
       extraName: undefined,
       disableSubmit: false,
