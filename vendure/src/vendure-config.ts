@@ -90,14 +90,14 @@ export const config: VendureConfig = {
                 logging: true,
                 debug: true,
                 auth: {
-                    user: 'noreply@pinelab.studio',
-                    pass: process.env.ZOHO_PASS as string,
+                    user: process.env.SMTP_EMAIL,
+                    pass: process.env.SMTP_PASS,
                 }
             },
             handlers: [orderConfirmationHandler],
             templatePath: path.join(__dirname, '../static/email/templates'),
             globalTemplateVars: {
-                fromAddress: '"Wormenkwekerij Wasse" <noreply@pinelab.studio>',
+                fromAddress: `"Wormenkwekerij Wasse" <${process.env.SMTP_EMAIL}>`,
             },
         }),
         // Production ready, precompiled admin UI

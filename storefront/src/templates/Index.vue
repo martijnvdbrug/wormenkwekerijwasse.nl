@@ -12,9 +12,7 @@
           <div class="card-section">
             <h5>Welkom bij Wormenkwekerij Wasse!</h5>
             <p>
-              Wormenkwekerij Wasse is de expert op het gebied van compostwormen en viswormen.
-              Hier komt nog meer informatie voor op de homepagina.
-              <g-link to="/"> Lees hier meer over wormen</g-link>
+              Wormenkwekerij Wasse is de expert op het gebied van compostwormen, viswormen en alles wat daar bij komt kijken. Bekijk anders bovenstaande video!
             </p>
           </div>
         </div>
@@ -22,12 +20,12 @@
 
       <div class="cell small-6 medium-3 margin-bottom-2">
 
-        <BlogPreview :blog="$context.blogs[0]" />
+        <BlogPreview :blog="$context.blogs[0]" class="hide-image"/>
 
       </div>
       <div class="cell small-6 medium-3 margin-bottom-2">
 
-        <BlogPreview :blog="$context.blogs[1]" />
+        <BlogPreview :blog="$context.blogs[1]" class="hide-image"/>
 
       </div>
 
@@ -97,4 +95,9 @@ export default {
 }
 </script>
 <style>
+@media screen and (max-width: 63.9375em) {
+  .hide-image img {
+    display: none;
+  }
+}
 </style>

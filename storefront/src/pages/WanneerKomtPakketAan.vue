@@ -25,3 +25,8 @@
 
   </Layout>
 </template>
+<script>
+export default {
+  mixins: [require('../mixins/load-foundation')],
+}
+</script>

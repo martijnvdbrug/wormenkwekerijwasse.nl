@@ -10,6 +10,7 @@
       <AsyncImage :src="blog.featuredImage"/>
       <div class="card-section">
         <p>{{ blog.description }}</p>
+        <a :href="`/informatie/${blog.slug}`">Lees meer...</a>
       </div>
     </div>
   </g-link>

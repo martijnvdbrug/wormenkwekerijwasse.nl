@@ -1,9 +1,10 @@
 <template>
   <Layout>
+    <g-link to="/">Terug naar de winkel</g-link>
     <h1>Wormenkwekerij Wasse advies en informatie</h1>
     <br>
 
-    <div class="grid-x grid-margin-x small-up-1 medium-up-3 large-up-4">
+    <div class="grid-x grid-margin-x small-up-1 medium-up-2 large-up-4">
 
       <div v-for="blog in $context.blogs"
            class="cell" style="margin-bottom: 1rem;">
