@@ -37,7 +37,7 @@
                     <th>Totaalprijs</th>
                   </tr>
                   <tr v-for="line in activeOrder.lines" style="padding-bottom: 10px;">
-                    <td>
+                    <td class="hide-image">
                       <img class="cart-thumbnail" :src="getPreview(line.featuredAsset)"
                            :alt="line.productVariant.name">
                     </td>

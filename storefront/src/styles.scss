@@ -194,3 +194,9 @@ h5 {
   height: 100%;
   object-fit: cover;
 }
+
+@media screen and (max-width: 63.9375em) {
+  .hide-image img {
+    display: none;
+  }
+}

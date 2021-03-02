@@ -95,9 +95,4 @@ export default {
 }
 </script>
 <style>
-@media screen and (max-width: 63.9375em) {
-  .hide-image img {
-    display: none;
-  }
-}
 </style>
