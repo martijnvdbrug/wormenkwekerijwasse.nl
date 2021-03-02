@@ -63,6 +63,9 @@ export const eligibleByWeightChecker = new ShippingEligibilityChecker({
             // if 'except' defined and order.country is in except list
             eligibleForCountry = false;
         }
+        if (!order.shippingAddress?.countryCode) {
+            eligibleForCountry = true; // No shippingAdres yet, so allow all countries
+        }
         const connection: TransactionalConnection = this.options.connection;
         const productIds = order.lines.map(line => line.productVariant.productId);
         const products = await connection.findByIdsInChannel(ctx, Product, productIds, ctx.channelId, {});
