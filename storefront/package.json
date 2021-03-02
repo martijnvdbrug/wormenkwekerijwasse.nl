@@ -16,7 +16,8 @@
     "foundation-sites": "^6.6.3",
     "graphql": "^14.7.0",
     "graphql-request": "3.4.0",
-    "gridsome": "^0.7.23"
+    "gridsome": "^0.7.23",
+    "rollbar": "^2.21.0"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

@@ -9,6 +9,7 @@ import Card from './components/Card';
 import Breadcrumb from './components/Breadcrumb.vue';
 import AsyncImage from './components/AsyncImage';
 import BuyButton from './components/BuyButton';
+import Rollbar from 'rollbar';
 
 export default function (Vue, {router, head, isClient}) {
     // Set default layout as a global component
@@ -53,5 +54,17 @@ export default function (Vue, {router, head, isClient}) {
         });
         Vue.prototype.$vendure = new Vendure(store);
         Vue.prototype.$store = store;
+        Vue.prototype.$rollbar = new Rollbar({
+            accessToken: '0901f691b650488eb517eae49eb828df',
+            captureUncaught: true,
+            captureUnhandledRejections: true,
+            payload: {
+                environment: 'WormenkwekerijWasse',
+            }
+        });
+        Vue.config.errorHandler = (err, vm, info) => {
+            vm.$rollbar.error(err);
+            throw err; // rethrow
+        };
     }
 }
