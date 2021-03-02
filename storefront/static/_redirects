@@ -4,3 +4,6 @@
 /informatie-2/ -> /informatie/ 302
 /nieuws/ -> /informatie/ 302
 /klantenservice/verzendkosten/ -> /verzendkosten/ 302
+/klantenservice/privacybeleid/ -> /privacybeleid/ 302
+/klantenservice/wanneer-komt-pakket-aan/ -> /wanneer-komt-pakket-aan/ 302
+/klantenservice/retour-en-restitutie-beleid/ -> /retour-en-restitutie-beleid/ 302

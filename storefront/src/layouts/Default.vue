@@ -82,6 +82,7 @@
                     v-bind:key="collection.slug">{{ collection.name }}<br></g-link>
           </p>
         </div>
+
         <div class="cell medium-12 large-4 text-center" id="contact">
           <h4>Contact</h4>
           <p><a href="tel:00310618441825">06 18441825</a></p>
@@ -98,11 +99,16 @@
             Kvk: 66626811<br>
             Btw nr: NL001413015b26<br>
           </p>
-          <p><strong><a href="/privacy-beleid/">Privacy beleid</a></strong></p>
-          <p><strong><a href="/verzendkosten/">Verzendkosten</a></strong></p>
         </div>
-        <div class="cell medium-12 large-4 text-center">
-          <h4>Afhalen is mogelijk op</h4>
+
+        <div class="cell medium-12 large-4 text-center" id="klantenservice">
+          <h4>Klantenservice</h4>
+          <p><a href="/privacy-beleid/">Privacy beleid</a></p>
+          <p><a href="/verzendkosten/">Verzendkosten</a></p>
+          <p><a href="/wanneer-komt-pakket-aan/">Wanneer komt mijn pakket aan?</a></p>
+          <p><a href="/retour-en-restitutie-beleid/">Retour en restitutiebeleid</a></p>
+          <p><a href="/waarmee-kan-je-betalen/">Waarmee kan ik betalen?</a></p>
+          <p><strong>Afhalen is mogelijk</strong></p>
           <p>Maandag, Woensdag en Vrijdag van 10:00 uur tot 17:00 uur.</p>
           <p>Buiten deze tijden alleen mogelijk op afspraak.</p>
           <p>Telefonisch bereikbaar van:
