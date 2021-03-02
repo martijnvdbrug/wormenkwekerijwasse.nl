@@ -84,7 +84,7 @@ export const config: VendureConfig = {
         EmailPlugin.init({
             transport: {
                 type: 'smtp',
-                host: 'smtp.zoho.eu',
+                host: 'smtp02.hostnet.nl',
                 port: 587,
                 secure: false,
                 logging: true,
