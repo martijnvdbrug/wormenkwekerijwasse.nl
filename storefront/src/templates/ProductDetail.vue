@@ -147,11 +147,6 @@ export default {
   metaInfo() {
     return getMetaInfo(this.$context.product);
   },
-  computed: {
-    reviewPreviews() {
-      return this.$context?.reviews?.slice(0, 2) || []
-    }
-  },
   data() {
     return {
       asset: {},
@@ -161,7 +156,8 @@ export default {
       products: [],
       productPrefix,
       nrOfReviews: 0,
-      rating: 5
+      rating: 5,
+      reviewPreviews: []
     }
   },
   watch: {
@@ -215,6 +211,7 @@ export default {
   },
   created() {
     this.load();
+    this.reviewPreviews = this.$context.product.reviews?.items?.slice(0, 2) || [];
     this.products = this.$context.featuredProducts?.slice(0, 8) || [];
   },
   async mounted() {

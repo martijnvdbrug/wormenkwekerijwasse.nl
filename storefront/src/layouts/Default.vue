@@ -26,7 +26,7 @@
         <div class="cell small-8">
           <ul class="vertical large-horizontal menu" data-responsive-menu="accordion large-dropdown">
             <li>
-              <a class="menu-item" href="#"><h5>Assortiment</h5></a>
+              <a class="menu-item" href="/assortiment/"><h5>Assortiment</h5></a>
               <ul class="menu vertical mobile-accordion">
                 <li v-for="collection of collections">
                   <g-link class="menu-item" :to="`/${categoryPrefix}/${collection.slug}`">{{
