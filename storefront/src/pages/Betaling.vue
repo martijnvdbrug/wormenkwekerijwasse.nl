@@ -8,6 +8,8 @@
           <div v-html="error"></div>
         </div>
       </ClientOnly>
+      <p><strong>In verband met de nieuwe website kan er een storing optreden. We zijn er mee bezig!</strong></p>
+      <p>Mocht u een foutmelding krijgen zou u die kunnen doorsturen naar <a href="mailto:info@wormenkwekerijwasse.nl">info@wormenkwekerijwasse.nl</a>. U kan dan ook de bestelling via de mail plaatsen.</p>
     </div>
     <br>
     <br>
