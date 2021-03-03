@@ -36,21 +36,21 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.error)
-    const states = await this.$vendure.getNextOrderStates();
-    if (states?.indexOf('ArrangingPayment') > -1) {
-      await this.$vendure.transitionOrderToState('ArrangingPayment');
-    }
-    const order = await this.$vendure.addPaymentToOrder({method: 'mollie-payment-handler', metadata: {}}).catch(e => {
+    try {
+      const states = await this.$vendure.getNextOrderStates();
+      if (states?.indexOf('ArrangingPayment') > -1) {
+        await this.$vendure.transitionOrderToState('ArrangingPayment');
+      }
+      const order = await this.$vendure.addPaymentToOrder({method: 'mollie-payment-handler', metadata: {}});
+      const latestPayment = order?.payments?.[order?.payments.length - 1];
+      if (latestPayment?.metadata?.public?.redirectLink) {
+        window.location.href = latestPayment.metadata.public.redirectLink;
+      } else {
+        throw new Error(`No redirect link found in order response for order ${order?.code}`);
+      }
+    } catch(e) {
       this.error = e.message;
-      console.error(e);
-    });
-    const latestPayment = order?.payments?.[order?.payments.length - 1];
-    if (latestPayment?.metadata?.public?.redirectLink) {
-      window.location.href = latestPayment.metadata.public.redirectLink;
-    } else {
-      this.error = order.errorCode;
-      console.error('Error creating payment', this.error);
+      throw e;
     }
   }
 }
