@@ -97,6 +97,9 @@ class Vendure {
         if (!input.company || input.company.length === 0) {
             input.company = '-'; // Dirty fix
         }
+        if (!input.phoneNumber || input.phoneNumber.length === 0) {
+            input.phoneNumber = '-'; // Dirty fix
+        }
         const {setOrderShippingAddress: order} = await this.request(setOrderShippingAddressMutation, {input});
         this.$store.activeOrder = order;
         return order;
