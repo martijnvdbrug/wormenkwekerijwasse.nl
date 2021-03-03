@@ -8,7 +8,7 @@
             <h1>Dit zit er in je winkelmand:</h1>
           </div>
           <div class="cell small-2" style="position: relative;">
-            <g-link class="button" to="/gegevens/" style="position: absolute; bottom: 0; right: 0;">
+            <g-link v-if="orderLines > 0" class="button" to="/gegevens/" style="position: absolute; bottom: 0; right: 0;">
               Bestellen
             </g-link>
           </div>
@@ -93,7 +93,7 @@
 
               </div>
 
-              <div class="card-section" v-if="emptyBasket">
+              <div class="card-section" v-if="orderLines === 0">
                 <p>U hebt nog niks in uw winkelmand...</p>
               </div>
 
@@ -110,6 +110,7 @@
 import NumberInput from '../components/NumberInput';
 
 export default {
+  mixins: [require('../mixins/load-foundation')],
   components: {NumberInput},
   methods: {
     getPreview(asset) {
@@ -128,10 +129,6 @@ export default {
     },
     orderLines() {
       return this.activeOrder?.lines?.length;
-    },
-    emptyBasket() {
-      // Only return true if we have an activeOrder, but it has no lines
-      return !!(this.$store?.activeOrder && !this.orderLines);
     }
   }
 }
