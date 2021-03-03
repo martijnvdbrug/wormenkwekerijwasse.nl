@@ -6,6 +6,6 @@ gcloud run deploy vendure \
             --region "europe-west4" \
             --platform "managed" \
             --allow-unauthenticated \
-            --memory=1G \
+            --memory=2G \
             --project=wormenkwekerijwasse \
             --set-env-vars=$ENV_VARS
