@@ -94,6 +94,9 @@ class Vendure {
     }
 
     async setOrderShippingAddress(input) {
+        if (!input.company || input.company.length === 0) {
+            input.company = '-'; // Dirty fix
+        }
         const {setOrderShippingAddress: order} = await this.request(setOrderShippingAddressMutation, {input});
         this.$store.activeOrder = order;
         return order;
