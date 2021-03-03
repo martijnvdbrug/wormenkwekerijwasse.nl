@@ -43,8 +43,8 @@
                   </div>
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
-                      <label>Telefoonnummer
-                        <input type="tel" name="phoneNumber" v-model="customer.phoneNumber">
+                      <label>Telefoonnummer*
+                        <input type="tel" name="phoneNumber" required v-model="customer.phoneNumber">
                       </label>
                     </div>
                     <div class="cell small-6">

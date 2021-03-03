@@ -17,15 +17,15 @@
 
         <h4>België</h4>
         <p>
-          Bestelling onder de 500 kilo € 6,99 <br>
-          Bestelling boven de 500 kilo € 20,00 <br>
+          Bestelling tot 499 kilo € 6,99 <br>
+          Bestelling van 500 kilo tot 999 kilo € 20,00 <br>
           Bestelling boven de 1000 kilo € 35,00
         </p>
 
         <h4>Duitsland</h4>
         <p>
-          Bestelling onder de 500 kilo € 6,99 <br>
-          Bestelling boven de 500 kilo € 20,00 <br>
+          Bestelling tot 499 kilo € 6,99 <br>
+          Bestelling van 500 kilo tot 999 kilo € 20,00 <br>
           Bestelling boven de 1000 kilo € 35,00
         </p>
 

@@ -10,6 +10,7 @@ import Breadcrumb from './components/Breadcrumb.vue';
 import AsyncImage from './components/AsyncImage';
 import BuyButton from './components/BuyButton';
 import Rollbar from 'rollbar';
+import VueDisqus from 'vue-disqus'
 
 export default function (Vue, {router, head, isClient}) {
     // Set default layout as a global component
@@ -18,6 +19,7 @@ export default function (Vue, {router, head, isClient}) {
     Vue.component('Breadcrumb', Breadcrumb);
     Vue.component('AsyncImage', AsyncImage);
     Vue.component('BuyButton', BuyButton);
+    Vue.use(VueDisqus)
 
     // DNS prefetch for images from storage
     head.link.push({
