@@ -20,10 +20,12 @@ import {SimpleCMSPlugin} from './simple-cms/simple-cms.plugin';
 import {SendcloudPlugin} from './sendcloud/sendcloud.plugin';
 import {EmailPlugin} from '@vendure/email-plugin';
 import {orderConfirmationHandler} from './email/email.handlers';
+import {NumericOrderCodeStrategy} from './order/numeric-order-code-strategy';
 
 export const config: VendureConfig = {
     orderOptions: {
-        stockAllocationStrategy: new CustomStockAllocationStrategy()
+        stockAllocationStrategy: new CustomStockAllocationStrategy(),
+        orderCodeStrategy: new NumericOrderCodeStrategy(),
     },
     workerOptions: {
         runInMainProcess: true,
