@@ -26,7 +26,7 @@ export class SendcloudController {
             return Logger.error(`Status is ${body.action}, but no matching SendCloud status was found for ${body.parcel?.status}`, SendcloudPlugin.context);
         }
         if (! body.parcel?.order_number) {
-            return Logger.error(`No order_number in incoming Sendcloud webhook: ${body.parcel}`, SendcloudPlugin.context)
+            return Logger.error(`No order_number in incoming Sendcloud webhook: ${JSON.stringify(body.parcel)}`, SendcloudPlugin.context)
         }
         await this.sendcloudService.updateOrder(status, body.parcel.order_number);
     }
