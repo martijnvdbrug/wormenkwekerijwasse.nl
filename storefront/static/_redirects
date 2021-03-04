@@ -1,12 +1,12 @@
 /order/* /order/_code.html 200
 /admin/* https://vendure-kfmzg3trkq-ez.a.run.app/admin/ 301
-/winkel/ -> /assortiment/ 301
-/informatie-2/ -> /informatie/ 301
-/informatie-2/* -> /informatie/ 301
-/nieuws/ -> /informatie/ 301
-/nieuws/* -> /informatie/ 301
-/klantenservice/verzendkosten/ -> /verzendkosten/ 301
-/klantenservice/privacybeleid/ -> /privacybeleid/ 301
-/klantenservice/wanneer-komt-pakket-aan/ -> /wanneer-komt-pakket-aan/ 301
-/klantenservice/retour-en-restitutie-beleid/ -> /retour-en-restitutie-beleid/ 301
-/vragen-wormen-dan-ook-opmerking-idee-laat-weten-reactie-hieronder/ -> /faq/ 301
+/winkel/ /assortiment/ 301
+/informatie-2/ /informatie/ 301
+/informatie-2/* /informatie/ 301
+/nieuws/ /informatie/ 301
+/nieuws/* /informatie/ 301
+/klantenservice/verzendkosten/ /verzendkosten/ 301
+/klantenservice/privacybeleid/ /privacybeleid/ 301
+/klantenservice/wanneer-komt-pakket-aan/ /wanneer-komt-pakket-aan/ 301
+/klantenservice/retour-en-restitutie-beleid/ /retour-en-restitutie-beleid/ 301
+/vragen-wormen-dan-ook-opmerking-idee-laat-weten-reactie-hieronder/ /faq/ 301
