@@ -75,7 +75,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 5,
-        "message": "Sorted"
+        "message": "Sorted",
+        orderState: 'Shipped'
     },
     {
         "id": 4,
@@ -83,7 +84,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 3,
-        "message": "En route to sorting center"
+        "message": "En route to sorting center",
+        orderState: 'Shipped'
     },
     {
         "id": 1,
