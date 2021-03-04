@@ -3,12 +3,14 @@ import * as path from 'path';
 import {webhookAdminUi} from 'vendure-plugin-webhook';
 import {ReviewsPlugin} from './reviews/reviews-plugin';
 import {simpleCmsAdminUi} from './simple-cms/ui';
+import {adminExternalLinkUI} from './admin-external-link/external-link-ui';
 
 compileUiExtensions({
     outputPath: path.join(__dirname, '__admin-ui'),
     extensions: [
         simpleCmsAdminUi,
         webhookAdminUi,
+        adminExternalLinkUI,
         ReviewsPlugin.uiExtensions,
         setBranding({
             // The small logo appears in the top left of the screen
