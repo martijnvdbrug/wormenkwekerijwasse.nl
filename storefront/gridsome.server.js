@@ -164,7 +164,21 @@ module.exports = async function (api) {
             }
         });
 
+        const migratedComments = ['zieke_wormen_en_oplossingen', 'zieke_wormen_en_oplossingen', 'vrolijk_pasen_01', 'wormentoren_in_de_winter',
+            'beestjes_in_de_wormenbak', '3_jarig_jubileum', 'compost_maken', 'plastic_in_koffiepads', 'groene_passie_beurs_2018', 'buxus_mot_bestrijden',
+            'landleven', 'heermoes_verantwoordt_bestrijden', 'wormen_courant_q_1_2018', 'wormer_courant_q3_van_oktober', 'meelwormen', 'compostwormen_op_de_televisie',
+            'baby_knoflook_oogst', 'wormencompost_vermicompost_wormenmest', 'vrolijk_pasen', 'wormen_kweken_78', 'een_axolotl_die_het_wormpje_wel_ziet_zitten',
+            'wormen_viswormen_en_compostwormen_bewaren', 'viswormen_of_compostwormen_en_uitleg_verpakkings_keuze', 'wormen_in_de_zomer'
+        ];
+
         simpleContentBlocks.forEach(blog => {
+
+            let disqusSlug;
+            const formatted = blog.slug.split('-').join('_');
+            if (migratedComments.indexOf(formatted) > -1) {
+                disqusSlug = formatted;
+            }
+
             const breadcrumb = [
                 {name: 'Advies & informatie', url: '/informatie/'},
                 {name: blog.title , url: blog.slug }
@@ -174,7 +188,7 @@ module.exports = async function (api) {
                 component: './src/templates/Artikel.vue',
                 context: {
                     blog,
-                    disqusSlug: blog.slug.split('-').join('_'),
+                    disqusSlug,
                     breadcrumb,
                     collections
                 }

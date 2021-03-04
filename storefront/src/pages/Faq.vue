@@ -16,6 +16,7 @@
 </template>
 <script>
 export default {
+  mixins: [require('../mixins/load-foundation')],
   data() {
     return {
       config: {

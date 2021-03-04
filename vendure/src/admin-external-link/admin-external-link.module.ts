@@ -8,7 +8,7 @@ import {addNavMenuItem, SharedModule} from '@vendure/admin-ui/core';
                 id: 'comments',
                 label: 'Comments',
                 icon: 'form',
-                routerLink: ['https://wormenkwekerijwasse.disqus.com/']
+                routerLink: ['/extensions/comments/']
             },
             'marketing'),
     ]

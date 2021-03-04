@@ -1,8 +1,6 @@
 <template>
   <Layout>
 
-    {{ $context.disqusSlug }}
-
     <h1>{{ $context.blog.title }}</h1>
     <p style="color: gray;">{{ $context.blog.createdAt | date }} door {{ $context.blog.author }}</p>
     <div class="grid-x grid-margin-x">
@@ -12,8 +10,15 @@
           <div class="card-section" v-html="$context.blog.body">
           </div>
           <div class="card-section">
+            <div v-if="$context.disqusSlug" id="migrated-comments">
+              <!--- Get migrated comments -->
               <Disqus shortname="wormenkwekerijwasse" :page-config="{slug: this.$context.disqusSlug}"
                       lang="nl"/>
+            </div>
+            <div v-else id="new-thread">
+              <!--- Otherwise create new disciossion -->
+              <Disqus shortname="wormenkwekerijwasse" lang="nl"/>
+            </div>
           </div>
         </div>
       </div>
