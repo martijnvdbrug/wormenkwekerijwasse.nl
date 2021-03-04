@@ -174,6 +174,7 @@ module.exports = async function (api) {
                 component: './src/templates/Artikel.vue',
                 context: {
                     blog,
+                    disqusSlug: blog.slug.split('-').join('_'),
                     breadcrumb,
                     collections
                 }
@@ -181,6 +182,4 @@ module.exports = async function (api) {
         })
 
     })
-
-
 }

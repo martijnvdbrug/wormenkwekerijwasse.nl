@@ -108,6 +108,7 @@
           <p><a href="/wanneer-komt-pakket-aan/">Wanneer komt mijn pakket aan?</a></p>
           <p><a href="/retour-en-restitutie-beleid/">Retour en restitutiebeleid</a></p>
           <p><a href="/waarmee-kan-je-betalen/">Waarmee kan ik betalen?</a></p>
+          <p><a href="/faq/">Vragen, antwoorden en opmerkingen</a></p>
           <p><strong>Afhalen is mogelijk</strong></p>
           <p>Maandag, Woensdag en Vrijdag van 10:00 uur tot 17:00 uur.</p>
           <p>Buiten deze tijden alleen mogelijk op afspraak.</p>

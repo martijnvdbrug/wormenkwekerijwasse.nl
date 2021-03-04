@@ -1,6 +1,8 @@
 <template>
   <Layout>
 
+    {{ $context.disqusSlug }}
+
     <h1>{{ $context.blog.title }}</h1>
     <p style="color: gray;">{{ $context.blog.createdAt | date }} door {{ $context.blog.author }}</p>
     <div class="grid-x grid-margin-x">
@@ -9,8 +11,14 @@
           <AsyncImage :src="$context.blog.featuredImage" style="object-fit: cover; height: 300px;"/>
           <div class="card-section" v-html="$context.blog.body">
           </div>
+          <div class="card-section">
+              <Disqus shortname="wormenkwekerijwasse" :page-config="{slug: this.$context.disqusSlug}"
+                      lang="nl"/>
+          </div>
         </div>
       </div>
+
+
       <div class="cell show-for-large large-4">
         <div class="card shadowed">
           <div class="card-section">
@@ -38,7 +46,12 @@ import {categoryPrefix} from '../util';
 export default {
   mixins: [require('../mixins/load-foundation')],
   data() {
-    return {categoryPrefix}
+    return {
+      categoryPrefix,
+      config: {
+        slug: 'wormen_viswormen_en_compostwormen_bewaren'
+      }
+    }
   },
   mounted() {
     // Parse Embedded content in found in <pre> tags
