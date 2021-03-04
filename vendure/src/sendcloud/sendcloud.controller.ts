@@ -18,8 +18,9 @@ export class SendcloudController {
            throw Error(`Invalid signature in incoming Sendcloud webhook from ${req.get('host')}`);
         }
         if (body.action !== 'parcel_status_changed') {
-            return Logger.debug(`Incoming webhook: ${body.action}. skipping...`, SendcloudPlugin.context);
+            return Logger.info(`Incoming webhook: ${body.action}. skipping...`, SendcloudPlugin.context);
         }
+        Logger.info(`Incoming Sendcloud webhook: ${body.action} - ${JSON.stringify(body.parcel)}`);
         const status = sendcloudStates.find(s => s.id === body.parcel?.status?.id)
         if (!status) {
             return Logger.error(`Status is ${body.action}, but no matching SendCloud status was found for ${body.parcel?.status}`, SendcloudPlugin.context);
