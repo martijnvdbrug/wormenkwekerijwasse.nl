@@ -1,14 +1,13 @@
 import {OrderCodeStrategy, RequestContext} from '@vendure/core';
-import generate = require('nanoid/generate');
+
 
 /**
- * Generates id's like 20210304-01234567
+ * Generates id's like 6149-2990-78
+ * Safe untill 1 tenth of a second. Collisions possible,
+ * but we take the gamble for the sake of readability
  */
 export class NumericOrderCodeStrategy implements OrderCodeStrategy {
     generate(ctx: RequestContext): string {
-        const date = new Date();
-        const suffix = generate('1234567890', 8);
-        const dateString = date.getFullYear() + ('0' + (date.getMonth()+1)).slice(-2) + ('0' + date.getDate()).slice(-2);
-        return `${dateString}-${suffix}`;
+        return String(Date.now()).slice(1, 11).match(/.{1,4}/g).join('-');
     }
 }
