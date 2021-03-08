@@ -84,7 +84,7 @@ export class BlockDetailComponent implements OnInit {
                 input
             }).subscribe(
                 (res) => {
-                    this.id = (res as any)?.createSimpleContentBlock?.id;
+                    this.id = (res as any)?.updateSimpleContentBlock?.id;
                     this.notificationService.success(`Saved`);
                 },
                 err => this.notificationService.error(`Failed to update content!`),
