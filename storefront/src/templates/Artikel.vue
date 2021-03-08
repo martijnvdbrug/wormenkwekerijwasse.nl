@@ -63,6 +63,10 @@ export default {
     if (document.querySelector('pre')?.textContent) {
       document.querySelector('pre').innerHTML = document.querySelector('pre').textContent;
     }
+    // Load instagram embed again ,in case instagram ambeds are here
+    let externalScript = document.createElement('script')
+    externalScript.setAttribute('src', 'https://www.instagram.com/embed.js')
+    document.head.appendChild(externalScript)
   },
 }
 </script>
