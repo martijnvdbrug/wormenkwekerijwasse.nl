@@ -33,7 +33,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 1000,
-        "message": "Ready to send"
+        "message": "Ready to send",
+        orderState: 'Shipped'
     },
     {
         "id": 12,
