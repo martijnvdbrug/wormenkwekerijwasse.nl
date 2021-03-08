@@ -61,6 +61,10 @@ const allProductFields = `
         name
       }
     }
+    customFields {
+     reviewRating
+     reviewCount
+   }
   }`;
 
 const minimalProductFields = `{

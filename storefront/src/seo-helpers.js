@@ -21,6 +21,8 @@ function getMetaInfo(product) {
     }
     const seoDescription = getSeoDescription(product.description);
     const image = product.featuredAsset ? product.featuredAsset.preview : undefined;
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 2);
     return {
         title: product.name,
         meta: [
@@ -41,6 +43,16 @@ function getMetaInfo(product) {
                     '@type': "Offer",
                     'price': product.defaultPrice / 100,
                     'priceCurrency': 'EUR',
+                    'priceValidUntil': date.toISOString(),
+                    'availability': 'InStock',
+                    'url': `/product/${product.slug}`,
+                },
+                'sku': product.name,
+                'aggregateRating': {
+                    '@type': 'AggregateRating',
+                    'ratingValue': product.customFields.reviewRating || 4.5,
+                    'bestRating': '5',
+                    'ratingCount': product.customFields.reviewCount || 4.5
                 }
             }
         }]

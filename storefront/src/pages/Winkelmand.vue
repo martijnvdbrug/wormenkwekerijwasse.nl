@@ -51,6 +51,7 @@
                       <NumberInput :value="line.quantity" v-on:numberChange="updateQuantity(line.id, $event)"/>
                     </td>
                     <td><p>{{ line.linePriceWithTax | euro }}</p></td>
+                    <td><a v-on:click="updateQuantity(line.id, 0)"><i class="fi-x"></i></a></td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
