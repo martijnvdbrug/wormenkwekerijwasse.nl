@@ -5,7 +5,7 @@
        style="width: 100%; margin-top: 10px;">
       IN WINKELMAND</a>
     <a v-if="soldOut" disabled="true" class="button"
-       style="width: 100%; margin-top: 10px;">SOLD OUT</a>
+       style="width: 100%; margin-top: 10px;">UITVERKOCHT</a>
 
     <div class="reveal text-center" id="addedToCartModal" data-reveal>
       <i class="fi-check green" style="font-size: 2rem;"></i>
