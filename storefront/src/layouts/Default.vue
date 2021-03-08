@@ -48,6 +48,9 @@
             <li>
               <a class="menu-item" href="#contact"><h5>Contact</h5></a>
             </li>
+            <li>
+              <a class="menu-item" href="/faq/"><h5>FAQ</h5></a>
+            </li>
           </ul>
         </div>
         <div class="cell small-1 hide-for-medium-only hide-for-small-only align-right">
