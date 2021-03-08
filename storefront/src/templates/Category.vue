@@ -54,9 +54,22 @@
 
 <script>
 import {categoryPrefix, productPrefix} from '../util';
+import {getSeoDescription} from '../seo-helpers';
 
 export default {
   mixins: [require('../mixins/load-foundation')],
+  metaInfo() {
+    const seoDescription = getSeoDescription(this.$context.collection.description);
+    return {
+      title: this.$context.collection.name,
+      meta: [
+        {name: 'description', content: seoDescription},
+        {name: 'og:title', content: this.$context.collection.name},
+        {name: 'og:description', content: seoDescription},
+        {name: 'og:image', content: this.$context.collection.featuredAsset?.preview || '/logo-wormenkwekerijwasse.png'},
+      ],
+    }
+  },
   components: {},
   data() {
     return {productPrefix, categoryPrefix}
