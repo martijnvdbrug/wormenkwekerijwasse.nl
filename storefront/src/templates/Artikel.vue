@@ -52,21 +52,23 @@ export default {
   mixins: [require('../mixins/load-foundation')],
   data() {
     return {
-      categoryPrefix,
-      config: {
-        slug: 'wormen_viswormen_en_compostwormen_bewaren'
+      categoryPrefix
+    }
+  },
+  methods: {
+    loadEmbeddedContent() {
+      // Load instagram embed again, in case instagram embeds are in content
+      if (document?.querySelector('pre')?.textContent) {
+        document.querySelector('pre').innerHTML = document?.querySelector('pre').textContent;
       }
+      let externalScript = document?.createElement('script');
+      externalScript?.setAttribute('src', 'https://www.instagram.com/embed.js');
+      document?.head.appendChild(externalScript);
     }
   },
   mounted() {
-    // Parse Embedded content in found in <pre> tags
-    if (document.querySelector('pre')?.textContent) {
-      document.querySelector('pre').innerHTML = document.querySelector('pre').textContent;
-    }
-    // Load instagram embed again ,in case instagram ambeds are here
-    let externalScript = document.createElement('script')
-    externalScript.setAttribute('src', 'https://www.instagram.com/embed.js')
-    document.head.appendChild(externalScript)
+    this.loadEmbeddedContent();
+    setTimeout(() => instgrm?.Embeds?.process(), 5000);
   },
 }
 </script>
