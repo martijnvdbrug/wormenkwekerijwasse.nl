@@ -229,7 +229,7 @@ description
   }
 }
 .top-banner {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   background-color: #2D93AD;
   color: white;
 }
