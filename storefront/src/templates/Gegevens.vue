@@ -149,6 +149,9 @@ export default {
       ]);
       this.$router.push('/verzending/')
     },
+    signUp() {
+      // https://wormenkwekerijwasse.us1.list-manage.com/subscribe/post?u=53d72f8e65e2d0cb6c2ed2c3c&id=a88584e992
+    }
   },
   async mounted() {
     const activeOrder = await this.$vendure.getActiveOrder();

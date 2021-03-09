@@ -1,8 +1,21 @@
 <template>
   <Layout>
     <ClientOnly>
-      <div>
 
+      <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+      <div id="mc_embed_signup">
+        <form action="https://wormenkwekerijwasse.us1.list-manage.com/subscribe/post?u=53d72f8e65e2d0cb6c2ed2c3c&amp;id=a88584e992" method="post" id="mc-embedded-subscribe-form" target="_blank" name="mc-embedded-subscribe-form" class="validate" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Meld je aan voor de nieuwsbrief</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email adres" v-model="emailAddress" required>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_53d72f8e65e2d0cb6c2ed2c3c_a88584e992" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Aanmelden" name="subscribe" id="mc-embedded-subscribe" class="button" style="background-color: #5FAD56;"></div>
+          </div>
+        </form>
+      </div>
+
+      <div>
         <div v-if="!order && !error">
           <h1>Even geduld...</h1>
           <p>Je betaling wordt verwerkt</p>
@@ -85,7 +98,8 @@ export default {
   data() {
     return {
       order: undefined,
-      error: undefined
+      error: undefined,
+      emailAddress: undefined
     }
   },
   async mounted() {
@@ -98,6 +112,7 @@ export default {
           break;
         }
         this.order = await this.$vendure.getOrderByCode(code);
+        this.emailAddress = this.order?.customer?.emailAddress;
         await new Promise(resolve => setTimeout(resolve, 1000));
         pollingCount++;
         console.log(`Polling for payment status ${pollingCount}`);
