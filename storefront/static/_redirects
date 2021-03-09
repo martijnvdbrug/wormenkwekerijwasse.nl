@@ -5,7 +5,6 @@
 /category/informatie/ /informatie/ 301
 /category/meelwormen/ /product/meelwormen/ 301
 /informatie-2/ /informatie/ 301
-/informatie-2/* /informatie/ 301
 /informatie-2/lavameel/
 /informatie-2/lavameel/ /informatie/lavameel/
 /informatie/wormencompost-wormenmest/ /informatie/wormencompost-vermicompost-wormenmest/ 301
@@ -24,7 +23,6 @@
 /product-categorie/bodemverbetering/wormenmest/ /product-categorie/bodemverbetering-wormenmest/ 301
 /product-categorie/overige/ /assortiment/ 301
 /product-categorie/wormentorens/ /product-categorie/wormentoren-en-wormenbakken/ 301
-/product-tag/* /assortiment/ 301
 /product-tag/lavameel/ /product-categorie/bodemverbetering-lavameel/ 301
 /product/lavagruis-bigbag/ /product/lavagruis-1000-kg/ 301
 /product/viswormen-2/ /product/dendrobena-viswormen/ 301
@@ -47,3 +45,5 @@
 /tag/* /informatie/ 301
 /nieuws/* /informatie/ 301
 /order/* /order/_code.html 200
+/product-tag/* /assortiment/ 301
+/informatie-2/* /informatie/ 301
