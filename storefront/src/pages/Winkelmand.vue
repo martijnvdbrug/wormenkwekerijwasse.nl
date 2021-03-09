@@ -94,7 +94,7 @@
 
               </div>
 
-              <div class="card-section" v-if="orderLines === 0">
+              <div class="card-section" v-if="!orderLines">
                 <p>U hebt nog niks in uw winkelmand...</p>
               </div>
 
