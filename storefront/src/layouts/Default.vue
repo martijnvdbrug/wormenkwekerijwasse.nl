@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <div class="text-center top-banner">Gratis verzenden binnen Nederland boven de €50,-!</div>
     <div class="title-bar shadowed" data-responsive-toggle="responsive-menu" data-hide-for="large">
       <div class="grid-x align-bottom">
         <div class="cell small-3">
@@ -227,5 +227,10 @@ description
   .no-js .title-bar {
     display: none;
   }
+}
+.top-banner {
+  font-size: 1.5rem;
+  background-color: #2D93AD;
+  color: white;
 }
 </style>
