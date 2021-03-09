@@ -1,4 +1,5 @@
 import {
+    CollectionModificationEvent,
     DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     ProductEvent,
@@ -72,7 +73,7 @@ export const config: VendureConfig = {
         WebhookPlugin.init({
             httpMethod: 'POST',
             delay: 3000,
-            events: [ProductEvent, ProductVariantChannelEvent, ProductVariantEvent]
+            events: [ProductEvent, ProductVariantChannelEvent, ProductVariantEvent, CollectionModificationEvent]
         }),
         MolliePlugin,
         AssetServerPlugin.init({
