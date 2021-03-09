@@ -7,8 +7,8 @@ function getSeoDescription(str) {
     if (!str) {
         return;
     }
-    if (str.length > 70) {
-        str = str.substring(0, 70);
+    if (str.length > 150) {
+        str = str.substring(0, 150);
     }
     str = str.replace(/<[^>]*>?/gm, ' '); // replace html
     str = str.replace(/&nbsp;/g, ' '); // replace &nbsp;
