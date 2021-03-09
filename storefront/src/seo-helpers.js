@@ -52,7 +52,7 @@ function getMetaInfo(product) {
                     '@type': 'AggregateRating',
                     'ratingValue': product.customFields.reviewRating || 4.5,
                     'bestRating': '5',
-                    'ratingCount': product.customFields.reviewCount || 0
+                    'ratingCount': product.customFields.reviewCount || 1
                 }
             }
         }]
