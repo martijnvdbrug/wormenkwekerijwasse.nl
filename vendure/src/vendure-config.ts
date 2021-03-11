@@ -45,6 +45,7 @@ export const config: VendureConfig = {
             identifier: 'admin',
             password: process.env.SUPERADMIN_PASS as string
         },
+        requireVerification: false,
         tokenMethod: 'bearer',
     },
     dbConnectionOptions: {
