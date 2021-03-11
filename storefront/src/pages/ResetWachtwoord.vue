@@ -1,11 +1,12 @@
 <template>
   <Layout>
+    <g-link to="/">Terug naar de winkel</g-link>
     <h1>Wachtwoord opnieuw instellen</h1>
     <div class="grid-x grid-margin-x">
       <div class="cell">
         <div class="card shadowed article-card" style="padding: 30px;">
 
-          <form v-on:submit.prevent="reset()">
+          <form v-if="!success" v-on:submit.prevent="reset()">
             <div class="grid-x grid-margin-x">
               <div class="cell small-12">
                 <label>Nieuw wachtwoord:
@@ -24,6 +25,10 @@
               </div>
             </div>
           </form>
+
+          <div v-else>
+            <p> Uw wachtwoord is ingesteld!</p>
+          </div>
         </div>
       </div>
     </div>
@@ -37,9 +42,10 @@
 </template>
 <script>
 export default {
-  mixins: [require('../mixins/load-foundation')],
+  // mixins: [require('../mixins/load-foundation')],
   data() {
     return {
+      success: false,
       newPassword: undefined,
       error: undefined,
       token: undefined,
