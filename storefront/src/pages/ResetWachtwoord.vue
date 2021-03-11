@@ -28,6 +28,7 @@
 
           <div v-else>
             <p> Uw wachtwoord is ingesteld!</p>
+            <g-link to="/">Terug naar de winkel</g-link>
           </div>
         </div>
       </div>
@@ -56,6 +57,7 @@ export default {
       try {
         await this.$vendure.resetPassword(this.token, this.newPassword);
         this.error = undefined;
+        this.success = true;
       } catch (e) {
         this.error = `Er is een fout opgetreden bij het opnieuw instellen van het wachtwoord. Neem contact met ons op`;
         console.error(e);
