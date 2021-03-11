@@ -49,6 +49,7 @@ export default {
     async reset() {
       try {
         await this.$vendure.resetPassword(this.token, this.newPassword);
+        this.error = undefined;
       } catch (e) {
         this.error = `Er is een fout opgetreden bij het opnieuw instellen van het wachtwoord. Neem contact met ons op`;
         console.error(e);

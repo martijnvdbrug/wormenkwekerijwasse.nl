@@ -298,6 +298,20 @@ mutation resetPassword($token: String!, $password: String!){
 }
 `;
 
+const requestPasswordResetMutation = `
+mutation requestPasswordReset($emailAddress: String!){
+  requestPasswordReset(emailAddress: $emailAddress) {
+    ...on Success {
+      success
+    }
+    ...on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+`;
+
 module.exports = {
     getStockForProductsQuery,
     getProductQuery,
@@ -320,5 +334,6 @@ module.exports = {
     createCustomerAddressMutation,
     updateCustomerAddressMutation,
     registerMutation,
-    resetPasswordMutation
+    resetPasswordMutation,
+    requestPasswordResetMutation
 };

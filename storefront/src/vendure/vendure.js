@@ -21,7 +21,8 @@ const {
     createCustomerAddressMutation,
     updateCustomerAddressMutation,
     registerMutation,
-    resetPasswordMutation
+    resetPasswordMutation,
+    requestPasswordResetMutation
 } = require('./client.queries');
 
 /**
@@ -120,6 +121,12 @@ class Vendure {
 
     async resetPassword(token, password) {
         const result = await this.request(resetPasswordMutation, {token, password});
+        this.validateResult(result);
+        return result;
+    }
+
+    async requestResetPassword(emailAddress) {
+        const result = await this.request(requestPasswordResetMutation, {emailAddress});
         this.validateResult(result);
         return result;
     }
