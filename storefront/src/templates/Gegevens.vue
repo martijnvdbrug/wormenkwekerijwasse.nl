@@ -162,7 +162,7 @@ export default {
   mixins: [require('../mixins/load-foundation'), require('../mixins/empty-basket-validator')],
   computed: {
     activeCustomer() {
-      return this.$store.activeCustomer;
+      return this.$store?.activeCustomer;
     }
   },
   data() {
