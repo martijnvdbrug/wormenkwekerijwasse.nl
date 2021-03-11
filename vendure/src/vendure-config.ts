@@ -102,7 +102,7 @@ export const config: VendureConfig = {
             templatePath: path.join(__dirname, '../static/email/templates'),
             globalTemplateVars: {
                 fromAddress: `"Wormenkwekerij Wasse" <${process.env.SMTP_EMAIL}>`,
-                passwordResetUrl: 'https://wormenkwekerijwase.nl/reset-wachtwoord',
+                passwordResetUrl: 'https://wormenkwekerijwasse.nl/reset-wachtwoord',
             },
         }),
         // Production ready, precompiled admin UI
