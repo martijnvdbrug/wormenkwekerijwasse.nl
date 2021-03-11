@@ -13,7 +13,7 @@
               </g-link>
             </div>
             <div class="cell small-10 text-right">
-              <h1> Jouw gegevens</h1>
+              <h1> Uw gegevens</h1>
             </div>
           </div>
 
@@ -21,8 +21,40 @@
             <div class="cell">
               <div class="card shadowed article-card" style="padding: 30px;">
 
+                <div v-if="activeCustomer" class="grid-x grid-padding-x" style="margin-bottom: 20px;">
+                  <div class="cell small-12">
+                    <i class="fi-check green" style="font-size: 2rem;"></i>
+                    <p style="margin-bottom: 5px;">U bent ingelogd met <i>{{ activeCustomer.emailAddress }}</i>
+                    </p>
+                    <a v-on:click="logout">Log uit</a>
+                  </div>
+                </div>
+
+                <form v-if="!activeCustomer" v-on:submit.prevent="login()">
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-12"><p><strong>Bent u al klant? Dan kunt u hier inloggen:</strong></p></div>
+                    <div class="cell small-12" style="color: red; font-size: 0.9rem;">{{ this.loginError }}</div>
+                    <div class="cell small-6 ">
+                      <label>Emailadres
+                        <input type="email" autocomplete name="email" v-model="loginEmail">
+                      </label>
+                    </div>
+                    <div class="cell small-6">
+                      <label>Wachtwoord
+                        <input type="password" name="password" required v-model="password"/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-12 text-right">
+                      <input type="submit" class="button" value="Login">
+                    </div>
+                  </div>
+                </form>
+
                 <form v-on:submit.prevent="submit()">
                   <div class="grid-x grid-padding-x">
+                    <div class="cell small-12"><p><strong>Of ga door met bestellen:</strong></p></div>
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
                         <input type="text" name="company" v-model="address.company">
@@ -49,7 +81,8 @@
                     </div>
                     <div class="cell small-6">
                       <label>Email*
-                        <input type="email" name="email" required v-model="customer.emailAddress">
+                        <input type="email" name="email" required v-model="customer.emailAddress"
+                               :disabled="activeCustomer">
                       </label>
                     </div>
                   </div>
@@ -89,6 +122,19 @@
                       </label>
                     </div>
                   </div>
+                  <div v-if="!activeCustomer" class="grid-x grid-padding-x">
+                    <div class="cell small-12">
+                      <input id="account" v-model="createAccount" type="checkbox"><label for="account">Maak een account
+                      aan voor {{ this.customer.emailAddress }}</label>
+
+                    </div>
+                    <div class="cell small-6" v-if="createAccount">
+                      <label >Wachtwoord:
+                        <input ref="newPassword" type="password" name="newPassword" :required="!!createAccount" v-model="newPassword" minlength="8">
+                      </label>
+                      <input id="showpass" v-on:change="togglePass($event.target.checked)" type="checkbox"><label for="showpass">Laat wachtwoord zien</label>
+                    </div>
+                  </div>
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-12 text-right">
                       <input type="submit" class="button" value="Bestellen">
@@ -109,9 +155,19 @@
 
 <script>
 export default {
-  mixins: [require('../mixins/load-foundation')],
+  mixins: [require('../mixins/load-foundation'), require('../mixins/empty-basket-validator')],
+  computed: {
+    activeCustomer() {
+      return this.$store.activeCustomer;
+    }
+  },
   data() {
     return {
+      loginError: undefined,
+      loginEmail: undefined,
+      password: undefined,
+      createAccount: false,
+      newPassword: undefined,
       customer: {
         emailAddress: undefined,
         firstName: undefined,
@@ -129,6 +185,40 @@ export default {
     }
   },
   methods: {
+    togglePass(checked){
+      if (checked) {
+        this.$refs['newPassword'].type = 'text';
+      } else {
+        this.$refs['newPassword'].type = 'password';
+      }
+    },
+    async register() {
+      await this.$vendure.register({
+        emailAddress: this.customer.emailAddress,
+        password: this.newPassword
+      })
+    },
+    async login() {
+      try {
+        await this.$vendure.login(this.loginEmail, this.password);
+        this.loginError = undefined;
+      } catch (e) {
+        if (e.message?.indexOf('ER_ROW_IS_REFERENCED') > -1) {
+          this.loginError = `Er is iets misgegaan met inloggen. U kunt uw bestelling afmaken door uw adresgegevens hieronder in te vullen.`;
+        } else {
+          this.loginError = `Emailadres of wachtwoord is onjuist`;
+        }
+        throw e;
+      }
+      if (this.activeCustomer) {
+        this.setCustomer(this.activeCustomer);
+        this.setAddress(this.activeCustomer.addresses?.[0])
+      }
+    },
+    async logout() {
+      await this.$vendure.logout();
+      this.$router.push('/winkelmand/')
+    },
     setCountry(countryName) {
       const country = this.$context.availableCountries?.find(c => c.name === countryName);
       if (country) {
@@ -136,6 +226,7 @@ export default {
       }
     },
     async submit() {
+      this.register().catch(e => console.error(e));// Registering should not be blocking
       const address = {
         ...this.address,
         fullName: `${this.customer.firstName} ${this.customer.lastName}`,
@@ -143,30 +234,56 @@ export default {
         defaultShippingAddress: true,
         phoneNumber: this.customer.phoneNumber,
       };
-      await Promise.all([
-        this.$vendure.setCustomerForOrder(this.customer),
-        this.$vendure.setOrderShippingAddress(address)
-      ]);
+      if (this.activeCustomer) {
+        const c = this.customer;
+        delete c.emailAddress;
+        await Promise.all([
+          this.$vendure.updateCustomer(c),
+          this.$vendure.setOrderShippingAddress(address)
+        ]);
+        if (this.activeCustomer.addresses?.[0]) {
+          this.$vendure.updateCustomerAddress({
+            id: this.activeCustomer.addresses?.[0].id,
+            ...address
+          }).catch(e => console.error(e));
+        } else {
+          this.$vendure.createCustomerAddress(address).catch(e => console.error(e));
+        }
+      } else {
+        await Promise.all([
+          this.$vendure.setCustomerForOrder(this.customer),
+          this.$vendure.setOrderShippingAddress(address)
+        ]);
+      }
       this.$router.push('/verzending/')
     },
-    signUp() {
-      // https://wormenkwekerijwasse.us1.list-manage.com/subscribe/post?u=53d72f8e65e2d0cb6c2ed2c3c&id=a88584e992
+    setAddress(address) {
+      this.address.company = address?.company;
+      this.address.streetLine1 = address?.streetLine1;
+      this.address.streetLine2 = address?.streetLine2;
+      this.address.city = address?.city;
+      this.address.postalCode = address?.postalCode;
+      this.setCountry(address?.country);
+    },
+    setCustomer(customer) {
+      this.customer.firstName = customer?.firstName;
+      this.customer.lastName = customer?.lastName;
+      this.customer.phoneNumber = customer?.phoneNumber;
+      this.customer.emailAddress = customer?.emailAddress;
     }
   },
   async mounted() {
     const activeOrder = await this.$vendure.getActiveOrder();
-    // Set Customer, if already set on order
-    this.customer.firstName = activeOrder?.customer?.firstName;
-    this.customer.lastName = activeOrder?.customer?.lastName;
-    this.customer.phoneNumber = activeOrder?.customer?.phoneNumber;
-    this.customer.emailAddress = activeOrder?.customer?.emailAddress;
-    // Set Address, if already set on order
-    this.address.company = activeOrder?.shippingAddress?.company;
-    this.address.streetLine1 = activeOrder?.shippingAddress?.streetLine1;
-    this.address.streetLine2 = activeOrder?.shippingAddress?.streetLine2;
-    this.address.city = activeOrder?.shippingAddress?.city;
-    this.address.postalCode = activeOrder?.shippingAddress?.postalCode;
-    this.setCountry(activeOrder?.shippingAddress?.country);
+    await this.$vendure.getActiveCustomer();
+    if (this.activeCustomer) {
+      this.setCustomer(this.activeCustomer);
+      this.setAddress(this.activeCustomer.addresses?.[0])
+    } else {
+      // Set Customer, if already set on order
+      this.setCustomer(activeOrder?.customer);
+      // Set Address, if already set on order
+      this.setAddress(activeOrder?.shippingAddress);
+    }
   }
 }
 </script>

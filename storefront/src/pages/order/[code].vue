@@ -95,6 +95,7 @@
 <script>
 export default {
   // mixins: [require('../../mixins/load-foundation')],
+  mixins: [require('../../mixins/empty-basket-validator')],
   data() {
     return {
       order: undefined,

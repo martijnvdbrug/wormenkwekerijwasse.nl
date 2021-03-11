@@ -1,5 +1,5 @@
 import {EmailEventListener} from "@vendure/email-plugin";
-import {OrderStateTransitionEvent} from "@vendure/core";
+import {OrderStateTransitionEvent, PasswordResetEvent} from "@vendure/core";
 
 export const orderConfirmationHandler = new EmailEventListener('order-confirmation')
     .on(OrderStateTransitionEvent)
@@ -15,3 +15,12 @@ export const orderConfirmationHandler = new EmailEventListener('order-confirmati
             }
         };
     });
+
+export const passwordResetHandler = new EmailEventListener('password-reset')
+    .on(PasswordResetEvent)
+    .setRecipient(event => event.user.identifier)
+    .setFrom(`{{ fromAddress }}`)
+    .setSubject(`Wachtwoord opnieuw instellen`)
+    .setTemplateVars(event => ({
+        passwordResetToken: event.user.getNativeAuthenticationMethod().passwordResetToken,
+    }));

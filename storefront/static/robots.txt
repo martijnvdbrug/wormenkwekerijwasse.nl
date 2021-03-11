@@ -1,5 +1,6 @@
 User-agent: *
-Disallow: /cart/
-Disallow: /customer-details/
-Disallow: /shipping/
+Disallow: /winkelmand/
+Disallow: /gegevens/
+Disallow: /verzending/
 Disallow: /order/
+Disallow: /reset-wachtwoord/

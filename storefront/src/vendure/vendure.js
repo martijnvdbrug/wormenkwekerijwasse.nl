@@ -13,7 +13,15 @@ const {
     addPaymentToOrderMutation,
     transitionOrderToStateMutation,
     orderByCodeQuery,
-    submitProductReviewMutation
+    submitProductReviewMutation,
+    loginQuery,
+    getActiveCustomerQuery,
+    logoutMutation,
+    updateCustomerForOrderMutation,
+    createCustomerAddressMutation,
+    updateCustomerAddressMutation,
+    registerMutation,
+    resetPasswordMutation
 } = require('./client.queries');
 
 /**
@@ -21,6 +29,8 @@ const {
  * and keeping track of activeOrder in Vue global store
  */
 class Vendure {
+
+    tokenName = 'vendure-auth-token';
 
     constructor(store) {
         this.client = new GraphQLClient(process.env.GRIDSOME_VENDURE_API, {
@@ -93,6 +103,27 @@ class Vendure {
         return order;
     }
 
+    async updateCustomer(input) {
+        await this.request(updateCustomerForOrderMutation, {input});
+        return this.getActiveCustomer()
+    }
+
+    async createCustomerAddress(input) {
+        await this.request(createCustomerAddressMutation, {input});
+        return this.getActiveCustomer()
+    }
+
+    async updateCustomerAddress(input) {
+        await this.request(updateCustomerAddressMutation, {input});
+        return this.getActiveCustomer()
+    }
+
+    async resetPassword(token, password) {
+        const result = await this.request(resetPasswordMutation, {token, password});
+        this.validateResult(result);
+        return result;
+    }
+
     async setOrderShippingAddress(input) {
         if (!input.company || input.company.length === 0) {
             input.company = '-'; // Dirty fix
@@ -129,19 +160,41 @@ class Vendure {
         return orderByCode;
     }
 
+    async login(username, password) {
+        const {login} = await this.request(loginQuery, {username, password});
+        this.validateResult(login);
+        return this.getActiveCustomer();
+    }
+
+    async logout() {
+        await this.request(logoutMutation);
+        return this.getActiveCustomer();
+    }
+
+    async getActiveCustomer() {
+        const {activeCustomer} = await this.request(getActiveCustomerQuery);
+        this.$store.activeCustomer = activeCustomer;
+        return activeCustomer;
+    }
+
+    async register(input) {
+        const {registerCustomerAccount} = await this.request(registerMutation, {input});
+        this.validateResult(registerCustomerAccount);
+        return registerCustomerAccount;
+    }
+
     async submitReview(input) {
         await this.request(submitProductReviewMutation, {input});
     }
 
-    validateResult(order) {
-        if (order && (order).errorCode) {
-            throw Error(`${order.errorCode} - ${order.message}`);
+    validateResult(result) {
+        if (result && (result).errorCode) {
+            throw Error(`${result.errorCode} - ${result.message}`);
         }
     }
 
     async request(document, variables) {
-        const tokenName = 'vendure-auth-token';
-        let token = window.localStorage.getItem(tokenName);
+        let token = window.localStorage.getItem(this.tokenName);
         if (token) {
             this.client.setHeader('Authorization', `Bearer ${token}`);
         }
@@ -149,9 +202,9 @@ class Vendure {
         if (errors) {
             throw errors;
         }
-        token = headers.get(tokenName);
+        token = headers.get(this.tokenName);
         if (token) {
-            window.localStorage.setItem(tokenName, token);
+            window.localStorage.setItem(this.tokenName, token);
         }
         return data;
     }

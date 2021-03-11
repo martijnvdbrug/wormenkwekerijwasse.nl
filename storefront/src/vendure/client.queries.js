@@ -149,6 +149,33 @@ const setCustomerForOrderMutation = `
         }
     }`;
 
+const updateCustomerForOrderMutation = `
+    mutation updateCustomer($input: UpdateCustomerInput!){
+      updateCustomer(input:$input) {
+        id
+        title
+        firstName
+        lastName
+        phoneNumber
+        emailAddress       
+      }
+}`;
+
+const createCustomerAddressMutation = `
+mutation createCustomerAddress($input: CreateAddressInput!) {
+  createCustomerAddress(input: $input) {
+    id
+  }
+}`;
+
+const updateCustomerAddressMutation = `
+mutation updateCustomerAddress($input: UpdateAddressInput!) {
+  updateCustomerAddress(input: $input) {
+    id
+  }
+}`;
+
+
 const setOrderShippingAddressMutation = `
     mutation setOrderShippingAddress($input: CreateAddressInput!){
         setOrderShippingAddress(input: $input) {
@@ -199,6 +226,78 @@ const submitProductReviewMutation = `
   }
 }`;
 
+const loginMutation = `
+mutation login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    ... on CurrentUser {
+      id
+      identifier
+    }
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+`;
+
+const getActiveCustomerQuery = `
+{
+  activeCustomer {
+    id
+    emailAddress
+    firstName
+    lastName
+    phoneNumber
+    addresses {
+      id
+      company
+      streetLine1
+      streetLine2
+      city
+      postalCode
+      country {
+        id
+        code
+      }
+      defaultShippingAddress
+    }
+  }
+}
+`;
+
+const logoutMutation = `
+mutation {
+  logout {
+    success
+  }
+}
+`;
+
+const registerMutation = `
+mutation registerCustomerAccount($input: RegisterCustomerInput!){
+  registerCustomerAccount(input: $input) {
+    ...on Success {
+      success
+    }
+    ...on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}`;
+
+const resetPasswordMutation = `
+mutation resetPassword($token: String!, $password: String!){
+  resetPassword(token: $token, password:$password) {
+    ...on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+`;
+
 module.exports = {
     getStockForProductsQuery,
     getProductQuery,
@@ -213,5 +312,13 @@ module.exports = {
     transitionOrderToStateMutation,
     addPaymentToOrderMutation,
     orderByCodeQuery,
-    submitProductReviewMutation
+    submitProductReviewMutation,
+    loginQuery: loginMutation,
+    getActiveCustomerQuery,
+    logoutMutation,
+    updateCustomerForOrderMutation,
+    createCustomerAddressMutation,
+    updateCustomerAddressMutation,
+    registerMutation,
+    resetPasswordMutation
 };

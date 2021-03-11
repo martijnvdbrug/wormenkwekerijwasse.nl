@@ -75,7 +75,7 @@
 
 
 export default {
-  mixins: [require('../mixins/load-foundation')],
+  mixins: [require('../mixins/load-foundation'), require('../mixins/empty-basket-validator')],
   data() {
     return {
       methods: [],

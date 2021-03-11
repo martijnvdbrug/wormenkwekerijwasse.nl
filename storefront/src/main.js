@@ -53,6 +53,7 @@ export default function (Vue, {router, head, isClient}) {
     if (isClient) {
         const store = Vue.observable({
             activeOrder: {},
+            activeCustomer: undefined
         });
         Vue.prototype.$vendure = new Vendure(store);
         Vue.prototype.$store = store;

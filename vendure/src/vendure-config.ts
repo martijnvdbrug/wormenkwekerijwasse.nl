@@ -20,7 +20,7 @@ import {ShippingByWeightPlugin} from './shipping-by-weight';
 import {SimpleCMSPlugin} from './simple-cms/simple-cms.plugin';
 import {SendcloudPlugin} from './sendcloud/sendcloud.plugin';
 import {EmailPlugin} from '@vendure/email-plugin';
-import {orderConfirmationHandler} from './email/email.handlers';
+import {orderConfirmationHandler, passwordResetHandler} from './email/email.handlers';
 import {NumericOrderCodeStrategy} from './order/numeric-order-code-strategy';
 
 export const config: VendureConfig = {
@@ -98,10 +98,11 @@ export const config: VendureConfig = {
                     pass: process.env.SMTP_PASS,
                 }
             },
-            handlers: [orderConfirmationHandler],
+            handlers: [orderConfirmationHandler, passwordResetHandler],
             templatePath: path.join(__dirname, '../static/email/templates'),
             globalTemplateVars: {
                 fromAddress: `"Wormenkwekerij Wasse" <${process.env.SMTP_EMAIL}>`,
+                passwordResetUrl: 'https://wormenkwekerijwase.nl/reset-wachtwoord',
             },
         }),
         // Production ready, precompiled admin UI
