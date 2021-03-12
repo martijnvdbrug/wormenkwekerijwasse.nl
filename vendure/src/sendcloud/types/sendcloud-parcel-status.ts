@@ -1,5 +1,3 @@
-import {FulfillmentState} from '@vendure/core';
-
 export interface SendcloudParcelStatus {
     id: number;
     message: string;
@@ -11,12 +9,34 @@ export interface SendcloudParcelStatus {
 
 export const sendcloudStates: SendcloudParcelStatus[] = [
     {
+        "id": 62989,
+        "message": "The package has been held at customs"
+    },
+    {
         "id": 6,
-        "message": "Not sorted"
+        "message": "Not sorted",
+        orderState: 'Shipped'
     },
     {
         "id": 15,
         "message": "Error collecting"
+    },
+    {
+        "id": 62990,
+        "message": "The package is in the sorting centre",
+        orderState: 'Shipped'
+    },
+    {
+        "id": 62991,
+        "message": "The package was refused by the recipient when delivered"
+    },
+    {
+        "id": 62992,
+        "message": "The package was returned to the sender due to an issue"
+    },
+    {
+        "id": 62993,
+        "message": "The delivery method was changed by the request of the recipient or due to other circumstances."
     },
     {
         "id": 1002,
@@ -24,7 +44,19 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 1999,
-        "message": "Cancellation requested"
+        "message": "Cancellation requested",
+    },
+    {
+        "id": 62994,
+        "message": "The delivery date was changed by the request of the recipient or due to other."
+    },
+    {
+        "id": 62995,
+        "message": "The delivery address was changed by the request of the recipient or due to other circumstances."
+    },
+    {
+        "id": 62996,
+        "message": "For unusual cases: lost, damaged, destroyed, etc."
     },
     {
         "id": 1998,
@@ -37,8 +69,13 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
         orderState: 'Shipped'
     },
     {
+        "id": 62997,
+        "message": "The address is incorrect and the carrier needs address correction from the sender or the recipient."
+    },
+    {
         "id": 12,
-        "message": "Awaiting customer pickup"
+        "message": "Awaiting customer pickup",
+        orderState: 'Shipped'
     },
     {
         "id": 11,
@@ -47,7 +84,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 93,
-        "message": "Shipment collected by customer"
+        "message": "Shipment collected by customer",
+        orderState: 'Delivered'
     },
     {
         "id": 91,
@@ -56,11 +94,12 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 80,
-        "message": "Unable to deliver",
+        "message": "Unable to deliver"
     },
     {
         "id": 22,
-        "message": "Shipment picked up by driver"
+        "message": "Shipment picked up by driver",
+        orderState: 'Shipped'
     },
     {
         "id": 13,
@@ -72,7 +111,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 7,
-        "message": "Being sorted"
+        "message": "Being sorted",
+        orderState: 'Shipped'
     },
     {
         "id": 5,
@@ -90,7 +130,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 1,
-        "message": "Announced"
+        "message": "Announced",
+        orderState: 'Shipped'
     },
     {
         "id": 1337,
@@ -102,7 +143,8 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 1001,
-        "message": "Being announced"
+        "message": "Being announced",
+        orderState: 'Shipped'
     },
     {
         "id": 2000,
@@ -111,7 +153,7 @@ export const sendcloudStates: SendcloudParcelStatus[] = [
     },
     {
         "id": 2001,
-        "message": "Submitting cancellation request",
+        "message": "Submitting cancellation request"
     },
     {
         "id": 92,
