@@ -30,35 +30,8 @@
                   </div>
                 </div>
 
-                <form v-if="!activeCustomer" v-on:submit.prevent="login()">
-                  <div class="grid-x grid-padding-x">
-                    <div class="cell small-12"><p><strong>Bent u al klant? Dan kunt u hier inloggen:</strong></p></div>
-                    <div v-if="loginError" class="cell small-12" style="font-size: 0.9rem;">
-                      <a v-on:click="requestReset()">Wachtwoord opnieuw instellen </a>
-                      <p v-if="resetEmailSent">Er is een email met wachtwoord reset link naar u verstuurd.</p>
-                      <p style="color: red;">{{ this.loginError }}</p>
-                    </div>
-                    <div class="cell small-6 ">
-                      <label>Emailadres
-                        <input type="email" autocomplete name="email" v-model="loginEmail">
-                      </label>
-                    </div>
-                    <div class="cell small-6">
-                      <label>Wachtwoord
-                        <input type="password" name="password" required v-model="password"/>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="grid-x grid-padding-x">
-                    <div class="cell small-12 text-right">
-                      <input type="submit" class="button" value="Login">
-                    </div>
-                  </div>
-                </form>
-
                 <form v-on:submit.prevent="submit()">
                   <div class="grid-x grid-padding-x">
-                    <div class="cell small-12"><p><strong>Of ga door met bestellen:</strong></p></div>
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
                         <input type="text" name="company" v-model="address.company">
@@ -126,7 +99,8 @@
                       </label>
                     </div>
                   </div>
-                  <div v-if="!activeCustomer" class="grid-x grid-padding-x">
+
+                  <!--<div v-if="!activeCustomer" class="grid-x grid-padding-x">
                     <div class="cell small-12">
                       <input id="account" v-model="createAccount" type="checkbox"><label for="account">Maak een account
                       aan voor {{ this.customer.emailAddress }}</label>
@@ -138,7 +112,8 @@
                       </label>
                       <input id="showpass" v-on:change="togglePass($event.target.checked)" type="checkbox"><label for="showpass">Laat wachtwoord zien</label>
                     </div>
-                  </div>
+                  </div>-->
+
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-12 text-right">
                       <input type="submit" class="button" value="Bestellen">
@@ -167,10 +142,6 @@ export default {
   },
   data() {
     return {
-      resetEmailSent: false,
-      loginError: undefined,
-      loginEmail: undefined,
-      password: undefined,
       createAccount: false,
       newPassword: undefined,
       customer: {
@@ -197,15 +168,13 @@ export default {
         this.$refs['newPassword'].type = 'password';
       }
     },
-    async requestReset() {
-      await this.$vendure.requestResetPassword(this.loginEmail);
-      this.resetEmailSent = true;
-    },
     async register() {
-      await this.$vendure.register({
-        emailAddress: this.customer.emailAddress,
-        password: this.newPassword
-      })
+      if(this.createAccount) {
+        await this.$vendure.register({
+          emailAddress: this.customer.emailAddress,
+          password: this.newPassword
+        })
+      }
     },
     async login() {
       try {
