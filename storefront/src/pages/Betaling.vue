@@ -8,7 +8,6 @@
           <div v-html="error"></div>
         </div>
       </ClientOnly>
-      <p><strong>In verband met de nieuwe website kan er een storing optreden. We zijn er mee bezig!</strong></p>
     </div>
     <br>
     <br>
@@ -47,7 +46,7 @@ export default {
       if (latestPayment?.metadata?.public?.redirectLink) {
         window.location.href = latestPayment.metadata.public.redirectLink;
       } else {
-        throw new Error(`No redirect link found in order response for order ${order?.code}`);
+        throw Error(`No redirect link found in order response for order ${order?.code}`);
       }
     } catch(e) {
       this.error = e.message;

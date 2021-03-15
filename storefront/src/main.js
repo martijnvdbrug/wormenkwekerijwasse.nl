@@ -67,7 +67,7 @@ export default function (Vue, {router, head, isClient}) {
         });
         Vue.config.errorHandler = (err, vm, info) => {
             const orderCode = vm.$store?.activeOrder?.code
-            vm.$rollbar.error(`${orderCode}: ${err.message}`, err);
+            vm.$rollbar.error(`${orderCode}: ${err.message} - ${err.transitionError}`, err);
             throw err; // rethrow
         };
     }

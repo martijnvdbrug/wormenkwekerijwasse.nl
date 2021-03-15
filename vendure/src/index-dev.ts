@@ -1,9 +1,7 @@
- require('dotenv').config({ path: process.env.SHOP_ENV });
+require('dotenv').config({ path: process.env.SHOP_ENV });
 import {bootstrap} from '@vendure/core';
 import {config} from './vendure-config';
 import localtunnel from 'localtunnel';
-
-
 
 /**
  * Dev env settings
@@ -19,7 +17,7 @@ import localtunnel from 'localtunnel';
 })();
 
 bootstrap(config)
-    .then(() => {
+    .then((app) => {
         console.log(`\x1b[46mUsing database ${process.env.DATABASE_NAME} \x1b[0m`);
     })
     .catch(err => console.error(err));

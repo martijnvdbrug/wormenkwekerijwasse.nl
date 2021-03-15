@@ -1,7 +1,9 @@
 import {
     CollectionModificationEvent,
     DefaultJobQueuePlugin,
+    DefaultLogger,
     DefaultSearchPlugin,
+    LogLevel,
     ProductEvent,
     ProductVariantChannelEvent,
     ProductVariantEvent,

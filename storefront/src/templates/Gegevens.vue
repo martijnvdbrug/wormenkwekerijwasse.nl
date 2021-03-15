@@ -161,7 +161,7 @@ export default {
     }
   },
   methods: {
-    togglePass(checked){
+    togglePass(checked) {
       if (checked) {
         this.$refs['newPassword'].type = 'text';
       } else {
@@ -169,7 +169,7 @@ export default {
       }
     },
     async register() {
-      if(this.createAccount) {
+      if (this.createAccount) {
         await this.$vendure.register({
           emailAddress: this.customer.emailAddress,
           password: this.newPassword
@@ -215,10 +215,8 @@ export default {
       if (this.activeCustomer) {
         const c = this.customer;
         delete c.emailAddress;
-        await Promise.all([
-          this.$vendure.updateCustomer(c),
-          this.$vendure.setOrderShippingAddress(address)
-        ]);
+        await this.$vendure.updateCustomer(c);
+        await this.$vendure.setOrderShippingAddress(address);
         if (this.activeCustomer.addresses?.[0]) {
           this.$vendure.updateCustomerAddress({
             id: this.activeCustomer.addresses?.[0].id,
@@ -228,10 +226,8 @@ export default {
           this.$vendure.createCustomerAddress(address).catch(e => console.error(e));
         }
       } else {
-        await Promise.all([
-          this.$vendure.setCustomerForOrder(this.customer),
-          this.$vendure.setOrderShippingAddress(address)
-        ]);
+        await this.$vendure.setCustomerForOrder(this.customer);
+        await this.$vendure.setOrderShippingAddress(address);
       }
       this.$router.push('/verzending/')
     },

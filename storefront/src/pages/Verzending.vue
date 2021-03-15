@@ -54,9 +54,9 @@
                   <tr>
                     <td></td>
                     <td>
-                      <g-link class="button" to="/betaling/" :disabled="!hasSelected">
+                      <a href="/betaling/" class="button" :class="!hasSelected ? 'disabled' : ''" v-on:click="">
                         € Betalen
-                      </g-link>
+                      </a>
                     </td>
                   </tr>
                 </table>
@@ -108,3 +108,8 @@ export default {
   }
 }
 </script>
+<style>
+.disabled {
+  pointer-events: none;
+}
+</style>
