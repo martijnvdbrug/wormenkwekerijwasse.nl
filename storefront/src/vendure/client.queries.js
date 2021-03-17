@@ -24,6 +24,14 @@ const orderFields = `
       postalCode
       country
     }
+    billingAddress {
+      company
+      streetLine1
+      streetLine2
+      city
+      postalCode
+      country
+    }
     shippingLines {
       shippingMethod {
         id
@@ -187,6 +195,17 @@ const setOrderShippingAddressMutation = `
         }
     }`;
 
+const setOrderBillingAddressMutation = `
+    mutation setOrderBillingAddress($input: CreateAddressInput!){
+        setOrderBillingAddress(input: $input) {
+            ... on Order  ${orderFields}
+            ... on NoActiveOrderError {
+                errorCode
+                message
+            }
+        }
+    }`;
+
 const nextOrderStatesQuery = `
     {
         nextOrderStates
@@ -335,5 +354,6 @@ module.exports = {
     updateCustomerAddressMutation,
     registerMutation,
     resetPasswordMutation,
-    requestPasswordResetMutation
+    requestPasswordResetMutation,
+    setOrderBillingAddressMutation
 };

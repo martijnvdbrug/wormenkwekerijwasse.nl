@@ -31,6 +31,7 @@
                 </div>
 
                 <form v-on:submit.prevent="submit()">
+
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
@@ -100,19 +101,55 @@
                     </div>
                   </div>
 
-                  <!--<div v-if="!activeCustomer" class="grid-x grid-padding-x">
-                    <div class="cell small-12">
-                      <input id="account" v-model="createAccount" type="checkbox"><label for="account">Maak een account
-                      aan voor {{ this.customer.emailAddress }}</label>
-
+                  <!-- billing address -->
+                  <div class="cell small-12">
+                    <input id="account" v-model="differentBillingAddress" type="checkbox"><label for="account">Ik wil een ander factuuradres opgeven</label>
+                  </div>
+                  <div v-if="differentBillingAddress">
+                    <div class="grid-x grid-padding-x">
+                      <div class="cell small-6 ">
+                        <label>Bedrijfsnaam*
+                          <input type="text" :required="differentBillingAddress" name="company" v-model="billingAddress.company">
+                        </label>
+                      </div>
                     </div>
-                    <div class="cell small-6" v-if="createAccount">
-                      <label >Wachtwoord:
-                        <input ref="newPassword" type="password" name="newPassword" :required="!!createAccount" v-model="newPassword" minlength="8">
-                      </label>
-                      <input id="showpass" v-on:change="togglePass($event.target.checked)" type="checkbox"><label for="showpass">Laat wachtwoord zien</label>
+                    <div class="grid-x grid-padding-x">
+                      <div class="cell small-8">
+                        <label>Straat*
+                          <input type="text" name="street" :required="differentBillingAddress" v-model="billingAddress.streetLine1">
+                        </label>
+                      </div>
+                      <div class="cell small-4">
+                        <label>Huisnr*
+                          <input type="text" name="housenr" :required="differentBillingAddress" v-model="billingAddress.streetLine2">
+                        </label>
+                      </div>
                     </div>
-                  </div>-->
+                    <div class="grid-x grid-padding-x">
+                      <div class="cell small-8">
+                        <label>Plaats*
+                          <input type="text" name="city" :required="differentBillingAddress" v-model="billingAddress.city">
+                        </label>
+                      </div>
+                      <div class="cell small-4">
+                        <label>Postcode*
+                          <input type="text" name="postalcode" :required="differentBillingAddress" v-model="billingAddress.postalCode">
+                        </label>
+                      </div>
+                    </div>
+                    <div class="grid-x grid-padding-x">
+                      <div class="cell small-6">
+                        <label>Land
+                          <select name="country" v-model="billingAddress.countryCode">
+                            <option v-for="country of $context.availableCountries"
+                                    :value="country.code">
+                              {{ country.name }}
+                            </option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-12 text-right">
@@ -142,8 +179,7 @@ export default {
   },
   data() {
     return {
-      createAccount: false,
-      newPassword: undefined,
+      differentBillingAddress: false,
       customer: {
         emailAddress: undefined,
         firstName: undefined,
@@ -157,58 +193,29 @@ export default {
         streetLine2: undefined,
         postalCode: undefined,
         countryCode: 'NL'
+      },
+      billingAddress: {
+        company: undefined,
+        city: undefined,
+        streetLine1: undefined,
+        streetLine2: undefined,
+        postalCode: undefined,
+        countryCode: 'NL'
       }
     }
   },
   methods: {
-    togglePass(checked) {
-      if (checked) {
-        this.$refs['newPassword'].type = 'text';
-      } else {
-        this.$refs['newPassword'].type = 'password';
-      }
-    },
-    async register() {
-      if (this.createAccount) {
-        await this.$vendure.register({
-          emailAddress: this.customer.emailAddress,
-          password: this.newPassword
-        })
-      }
-    },
-    async login() {
-      try {
-        await this.$vendure.login(this.loginEmail, this.password);
-        this.loginError = undefined;
-      } catch (e) {
-        if (e.message?.indexOf('ER_ROW_IS_REFERENCED') > -1) {
-          this.loginError = `Er is iets misgegaan met inloggen. U kunt uw bestelling afmaken door uw adresgegevens hieronder in te vullen.`;
-        } else {
-          this.loginError = `Emailadres of wachtwoord is onjuist`;
-        }
-        throw e;
-      }
-      if (this.activeCustomer) {
-        this.setCustomer(this.activeCustomer);
-        this.setAddress(this.activeCustomer.addresses?.[0])
-      }
-    },
-    async logout() {
-      await this.$vendure.logout();
-      this.$router.push('/winkelmand/')
-    },
-    setCountry(countryName) {
+    getCountryCode(countryName) {
       const country = this.$context.availableCountries?.find(c => c.name === countryName);
       if (country) {
-        this.address.countryCode = country.code;
+        return country.code;
       }
     },
     async submit() {
-      this.register().catch(e => console.error(e));// Registering should not be blocking
       const address = {
         ...this.address,
         fullName: `${this.customer.firstName} ${this.customer.lastName}`,
-        defaultBillingAddress: true,
+        defaultBillingAddress: !this.differentBillingAddress,
         defaultShippingAddress: true,
         phoneNumber: this.customer.phoneNumber,
       };
@@ -216,7 +223,6 @@ export default {
         const c = this.customer;
         delete c.emailAddress;
         await this.$vendure.updateCustomer(c);
-        await this.$vendure.setOrderShippingAddress(address);
         if (this.activeCustomer.addresses?.[0]) {
           this.$vendure.updateCustomerAddress({
             id: this.activeCustomer.addresses?.[0].id,
@@ -227,8 +233,18 @@ export default {
         }
       } else {
         await this.$vendure.setCustomerForOrder(this.customer);
-        await this.$vendure.setOrderShippingAddress(address);
       }
+      if (this.differentBillingAddress) {
+        const billingAddress = {
+          ...this.billingAddress,
+          fullName: `${this.customer.firstName} ${this.customer.lastName}`,
+          defaultBillingAddress: true,
+          defaultShippingAddress: false,
+          phoneNumber: this.customer.phoneNumber,
+        };
+        await this.$vendure.setOrderBillingAddress(billingAddress);
+      }
+      await this.$vendure.setOrderShippingAddress(address);
       this.$router.push('/verzending/')
     },
     setAddress(address) {
@@ -237,7 +253,7 @@ export default {
       this.address.streetLine2 = address?.streetLine2;
       this.address.city = address?.city;
       this.address.postalCode = address?.postalCode;
-      this.setCountry(address?.country);
+      this.address.countryCode = this.getCountryCode(address?.country);
     },
     setCustomer(customer) {
       this.customer.firstName = customer?.firstName;
@@ -258,6 +274,17 @@ export default {
       // Set Address, if already set on order
       this.setAddress(activeOrder?.shippingAddress);
     }
+    if (activeOrder.billingAddress) {
+      this.differentBillingAddress = true;
+      const address = activeOrder.billingAddress;
+      this.billingAddress.company = address?.company;
+      this.billingAddress.streetLine1 = address?.streetLine1;
+      this.billingAddress.streetLine2 = address?.streetLine2;
+      this.billingAddress.city = address?.city;
+      this.billingAddress.postalCode = address?.postalCode;
+      this.billingAddress.countryCode = this.getCountryCode(address?.country);
+    }
+
   }
 }
 </script>

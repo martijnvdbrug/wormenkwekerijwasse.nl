@@ -22,7 +22,8 @@ const {
     updateCustomerAddressMutation,
     registerMutation,
     resetPasswordMutation,
-    requestPasswordResetMutation
+    requestPasswordResetMutation,
+    setOrderBillingAddressMutation
 } = require('./client.queries');
 
 /**
@@ -139,6 +140,15 @@ class Vendure {
             input.phoneNumber = '-'; // Dirty fix
         }
         const {setOrderShippingAddress: order} = await this.request(setOrderShippingAddressMutation, {input});
+        this.$store.activeOrder = order;
+        return order;
+    }
+
+    async setOrderBillingAddress(input) {
+        if (!input.company || input.company.length === 0) {
+            input.company = '-'; // Dirty fix
+        }
+        const {setOrderBillingAddress: order} = await this.request(setOrderBillingAddressMutation, {input});
         this.$store.activeOrder = order;
         return order;
     }
