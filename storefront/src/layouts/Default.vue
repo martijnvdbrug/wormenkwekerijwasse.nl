@@ -88,7 +88,7 @@
 
         <div class="cell medium-12 large-4 text-center" id="contact">
           <h4>Contact</h4>
-          <p><a href="tel:00310618441825">06 18441825</a></p>
+          <p><a href="tel:0031618441825">06 18441825</a></p>
           <p><a href="mailto:info@wormenkwekerijwasse.nl">info@wormenkwekerijwasse.nl</a></p>
           <p><strong>Wormenkwekerij adres:</strong><br>
             Wormenkwekerij Wasse<br>
