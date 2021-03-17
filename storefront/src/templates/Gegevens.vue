@@ -79,7 +79,7 @@
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-8">
                       <label>Plaats*
-                        <input type="text" name="city" required v-model="address.city">
+                        <input type="text" name="city" required v-model="address.city" maxlength="29">
                       </label>
                     </div>
                     <div class="cell small-4">
@@ -128,7 +128,7 @@
                     <div class="grid-x grid-padding-x">
                       <div class="cell small-8">
                         <label>Plaats*
-                          <input type="text" name="city" :required="differentBillingAddress" v-model="billingAddress.city">
+                          <input type="text" name="city" :required="differentBillingAddress" v-model="billingAddress.city" maxlength="29">
                         </label>
                       </div>
                       <div class="cell small-4">

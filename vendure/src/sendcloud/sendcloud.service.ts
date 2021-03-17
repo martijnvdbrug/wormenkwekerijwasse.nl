@@ -30,7 +30,7 @@ export class SendcloudService {
         this.eventBus.ofType(OrderStateTransitionEvent)
             .pipe(filter(event => event.toState === 'PaymentSettled'))
             .subscribe(event => this.syncToSendloud(event.ctx, event.order)
-                .catch(e => Logger.error(`Failed to sync order ${event.order.code} to SendCloud`, SendcloudPlugin.context, e))
+                .catch(e => Logger.error(`Failed to sync order ${event.order.code} to SendCloud, ${e}`, SendcloudPlugin.context))
             );
     }
 
@@ -62,18 +62,19 @@ export class SendcloudService {
             return Logger.info(`Successfully update order ${orderCode} to ${sendcloudStatus.orderState}`, SendcloudPlugin.context);
         }
         if (sendcloudStatus.orderState === 'Delivered') {
-            await this.shipAll(ctx, order).catch(() => {
+            await this.shipAll(ctx, order).catch((e) => {
+                Logger.error(e, SendcloudPlugin.context);
             }); // ShipAll in case previous webhook was missed, but catch because it might have been done already
             const fulfillments = await this.orderService.getOrderFulfillments(ctx, order);
             const [result] = await Promise.all(fulfillments.map(f => this.orderService.transitionFulfillmentToState(ctx, f.id, sendcloudStatus.orderState!)));
-            if ((result as FulfillmentStateTransitionError).errorCode) {
-                throw Error(`Cannot transition order to ${sendcloudStatus.orderState}: ${(result as FulfillmentStateTransitionError).transitionError}`);
+            if ((result as FulfillmentStateTransitionError)?.errorCode) {
+                throw Error(`Cannot transition order ${orderCode} to ${sendcloudStatus.orderState}: ${(result as FulfillmentStateTransitionError).transitionError}`);
             }
             return Logger.info(`Successfully update order ${orderCode} to ${sendcloudStatus.orderState}`, SendcloudPlugin.context);
         }
         // Only 'cancelled' is left
         const result = await this.orderService.cancelOrder(ctx, {orderId: order.id});
-        if ((result as GraphQLErrorResult).errorCode) {
+        if ((result as GraphQLErrorResult)?.errorCode) {
             throw Error(`Cannot transition order to ${sendcloudStatus.orderState}: ${(result as GraphQLErrorResult).message}`);
         }
         Logger.info(`Successfully update order ${orderCode} to ${sendcloudStatus.orderState}`, SendcloudPlugin.context);

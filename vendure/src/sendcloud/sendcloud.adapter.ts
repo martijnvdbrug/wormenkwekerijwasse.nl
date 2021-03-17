@@ -15,7 +15,7 @@ export function toParcelInput(order: Order, variants: ProductVariant[]): ParcelI
         return toParcelInputItem(line, variant);
     });
     return {
-        name: `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`,
+        name: order.shippingAddress.fullName,
         company_name: order.shippingAddress.company,
         address: order.shippingAddress.streetLine1!,
         house_number: order.shippingAddress.streetLine2!,
