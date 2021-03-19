@@ -100,6 +100,13 @@
                       </label>
                     </div>
                   </div>
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-6">
+                      <label>Optionele notitie
+                        <textarea id="textarea" name="customerNote" rows="3" maxlength="254" v-model="customerNote"></textarea>
+                      </label>
+                    </div>
+                  </div>
 
                   <!-- billing address -->
                   <div class="cell small-12">
@@ -179,6 +186,7 @@ export default {
   },
   data() {
     return {
+      customerNote: undefined,
       differentBillingAddress: false,
       customer: {
         emailAddress: undefined,
@@ -245,6 +253,9 @@ export default {
         await this.$vendure.setOrderBillingAddress(billingAddress);
       }
       await this.$vendure.setOrderShippingAddress(address);
+      if (this.customerNote) {
+        await this.$vendure.setOrderNote(this.customerNote);
+      }
       this.$router.push('/verzending/')
     },
     setAddress(address) {
@@ -253,7 +264,7 @@ export default {
       this.address.streetLine2 = address?.streetLine2;
       this.address.city = address?.city;
       this.address.postalCode = address?.postalCode;
-      this.address.countryCode = this.getCountryCode(address?.country);
+      this.address.countryCode = this.getCountryCode(address?.country) || 'NL';
     },
     setCustomer(customer) {
       this.customer.firstName = customer?.firstName;
@@ -267,14 +278,15 @@ export default {
     await this.$vendure.getActiveCustomer();
     if (this.activeCustomer) {
       this.setCustomer(this.activeCustomer);
-      this.setAddress(this.activeCustomer.addresses?.[0])
+      this.setAddress(this.activeCustomer.addresses?.[0]);
     } else {
       // Set Customer, if already set on order
       this.setCustomer(activeOrder?.customer);
       // Set Address, if already set on order
       this.setAddress(activeOrder?.shippingAddress);
     }
-    if (activeOrder.billingAddress) {
+    this.customerNote = activeOrder?.customFields?.customerNote;
+    if (activeOrder.billingAddress?.city) {
       this.differentBillingAddress = true;
       const address = activeOrder.billingAddress;
       this.billingAddress.company = address?.company;
@@ -282,7 +294,7 @@ export default {
       this.billingAddress.streetLine2 = address?.streetLine2;
       this.billingAddress.city = address?.city;
       this.billingAddress.postalCode = address?.postalCode;
-      this.billingAddress.countryCode = this.getCountryCode(address?.country);
+      this.billingAddress.countryCode = this.getCountryCode(address?.country) || 'NL';
     }
 
   }

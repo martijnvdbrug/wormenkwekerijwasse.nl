@@ -74,6 +74,9 @@ const orderFields = `
      description
      amount
     }
+    customFields {
+      customerNote
+    }
   }
 `;
 
@@ -331,6 +334,19 @@ mutation requestPasswordReset($emailAddress: String!){
 }
 `;
 
+const setOrderCustomFieldsMutation = `
+mutation setOrderCustomFields($note: String) {
+  setOrderCustomFields(input: {customFields: {customerNote: $note}}){ 
+    ... on Order  ${orderFields}
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+`;
+
+
 module.exports = {
     getStockForProductsQuery,
     getProductQuery,
@@ -355,5 +371,6 @@ module.exports = {
     registerMutation,
     resetPasswordMutation,
     requestPasswordResetMutation,
-    setOrderBillingAddressMutation
+    setOrderBillingAddressMutation,
+    setOrderCustomFieldsMutation
 };

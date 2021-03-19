@@ -23,7 +23,8 @@ const {
     registerMutation,
     resetPasswordMutation,
     requestPasswordResetMutation,
-    setOrderBillingAddressMutation
+    setOrderBillingAddressMutation,
+    setOrderCustomFieldsMutation
 } = require('./client.queries');
 
 /**
@@ -202,6 +203,13 @@ class Vendure {
 
     async submitReview(input) {
         await this.request(submitProductReviewMutation, {input});
+    }
+
+    async setOrderNote(note) {
+        const {setOrderCustomFields} = await this.request(setOrderCustomFieldsMutation, {note});
+        this.validateResult(setOrderCustomFields);
+        this.$store.activeOrder = setOrderCustomFields;
+        return setOrderCustomFields;
     }
 
     validateResult(result) {
