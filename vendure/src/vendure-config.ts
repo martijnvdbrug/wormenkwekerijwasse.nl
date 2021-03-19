@@ -63,7 +63,16 @@ export const config: VendureConfig = {
     paymentOptions: {
         paymentMethodHandlers: [],
     },
-    customFields: {},
+    customFields: {
+        Order: [
+            {
+                name: 'customerNote',
+                public: true,
+                nullable: true,
+                type: 'string',
+            }
+        ]
+    },
     plugins: [
         ReviewsPlugin,
         SimpleCMSPlugin,

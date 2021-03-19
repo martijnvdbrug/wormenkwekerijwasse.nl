@@ -1,4 +1,4 @@
-require('dotenv').config({ path: process.env.SHOP_ENV });
+require('dotenv').config();
 import {bootstrap} from '@vendure/core';
 import {config} from './vendure-config';
 import localtunnel from 'localtunnel';
