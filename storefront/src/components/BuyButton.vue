@@ -1,9 +1,15 @@
 <template>
   <div>
 
-    <a v-if="!soldOut" class="button" data-toggle="addedToCartModal" v-on:click="buy()"
-       style="width: 100%; margin-top: 10px;">
-      IN WINKELMAND</a>
+    <div v-if="!soldOut">
+      <a class="button" data-toggle="addedToCartModal" v-on:click="buy()"
+         style="width: 100%; margin-top: 10px;">
+        IN WINKELMAND</a>
+      <label>Aantal
+        <input type="number" min="0" name="amount" :max="variant.available" v-model="amount" style="width: 100%;">
+      </label>
+    </div>
+
     <a v-if="soldOut" disabled="true" class="button"
        style="width: 100%; margin-top: 10px;">UITVERKOCHT</a>
 
@@ -29,6 +35,7 @@ export default {
   data() {
     return {
       soldOut: false,
+      amount: 1
     }
   },
   watch: {
@@ -41,8 +48,8 @@ export default {
       if (this.soldOut) {
         return;
       }
-      // this.$store.activeOrder = {dingen: 'dinges'}
-      this.$vendure.addProductToCart(this.variant.id, 1);
+      const amount = parseInt(this.amount) > 0 ? parseInt(this.amount) : 1;
+      this.$vendure.addProductToCart(this.variant.id, amount);
     },
     isSoldOut(variant) {
       this.soldOut = variant?.available <= 0;

@@ -29,6 +29,7 @@
                 <ClientOnly>
                   <BuyButton ref="buyButton" :variant="this.selectedVariant"></BuyButton>
                 </ClientOnly>
+
                 <div v-if="$context.product.optionGroups.length > 0">
 
                   <div v-for="group of $context.product.optionGroups">
@@ -143,7 +144,7 @@ import MiniShowStarRating from '../components/MiniShowStarRating';
 
 export default {
   // Foundation is loaded in child component BuyButton
-  components: { MiniShowStarRating, ShowStarRating, SubmitReviewComponent},
+  components: {MiniShowStarRating, ShowStarRating, SubmitReviewComponent},
   metaInfo() {
     return getMetaInfo(this.$context.product);
   },
