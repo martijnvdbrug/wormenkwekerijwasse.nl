@@ -100,13 +100,13 @@
                       </label>
                     </div>
                   </div>
-                  <div class="grid-x grid-padding-x">
+<!--                  <div class="grid-x grid-padding-x">
                     <div class="cell small-6">
                       <label>Optionele notitie
                         <textarea id="textarea" name="customerNote" rows="3" maxlength="254" v-model="customerNote"></textarea>
                       </label>
                     </div>
-                  </div>
+                  </div>-->
 
                   <!-- billing address -->
                   <div class="cell small-12">
