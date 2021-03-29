@@ -28,7 +28,10 @@ export class SendcloudService {
     constructor(private eventBus: EventBus, private connection: TransactionalConnection, private orderService: OrderService, private channelService: ChannelService) {
         this.client = new SendcloudClient(SendcloudPlugin.options.publicKey, SendcloudPlugin.options.secret);
         this.eventBus.ofType(OrderStateTransitionEvent)
-            .pipe(filter(event => event.toState === 'PaymentSettled'))
+            .pipe(filter(event => {
+                const isPickup = !!event.order.shippingLines.find(s => s.shippingMethodId == 11);
+                return event.toState === 'PaymentSettled' && !isPickup;
+            }))
             .subscribe(event => this.syncToSendloud(event.ctx, event.order)
                 .catch(e => Logger.error(`Failed to sync order ${event.order.code} to SendCloud, ${e}`, SendcloudPlugin.context))
             );
