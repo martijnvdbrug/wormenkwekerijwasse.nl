@@ -84,7 +84,7 @@
                     </div>
                     <div class="cell small-4">
                       <label>Postcode*
-                        <input type="text" name="postalcode" required v-model="address.postalCode">
+                        <input type="text" name="postalcode" required v-model="address.postalCode" maxlength="11">
                       </label>
                     </div>
                   </div>

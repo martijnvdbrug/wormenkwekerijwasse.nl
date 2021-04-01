@@ -3,7 +3,7 @@ import {bootstrap, OrderService} from '@vendure/core';
 import {config} from '../src/vendure-config';
 import {SendcloudService} from '../src/sendcloud/sendcloud.service';
 
-const orders = [355, 559, 689];
+const orders = [1539];
 (async () => {
     const app = await bootstrap(config);
     const sendcloud = app.get(SendcloudService);
