@@ -35,7 +35,7 @@
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
-                        <input type="text" name="company" v-model="address.company" maxlength="49">
+                        <input type="text" name="company" v-model="address.company" maxlength="28">
                       </label>
                     </div>
                   </div>
