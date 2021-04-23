@@ -123,7 +123,7 @@
                     <div class="grid-x grid-padding-x">
                       <div class="cell small-8">
                         <label>Straat*
-                          <input type="text" name="street" :required="differentBillingAddress" v-model="billingAddress.streetLine1">
+                          <input type="text" name="street" :required="differentBillingAddress" v-model="billingAddress.streetLine1" minlength="4">
                         </label>
                       </div>
                       <div class="cell small-4">
