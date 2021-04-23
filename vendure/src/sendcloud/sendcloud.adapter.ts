@@ -26,7 +26,7 @@ export function toParcelInput(order: Order, variants: ProductVariant[]): ParcelI
         request_label: false,
         email: order.customer?.emailAddress,
         order_number: order.code,
-        parcel_items: items
+        parcel_items: items || []
     }
 }
 
@@ -46,4 +46,33 @@ export function toParcelInputItem(line: OrderLine, variant: ProductVariant): Par
         sku: variant.sku,
         value: (variant.priceWithTax / 100).toFixed(2)
     }
+}
+
+/**
+ * Add customerNote as parcelitem
+ */
+export function addNote(parceInput: ParcelInput, note: string): ParcelInput {
+    parceInput.parcel_items.unshift({
+        description: note,
+        quantity: 1,
+        weight: "0.1",
+        sku: "Klant notitie",
+        value: "0"
+    });
+    return parceInput;
+}
+
+/**
+ * Add nr of orders for this customer as parcelItem
+ */
+export function addNrOfOrders(parceInput: ParcelInput, nrOfOrders: number): ParcelInput {
+    const nrOfOrderString = typeof nrOfOrders === undefined ? 'Niet beschikbaar' : String(nrOfOrders);
+    parceInput.parcel_items.unshift({
+        description: nrOfOrderString,
+        quantity: nrOfOrders || 1,
+        weight: "0.1",
+        sku: `Aantal bestellingen van ${parceInput.email}`,
+        value: "0"
+    });
+    return parceInput;
 }

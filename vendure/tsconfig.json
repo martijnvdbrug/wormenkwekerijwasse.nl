@@ -13,5 +13,7 @@
     "baseUrl": "./src/"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "migration", "script", "__admin-ui"]
+  "exclude": ["node_modules", "migration", "script",
+    "src/__admin-ui"
+  ]
 }

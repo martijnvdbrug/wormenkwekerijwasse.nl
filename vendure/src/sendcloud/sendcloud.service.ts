@@ -14,7 +14,7 @@ import {
 import {filter} from 'rxjs/operators';
 import {SendcloudClient} from './sendcloud.client';
 import {SendcloudPlugin} from './sendcloud.plugin';
-import {toParcelInput} from './sendcloud.adapter';
+import {addNote, addNrOfOrders, toParcelInput} from './sendcloud.adapter';
 import {Parcel} from './types/sendcloud-api-response.types';
 import {SendcloudParcelStatus} from './types/sendcloud-parcel-status';
 import {CancelOrderResult, OrderLineInput} from '@vendure/admin-ui/core';
@@ -40,7 +40,17 @@ export class SendcloudService {
     async syncToSendloud(ctx: RequestContext, order: Order): Promise<Parcel> {
         const variantIds = order.lines.map(l => l.productVariant.id);
         const variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, variantIds, ctx.channelId, {relations: ['translations', 'product', 'product.translations']});
-        return this.client.createParcel(toParcelInput(order, variants));
+        let nrOfOrders = undefined;
+        if (order.customer?.id) {
+            const orders = await this.connection.getRepository(Order).find({where: {customer: {id: order.customer.id}, state: 'Delivered'}});
+            nrOfOrders = orders.length;
+        }
+        const parcelInput = toParcelInput(order, variants);
+        if ((order.customFields as any).customerNote) {
+            addNote(parcelInput, (order.customFields as any).customerNote);
+        }
+        addNrOfOrders(parcelInput, nrOfOrders);
+        return this.client.createParcel(parcelInput);
     }
 
     /**
@@ -107,6 +117,9 @@ export class SendcloudService {
         return this.orderService.transitionFulfillmentToState(ctx, (fulfillment as any).id, 'Shipped');
     }
 
+    /**
+     * Get ctx for DEFAULT channel
+     */
     async createContext(): Promise<RequestContext> {
         const channel = await this.channelService.getDefaultChannel();
         return new RequestContext({
