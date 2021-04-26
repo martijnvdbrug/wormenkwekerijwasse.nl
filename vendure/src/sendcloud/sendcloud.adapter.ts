@@ -71,7 +71,7 @@ export function addNrOfOrders(parceInput: ParcelInput, nrOfOrders: number): Parc
         description: nrOfOrderString,
         quantity: nrOfOrders || 1,
         weight: "0.1",
-        sku: `Aantal bestellingen van ${parceInput.email}`,
+        sku: `Aantal bestellingen`,
         value: "0"
     });
     return parceInput;
