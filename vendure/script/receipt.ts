@@ -1,11 +1,11 @@
 import pdf = require("pdf-creator-node");
 import fs = require('fs');
 import Handlebars from 'handlebars'
-require('dotenv').config();
 import {bootstrap, OrderService} from "@vendure/core";
 import {config} from "../src/vendure-config";
-import {RequestContext} from "@vendure/core/dist/api/common/request-context";
 import {SendcloudService} from "../src/sendcloud/sendcloud.service";
+
+require('dotenv').config();
 
 (async () => {
     Handlebars.registerHelper('formatMoney', (amount?: number) => {
@@ -28,12 +28,17 @@ import {SendcloudService} from "../src/sendcloud/sendcloud.service";
         border: "10mm"
     };
 
+    const orderDate = `${order.orderPlacedAt.getDate()}-${order.orderPlacedAt.getMonth() + 1}-${order.orderPlacedAt.getFullYear()}`;
+
     const document = {
         html: html,
         data: {
+            taxes: {
+                21: (order.totalWithTax - order.total)
+            },
             order,
             btwId: 'Dit is een BTW id',
-            orderDate: 'testdatum'
+            orderDate: orderDate
         },
         path: "/tmp/receipt.pdf",
         type: "",

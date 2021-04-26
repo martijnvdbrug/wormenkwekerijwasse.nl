@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html style="zoom: 0.55;">
 <head>
-    <mate charest="utf-8"/>
+    <meta charset="utf-8"/>
     <title>Bestelling {{ order.code }}</title>
 </head>
-<body style="font-size: 11pt;">
+<body style="font-family: Arial, Helvetica, sans-serif;">
 
 <table style="width:100%">
     <tr>
@@ -51,8 +51,8 @@
             {{/if}}
         </td>
         <td>
-            Ordernummer. {{ order.code }} <br>
-            {{ orderDate }}
+            Bestelnummer: {{ order.code }} <br>
+            Datum: {{ orderDate }}
         </td>
     </tr>
 </table>
@@ -61,7 +61,7 @@
 <br>
 <br>
 
-<table>
+<table style="width:100%">
     {{#each order.lines }}
     <tr>
         <td>{{ quantity }} x</td>
@@ -78,17 +78,17 @@
         <td>
             {{ description }}
         </td>
-        <td style="text-align: right">€{{ formatMoney amount }}</td>
+        <td style="text-align: right;">€{{ formatMoney amount }}</td>
     </tr>
     {{/each}}
 
     <tr>
-
+        <td>&nbsp;</td>
     </tr>
     <tr>
-        <td>Verzendkosten</td>
         <td></td>
-        <td style="text-align: right">€{{ formatMoney order.shippingWithTax }}</td>
+        <td>Verzendkosten</td>
+        <td style="text-align: right;">€{{ formatMoney order.shippingWithTax }}</td>
     </tr>
 
     <tr></tr>
@@ -96,22 +96,22 @@
 
 <hr>
 
-<table>
+<table style="width:100%">
 
     <tr>
-        <td>Totaal Excl.</td>
-        <td style="text-align: right">€{{ formatMoney order.total }}</td>
+        <td style="text-align: right;">Totaal Excl.</td>
+        <td style="text-align: right;">€{{ formatMoney order.total }}</td>
     </tr>
     {{#each taxes}}
-    <tr>
+    <tr style="text-align: right;">
         <td>{{ @key }}% BTW</td>
-        <td style="text-align: right">€{{ formatMoney this }}</td>
+        <td style="text-align: right;">€{{ formatMoney this }}</td>
     </tr>
     {{/each}}
 
-    <tr>
+    <tr style="text-align: right;">
         <td><strong>Totaal Incl.</strong></td>
-        <td style="text-align: right"><strong>€{{ formatMoney order.totalWithTax }}</strong></td>
+        <td style="text-align: right;"><strong>€{{ formatMoney order.totalWithTax }}</strong></td>
     </tr>
 
 
