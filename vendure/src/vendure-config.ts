@@ -1,9 +1,7 @@
 import {
     CollectionModificationEvent,
     DefaultJobQueuePlugin,
-    DefaultLogger,
     DefaultSearchPlugin,
-    LogLevel,
     ProductEvent,
     ProductVariantChannelEvent,
     ProductVariantEvent,
@@ -67,6 +65,12 @@ export const config: VendureConfig = {
         Order: [
             {
                 name: 'customerNote',
+                public: true,
+                nullable: true,
+                type: 'string',
+            },
+            {
+                name: 'taxId',
                 public: true,
                 nullable: true,
                 type: 'string',

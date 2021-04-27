@@ -50,20 +50,8 @@
                 </mj-table>
                 <mj-divider border-color="#343434" border-width="1px"></mj-divider>
                 <mj-table cellpadding="6px">
-
                     <tr>
-                        <td>Totaal Excl.</td>
-                        <td align="right">€ {{ formatMoney order.total }}</td>
-                    </tr>
-                    {{#each taxes}}
-                        <tr>
-                            <td>{{ @key }}% BTW</td>
-                            <td align="right">€ {{ formatMoney this }}</td>
-                        </tr>
-                    {{/each}}
-
-                    <tr>
-                        <td><strong>Totaal Incl.</strong></td>
+                        <td><strong>Totaal</strong></td>
                         <td align="right"><strong>€ {{ formatMoney order.totalWithTax }}</strong></td>
                     </tr>
 

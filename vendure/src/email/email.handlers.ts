@@ -1,5 +1,6 @@
 import {EmailEventListener} from "@vendure/email-plugin";
 import {OrderStateTransitionEvent, PasswordResetEvent} from "@vendure/core";
+import {createPdfReceipt} from "../pdf-receipt/pdf-receipt.helper";
 
 export const orderConfirmationHandler = new EmailEventListener('order-confirmation')
     .on(OrderStateTransitionEvent)
@@ -9,11 +10,16 @@ export const orderConfirmationHandler = new EmailEventListener('order-confirmati
     .setSubject(`Bedankt voor je bestelling bij Wormenkwekerij met nr. {{ order.code }}`)
     .setTemplateVars(event => {
         return {
-            order: event.order,
-            taxes: {
-                21: (event.order.totalWithTax - event.order.total)
-            }
+            order: event.order
         };
+    })
+    .setAttachments(async (event) => {
+        const taxes = {21: (event.order.totalWithTax - event.order.total)};
+        const pdfPath = await createPdfReceipt(event.order, taxes);
+        return [{
+            filename: `${event.order.code}.pdf`,
+            path: pdfPath,
+        }];
     });
 
 export const passwordResetHandler = new EmailEventListener('password-reset')
