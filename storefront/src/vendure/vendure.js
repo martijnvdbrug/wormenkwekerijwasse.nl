@@ -205,8 +205,8 @@ class Vendure {
         await this.request(submitProductReviewMutation, {input});
     }
 
-    async setOrderNote(note) {
-        const {setOrderCustomFields} = await this.request(setOrderCustomFieldsMutation, {note});
+    async setOrderCustomFields(customfields) {
+        const {setOrderCustomFields} = await this.request(setOrderCustomFieldsMutation, {customfields});
         this.validateResult(setOrderCustomFields);
         this.$store.activeOrder = setOrderCustomFields;
         return setOrderCustomFields;

@@ -41,6 +41,13 @@
                   </div>
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
+                      <label>BTW ID
+                        <input type="text" name="taxId" v-model="taxId" maxlength="200">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-6 ">
                       <label>Voornaam*
                         <input type="text" name="firstname" required v-model="customer.firstName"/>
                       </label>
@@ -187,6 +194,7 @@ export default {
   data() {
     return {
       customerNote: undefined,
+      taxId: undefined,
       differentBillingAddress: false,
       customer: {
         emailAddress: undefined,
@@ -253,8 +261,11 @@ export default {
         await this.$vendure.setOrderBillingAddress(billingAddress);
       }
       await this.$vendure.setOrderShippingAddress(address);
-      if (this.customerNote) {
-        await this.$vendure.setOrderNote(this.customerNote);
+      if (this.customerNote || this.taxId) {
+        await this.$vendure.setOrderCustomFields({
+          customerNote: this.customerNote,
+          taxId: this.taxId
+        });
       }
       this.$router.push('/verzending/')
     },
