@@ -103,6 +103,24 @@ export default {
   metaInfo() {
     return {
       title: `Officiele website van Wormenkwekerij Wasse in Beilen`,
+      script: [{
+        type: 'application/ld+json',
+        json: {
+          '@context': "http://schema.org",
+          '@type': "LocalBusiness",
+          'name': 'Wormenkwekerij Wasse',
+          'image': '/logo-wormenkwekerijwasse.png',
+          'telephone': '+31 06 18441825',
+          'email': 'info@wormenkwekerijwasse.nl',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': 'Vorrelveen 6',
+            'addressLocality': 'Beilen',
+            'postalCode': '9411 VP',
+            'addressCountry': 'NL'
+          },
+        }
+      }]
     }
   },
   data() {
