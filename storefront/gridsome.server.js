@@ -181,7 +181,7 @@ module.exports = async function (api) {
 
             const breadcrumb = [
                 {name: 'Advies & informatie', url: '/informatie/'},
-                {name: blog.title , url: blog.slug }
+                {name: blog.title , url: `/informatie/${blog.slug}` }
                 ];
             createPage({
                 path: `/informatie/${blog.slug}`,

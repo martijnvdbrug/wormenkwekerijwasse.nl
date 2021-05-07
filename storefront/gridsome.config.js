@@ -22,5 +22,14 @@ module.exports = {
         }, {
             use: '@gridsome/plugin-sitemap',
         },
+        {
+            use: '@gridsome/plugin-google-analytics',
+            options: {
+                id: 'UA-57308319-7',
+                set: [
+                    { field: 'anonymizeIp', value: true }
+                ]
+            }
+        }
     ],
 }
