@@ -1,20 +1,20 @@
 <template>
-    <Layout>
+  <Layout>
 
-        <g-link to="/">Terug naar de winkel</g-link>
-        <h1>404 - Deze pagina bestaat niet</h1>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <g-link to="/">Terug naar de winkel</g-link>
+    <h1>404 - Deze pagina bestaat niet</h1>
+    <g-link to="/assortiment/">Of bekijk hier ons assortiment!</g-link>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    </Layout>
+  </Layout>
 </template>

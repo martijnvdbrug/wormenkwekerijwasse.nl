@@ -61,7 +61,7 @@
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Telefoonnummer*
-                        <input type="tel" name="phoneNumber" required v-model="customer.phoneNumber">
+                        <input type="tel" name="phoneNumber" required v-model="customer.phoneNumber" maxlength="19">
                       </label>
                     </div>
                     <div class="cell small-6">
