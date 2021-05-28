@@ -4,6 +4,7 @@ import {webhookAdminUi} from 'vendure-plugin-webhook';
 import {ReviewsPlugin} from './reviews/reviews-plugin';
 import {simpleCmsAdminUi} from './simple-cms/ui';
 import {adminExternalLinkUI} from './admin-external-link/external-link-ui';
+import {OrderExportPlugin} from "./order-export/order-export.plugin";
 
 compileUiExtensions({
     outputPath: path.join(__dirname, '__admin-ui'),
@@ -12,6 +13,7 @@ compileUiExtensions({
         webhookAdminUi,
         adminExternalLinkUI,
         ReviewsPlugin.uiExtensions,
+        OrderExportPlugin.ui,
         setBranding({
             // The small logo appears in the top left of the screen
             smallLogoPath: path.join(__dirname, 'images/logo.png'),

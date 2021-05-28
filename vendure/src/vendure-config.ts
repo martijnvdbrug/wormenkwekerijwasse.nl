@@ -22,6 +22,7 @@ import {SendcloudPlugin} from './sendcloud/sendcloud.plugin';
 import {EmailPlugin} from '@vendure/email-plugin';
 import {orderConfirmationHandler, passwordResetHandler} from './email/email.handlers';
 import {NumericOrderCodeStrategy} from './order/numeric-order-code-strategy';
+import {OrderExportPlugin} from "./order-export/order-export.plugin";
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -78,6 +79,7 @@ export const config: VendureConfig = {
         ]
     },
     plugins: [
+        OrderExportPlugin,
         ReviewsPlugin,
         SimpleCMSPlugin,
         ShippingByWeightPlugin,
