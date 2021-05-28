@@ -32,6 +32,8 @@
 
                 <form v-on:submit.prevent="submit()">
 
+                  <p><strong>Verzending</strong> kunt u in de volgende stap kiezen!</p>
+
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
