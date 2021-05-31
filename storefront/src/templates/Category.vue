@@ -4,7 +4,6 @@
     <div class="grid-x grid-margin-x grid-margin-y">
       <div class="cell">
         <h1>{{ $context.collection.name }}</h1>
-        <div v-html="$context.collection.description"></div>
       </div>
     </div>
 
@@ -47,6 +46,13 @@
         ></Card>
       </div>
 
+    </div>
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+      <div class="cell">
+        <h2>Over {{ $context.collection.name }}</h2>
+        <div v-html="$context.collection.description"></div>
+      </div>
     </div>
 
   </Layout>

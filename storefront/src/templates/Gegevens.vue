@@ -32,10 +32,19 @@
 
                 <form v-on:submit.prevent="submit()">
 
+                  <p><strong>Verzending</strong> kunt u in de volgende stap kiezen!</p>
+
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Bedrijfsnaam
                         <input type="text" name="company" v-model="address.company" maxlength="28">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-6 ">
+                      <label>BTW ID
+                        <input type="text" name="taxId" v-model="taxId" maxlength="200">
                       </label>
                     </div>
                   </div>
@@ -54,7 +63,7 @@
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-6 ">
                       <label>Telefoonnummer*
-                        <input type="tel" name="phoneNumber" required v-model="customer.phoneNumber">
+                        <input type="tel" name="phoneNumber" required v-model="customer.phoneNumber" maxlength="19">
                       </label>
                     </div>
                     <div class="cell small-6">
@@ -187,6 +196,7 @@ export default {
   data() {
     return {
       customerNote: undefined,
+      taxId: undefined,
       differentBillingAddress: false,
       customer: {
         emailAddress: undefined,
@@ -253,8 +263,11 @@ export default {
         await this.$vendure.setOrderBillingAddress(billingAddress);
       }
       await this.$vendure.setOrderShippingAddress(address);
-      if (this.customerNote) {
-        await this.$vendure.setOrderNote(this.customerNote);
+      if (this.customerNote || this.taxId) {
+        await this.$vendure.setOrderCustomFields({
+          customerNote: this.customerNote,
+          taxId: this.taxId
+        });
       }
       this.$router.push('/verzending/')
     },

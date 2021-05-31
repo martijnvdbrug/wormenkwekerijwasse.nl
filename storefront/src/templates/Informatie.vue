@@ -21,6 +21,11 @@
 import BlogPreview from '../components/BlogPreview';
 export default {
   mixins: [require('../mixins/load-foundation')],
-  components: {BlogPreview}
+  components: {BlogPreview},
+  metaInfo() {
+    return {
+      title: `Officiele website van Wormenkwekerij Wasse in Beilen`,
+    }
+  },
 }
 </script>

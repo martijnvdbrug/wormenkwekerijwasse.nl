@@ -3,30 +3,16 @@
 
     <div class="grid-x grid-margin-x">
 
-      <div class="cell small-12 medium-6 margin-bottom-2">
+      <div class="cell small-12 margin-bottom-2">
         <div class="card shadowed article-card">
-          <div class="responsive-embed" style="height: 315px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/cLblUjpFdfU" frameborder="0"
-                    allow="picture-in-picture" allowfullscreen></iframe>
-          </div>
           <div class="card-section">
             <h5>Welkom bij Wormenkwekerij Wasse!</h5>
             <p>
-              Wormenkwekerij Wasse is de expert op het gebied van compostwormen, viswormen en alles wat daar bij komt kijken. Bekijk anders bovenstaande video!
+              Wormenkwekerij Wasse is de expert op het gebied van compostwormen, viswormen en alles wat daar bij komt
+              kijken. Bekijk hieronder anders <a href="#video">onze video!</a>
             </p>
           </div>
         </div>
-      </div>
-
-      <div class="cell small-6 medium-3 margin-bottom-2">
-
-        <BlogPreview :blog="$context.blogs[0]" class="hide-image"/>
-
-      </div>
-      <div class="cell small-6 medium-3 margin-bottom-2">
-
-        <BlogPreview :blog="$context.blogs[1]" class="hide-image"/>
-
       </div>
 
     </div>
@@ -68,6 +54,42 @@
       </div>
 
     </div>
+
+
+    <br>
+    <br>
+    <!-- video en blogs -->
+    <div class="grid-x grid-margin-x">
+
+      <div class="cell small-12 medium-6 margin-bottom-2" id="video">
+        <div class="card shadowed article-card">
+          <div class="responsive-embed" style="height: 315px;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/cLblUjpFdfU" frameborder="0"
+                    allow="picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="card-section">
+            <p>
+              De wormenkwekerij van Frank Wasse in het Drentse Beilen loopt goed. Door de toenemende belangstelling voor
+              bodemverbetering en de vermindering van kunstmest steeg in het afgelopen jaar de vraag naar wormen en
+              wormenmest.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell small-6 medium-3 margin-bottom-2">
+
+        <BlogPreview :blog="$context.blogs[0]" class="hide-image"/>
+
+      </div>
+      <div class="cell small-6 medium-3 margin-bottom-2">
+
+        <BlogPreview :blog="$context.blogs[1]" class="hide-image"/>
+
+      </div>
+
+    </div>
+
   </Layout>
 </template>
 
@@ -78,6 +100,29 @@ import BlogPreview from '../components/BlogPreview';
 export default {
   mixins: [require('../mixins/load-foundation')],
   components: {BlogPreview},
+  metaInfo() {
+    return {
+      title: `Officiele website van Wormenkwekerij Wasse in Beilen`,
+      script: [{
+        type: 'application/ld+json',
+        json: {
+          '@context': "http://schema.org",
+          '@type': "LocalBusiness",
+          'name': 'Wormenkwekerij Wasse',
+          'image': '/logo-wormenkwekerijwasse.png',
+          'telephone': '+31 06 18441825',
+          'email': 'info@wormenkwekerijwasse.nl',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': 'Vorrelveen 6',
+            'addressLocality': 'Beilen',
+            'postalCode': '9411 VP',
+            'addressCountry': 'NL'
+          },
+        }
+      }]
+    }
+  },
   data() {
     return {
       collections: [],

@@ -335,8 +335,8 @@ mutation requestPasswordReset($emailAddress: String!){
 `;
 
 const setOrderCustomFieldsMutation = `
-mutation setOrderCustomFields($note: String) {
-  setOrderCustomFields(input: {customFields: {customerNote: $note}}){ 
+mutation setOrderCustomFields($customfields: UpdateOrderCustomFieldsInput) {
+  setOrderCustomFields(input: {customFields: $customfields}){ 
     ... on Order  ${orderFields}
     ... on ErrorResult {
       errorCode
