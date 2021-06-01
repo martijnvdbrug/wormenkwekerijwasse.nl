@@ -85,12 +85,6 @@ export class SendcloudService {
             }
             return Logger.info(`Successfully update order ${orderCode} to ${sendcloudStatus.orderState}`, SendcloudPlugin.context);
         }
-        // Only 'cancelled' is left
-        const result = await this.orderService.cancelOrder(ctx, {orderId: order.id});
-        if ((result as GraphQLErrorResult)?.errorCode) {
-            throw Error(`Cannot transition order to ${sendcloudStatus.orderState}: ${(result as GraphQLErrorResult).message}`);
-        }
-        Logger.info(`Successfully update order ${orderCode} to ${sendcloudStatus.orderState}`, SendcloudPlugin.context);
     }
 
     /**
