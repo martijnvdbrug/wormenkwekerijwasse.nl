@@ -16,7 +16,12 @@ import localtunnel from 'localtunnel';
     });
 })();
 
-bootstrap(config)
+bootstrap({
+    ...config,
+    workerOptions: {
+        runInMainProcess: false,
+    },
+})
     .then((app) => {
         console.log(`\x1b[46mUsing database ${process.env.DATABASE_NAME} \x1b[0m`);
     })

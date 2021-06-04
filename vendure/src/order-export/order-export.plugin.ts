@@ -2,6 +2,7 @@ import {PluginCommonModule, VendurePlugin} from '@vendure/core';
 import path from 'path';
 import {AdminUiExtension} from '@vendure/ui-devkit/compiler';
 import {OrderExportResolver} from "./order-export.resolver";
+import {DefaultCsvStrategy, OrderExportStrategy} from "./order-export.strategy";
 
 @VendurePlugin({
     imports: [PluginCommonModule],
@@ -21,5 +22,15 @@ export class OrderExportPlugin {
             }
         ],
     };
+    static strategy: OrderExportStrategy;
+
+    static init(strategy?: OrderExportStrategy): typeof OrderExportPlugin {
+        if (strategy) {
+            this.strategy = strategy;
+        } else {
+            this.strategy = new DefaultCsvStrategy();
+        }
+        return OrderExportPlugin;
+    }
 
 }
