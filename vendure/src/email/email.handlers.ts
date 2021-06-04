@@ -14,12 +14,17 @@ export const orderConfirmationHandler = new EmailEventListener('order-confirmati
         };
     })
     .setAttachments(async (event) => {
-        const taxes = {21: (event.order.totalWithTax - event.order.total)};
-        const pdfPath = await createPdfReceipt(event.order, taxes);
-        return [{
-            filename: `${event.order.code}.pdf`,
-            path: pdfPath,
-        }];
+        try {
+            const taxes = {21: (event.order.totalWithTax - event.order.total)};
+            const pdfPath = await createPdfReceipt(event.order, taxes);
+            return [{
+                filename: `${event.order.code}.pdf`,
+                path: pdfPath,
+            }];
+        } catch(e) {
+            console.error(`Failed to attach PDF receipt to email for order ${event.order.code}`);
+            return [];
+        }
     });
 
 export const passwordResetHandler = new EmailEventListener('password-reset')
