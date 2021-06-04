@@ -9,7 +9,8 @@ export async function createPdfReceipt(order: Order, taxes: {[key: number]: numb
     const options = {
         format: 'A4',
         orientation: 'portrait',
-        border: '10mm'
+        border: '10mm',
+        timeout: 1000 * 60 * 15, // 15 min
     };
     const btwId = (order.customFields as any).taxId;
     const orderDate = `${order.orderPlacedAt.getDate()}-${order.orderPlacedAt.getMonth() + 1}-${order.orderPlacedAt.getFullYear()}`;
