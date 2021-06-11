@@ -1,5 +1,5 @@
 require('dotenv').config();
-import {bootstrap} from '@vendure/core';
+import {bootstrap, DefaultLogger, LogLevel} from '@vendure/core';
 import {config} from './vendure-config';
 import localtunnel from 'localtunnel';
 
@@ -21,6 +21,11 @@ bootstrap({
     workerOptions: {
         runInMainProcess: false,
     },
+    dbConnectionOptions: {
+        ...config.dbConnectionOptions,
+        logging: 'all'
+    },
+    // logger: new DefaultLogger({ level: LogLevel.Debug }),
 })
     .then((app) => {
         console.log(`\x1b[46mUsing database ${process.env.DATABASE_NAME} \x1b[0m`);

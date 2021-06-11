@@ -19,18 +19,16 @@ import gql from 'graphql-tag';
                 if (!filters.placedAtEnd || !filters.placedAtStart) {
                     ctx.notificationService.error(`Select a start and end date to export`);
                 }
-                console.log(filters.)
-                const states = filters.states?.split(',');
+                const filter = {
+                    placedAtEnd: filters.placedAtEnd,
+                    placedAtStart: filters.placedAtStart,
+                    states: filters.states
+                };
                 await ctx.dataService.query(gql`
-                    {
-                        orderExport(filter: {
-                            states: "${states}"
-                            placedAtEnd: "${filters.placedAtEnd}"
-                            placedAtStart: "${filters.placedAtStart}"
-                        }
-                        )
+                    query orderExport($filter: OrderExportFilter!) {
+                        orderExport(filter: $filter)
                     }
-                `)
+                `, {filter: filter})
                 .mapStream((q: any) => q.orderExport)
                 .subscribe((orders) => {
                     const blob = new Blob([orders], {type: 'text/csv'});

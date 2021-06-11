@@ -22,13 +22,11 @@ export class OrderExportPlugin {
             }
         ],
     };
-    static strategy: OrderExportStrategy;
+    static strategy: OrderExportStrategy = new DefaultCsvStrategy;
 
     static init(strategy?: OrderExportStrategy): typeof OrderExportPlugin {
         if (strategy) {
             this.strategy = strategy;
-        } else {
-            this.strategy = new DefaultCsvStrategy();
         }
         return OrderExportPlugin;
     }
