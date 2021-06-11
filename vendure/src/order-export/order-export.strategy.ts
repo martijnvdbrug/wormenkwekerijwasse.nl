@@ -34,8 +34,8 @@ export class DefaultCsvStrategy implements OrderExportStrategy {
                     tax: orderLine.lineTax / 100,
                     taxRate: orderLine.taxRate,
                     quantity: orderLine.quantity,
-                    totalPriceEx: orderLine.linePrice,
-                    totalPriceWithTax: orderLine.linePriceWithTax,
+                    totalPriceEx: orderLine.linePrice / 100,
+                    totalPriceWithTax: orderLine.linePriceWithTax / 100,
                     shippingMethod: "",
                 });
             });
