@@ -22,7 +22,7 @@ export const orderConfirmationHandler = new EmailEventListener('order-confirmati
                 path: pdfPath,
             }];
         } catch(e) {
-            console.error(`Failed to attach PDF receipt to email for order ${event.order.code}`);
+            console.error(`Failed to attach PDF receipt to email for order ${event.order.code}`, e);
             return [];
         }
     });
