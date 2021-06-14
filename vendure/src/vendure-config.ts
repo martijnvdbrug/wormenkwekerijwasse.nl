@@ -23,6 +23,7 @@ import {EmailPlugin} from '@vendure/email-plugin';
 import {orderConfirmationHandler, passwordResetHandler} from './email/email.handlers';
 import {NumericOrderCodeStrategy} from './order/numeric-order-code-strategy';
 import {OrderExportPlugin} from "./order-export/order-export.plugin";
+import {DutchPostalCodePlugin} from "vendure-plugin-dutch-postalcode";
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -80,6 +81,7 @@ export const config: VendureConfig = {
     },
     plugins: [
         OrderExportPlugin,
+        DutchPostalCodePlugin.init(process.env.POSTCODE_APIKEY as string),
         ReviewsPlugin,
         SimpleCMSPlugin,
         ShippingByWeightPlugin,

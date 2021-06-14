@@ -335,6 +335,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+vendure-plugin-dutch-postalcode@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-dutch-postalcode/-/vendure-plugin-dutch-postalcode-1.0.0.tgz#4ca606abbacc7d90ffbc3dc6662a1d4afb33836b"
+  integrity sha512-brHqM5KjAmd5i7sSBdySL0u1PTyb262pdpTIWNBq6QzipL+xrule4AF1DyOaXWTCRRCkBy9Y6QXCf1I7b6YuhA==
+
 which-module@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/which-module/-/which-module-2.0.0.tgz#d9ef07dce77b9902b8a3a8fa4b31c3e3f7e6e87a"

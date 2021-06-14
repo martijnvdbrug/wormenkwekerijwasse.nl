@@ -24,7 +24,8 @@ const {
     resetPasswordMutation,
     requestPasswordResetMutation,
     setOrderBillingAddressMutation,
-    setOrderCustomFieldsMutation
+    setOrderCustomFieldsMutation,
+    getDucthAddressQuery
 } = require('./client.queries');
 
 /**
@@ -210,6 +211,11 @@ class Vendure {
         this.validateResult(setOrderCustomFields);
         this.$store.activeOrder = setOrderCustomFields;
         return setOrderCustomFields;
+    }
+
+    async getAddress(input) {
+        const { dutchAddressLookup } = await this.request(getDucthAddressQuery, { input });
+        return dutchAddressLookup;
     }
 
     validateResult(result) {

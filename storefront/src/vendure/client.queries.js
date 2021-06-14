@@ -346,6 +346,15 @@ mutation setOrderCustomFields($customfields: UpdateOrderCustomFieldsInput) {
 }
 `;
 
+const getDucthAddressQuery = `
+    query dutchAddressLookup($input: DutchPostalCodeInput!) {
+        dutchAddressLookup(input: $input) {
+            street
+            city
+        }
+    }
+`;
+
 
 module.exports = {
     getStockForProductsQuery,
@@ -372,5 +381,6 @@ module.exports = {
     resetPasswordMutation,
     requestPasswordResetMutation,
     setOrderBillingAddressMutation,
-    setOrderCustomFieldsMutation
+    setOrderCustomFieldsMutation,
+    getDucthAddressQuery
 };

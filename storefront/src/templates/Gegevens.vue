@@ -229,6 +229,19 @@ export default {
         return country.code;
       }
     },
+    async getAddress() {
+      if (this.address?.postalCode?.length < 6 || !this.address?.streetLine2) {
+        return;
+      }
+      const address = await this.$vendure.getAddress({
+        postalCode: this.address.postalCode,
+        houseNumber: this.address.streetLine2
+      });
+      if (address && address.street) {
+        this.address.streetLine1 = address.street;
+        this.address.city = address.city;
+      }
+    },
     async submit() {
       const address = {
         ...this.address,
