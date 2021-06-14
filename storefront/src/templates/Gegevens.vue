@@ -75,25 +75,25 @@
                   </div>
                   <div class="grid-x grid-padding-x">
                     <div class="cell small-8">
-                      <label>Straat*
-                        <input type="text" name="street" required v-model="address.streetLine1">
+                      <label>Postcode*
+                        <input type="text" name="postalcode" required v-model="address.postalCode" maxlength="11" v-on:change="getAddress(address)">
                       </label>
                     </div>
                     <div class="cell small-4">
                       <label>Huisnr*
-                        <input type="text" name="housenr" required v-model="address.streetLine2">
+                        <input type="text" name="housenr" required v-model="address.streetLine2" v-on:change="getAddress(address)">
                       </label>
                     </div>
                   </div>
                   <div class="grid-x grid-padding-x">
-                    <div class="cell small-8">
+                    <div class="cell small-6">
                       <label>Plaats*
                         <input type="text" name="city" required v-model="address.city" maxlength="29">
                       </label>
                     </div>
-                    <div class="cell small-4">
-                      <label>Postcode*
-                        <input type="text" name="postalcode" required v-model="address.postalCode" maxlength="11">
+                    <div class="cell small-6">
+                      <label>Straat*
+                        <input type="text" name="street" required v-model="address.streetLine1">
                       </label>
                     </div>
                   </div>
@@ -131,25 +131,25 @@
                     </div>
                     <div class="grid-x grid-padding-x">
                       <div class="cell small-8">
-                        <label>Straat*
-                          <input type="text" name="street" :required="differentBillingAddress" v-model="billingAddress.streetLine1" minlength="4">
+                        <label>Postcode*
+                          <input type="text" name="postalcode" :required="differentBillingAddress" v-model="billingAddress.postalCode" v-on:change="getAddress(billingAddress)">
                         </label>
                       </div>
                       <div class="cell small-4">
                         <label>Huisnr*
-                          <input type="text" name="housenr" :required="differentBillingAddress" v-model="billingAddress.streetLine2">
+                          <input type="text" name="housenr" :required="differentBillingAddress" v-model="billingAddress.streetLine2" v-on:change="getAddress(billingAddress)">
                         </label>
                       </div>
                     </div>
                     <div class="grid-x grid-padding-x">
-                      <div class="cell small-8">
+                      <div class="cell small-6">
                         <label>Plaats*
                           <input type="text" name="city" :required="differentBillingAddress" v-model="billingAddress.city" maxlength="29">
                         </label>
                       </div>
-                      <div class="cell small-4">
-                        <label>Postcode*
-                          <input type="text" name="postalcode" :required="differentBillingAddress" v-model="billingAddress.postalCode">
+                      <div class="cell small-6">
+                        <label>Straat*
+                          <input type="text" name="street" :required="differentBillingAddress" v-model="billingAddress.streetLine1" minlength="4">
                         </label>
                       </div>
                     </div>
@@ -229,7 +229,7 @@ export default {
         return country.code;
       }
     },
-    async getAddress() {
+    async getAddress(updatableAddress) {
       if (this.address?.postalCode?.length < 6 || !this.address?.streetLine2) {
         return;
       }
@@ -238,8 +238,8 @@ export default {
         houseNumber: this.address.streetLine2
       });
       if (address && address.street) {
-        this.address.streetLine1 = address.street;
-        this.address.city = address.city;
+        updatableAddress.streetLine1 = address.street;
+        updatableAddress.city = address.city;
       }
     },
     async submit() {
