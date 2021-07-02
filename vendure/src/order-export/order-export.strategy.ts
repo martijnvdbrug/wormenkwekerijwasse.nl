@@ -11,53 +11,49 @@ export interface OrderExportStrategy {
 interface CsvDataLine {
     orderCode: string
     status: string
+    orderTotalEx: string | number
+    orderTotalWithTax: string | number
+    shippingMethod: string
+    // This is only for orderlines
     variant: string
     product: string
     quantity: number | string
-    tax: string | number
-    taxRate: string | number
-    totalPriceEx: string | number
-    totalPriceWithTax: string | number
-    shippingMethod: string
 }
 
 export class DefaultCsvStrategy implements OrderExportStrategy {
     async toCsv(orders: Order[]): Promise<string> {
         const csvData: CsvDataLine[] = [];
         orders.forEach(order => {
+            csvData.push({
+               orderCode: order.code,
+                status: order.state,
+                variant: "",
+                product: "",
+                quantity: "",
+                orderTotalEx: this.toCurrency(order.total),
+                orderTotalWithTax: this.toCurrency(order.totalWithTax),
+                shippingMethod: order.shippingLines?.[0]?.shippingMethod?.translations?.[0]?.name || "unknown shippingmethod",
+
+            });
             order.lines.forEach(orderLine => {
                 csvData.push({
                     orderCode: order.code,
-                    status: order.state,
+                    status: "",
                     variant: orderLine.productVariant.translations?.[0]?.name,
                     product: orderLine.productVariant.product?.translations?.[0]?.name,
-                    tax: orderLine.lineTax / 100,
-                    taxRate: orderLine.taxRate,
                     quantity: orderLine.quantity,
-                    totalPriceEx: orderLine.linePrice / 100,
-                    totalPriceWithTax: orderLine.linePriceWithTax / 100,
+                    orderTotalEx: "",
+                    orderTotalWithTax: "",
                     shippingMethod: "",
                 });
-            });
-            const shippingTax = (order.shippingWithTax - order.shipping) / 100;
-            let shippingTaxRate = "";
-            if (order.shippingLines?.length === 1) {
-                shippingTaxRate = String(order.shippingLines[0].taxRate)
-            }
-            csvData.push({
-                orderCode: order.code,
-                status: "",
-                variant: "",
-                product: "",
-                tax: shippingTax,
-                taxRate: shippingTaxRate,
-                quantity: "",
-                totalPriceEx: order.shipping / 100,
-                totalPriceWithTax: order.shippingWithTax / 100,
-                shippingMethod: order.shippingLines?.[0]?.shippingMethod?.translations?.[0]?.name || "unknown shippingmethod",
             });
         });
         return papa.unparse(csvData);
     }
+
+    private toCurrency(price: number): string {
+        return (price / 100).toFixed(2);
+    }
+
 }
 

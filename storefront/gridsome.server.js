@@ -46,6 +46,8 @@ module.exports = async function (api) {
         products.reverse();
         const featuredProducts = products.filter(p => p.facetValues.find(facetValue => facetValue.name === 'featured')).slice(0,8);
 
+        console.log(JSON.stringify(collections));
+
         /* -----------------  Home --------------------------------------------------------------------------- */
         createPage({
             path: `/`,
