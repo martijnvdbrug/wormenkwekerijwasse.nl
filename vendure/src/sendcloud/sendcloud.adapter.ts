@@ -7,7 +7,9 @@ import {ParcelInput, ParcelInputItem} from './types/sendcloud-api-input.types';
  * @param variants including corresponding product
  */
 export function toParcelInput(order: Order, variants: ProductVariant[]): ParcelInput {
-    const items = order.lines.map(line => {
+    const items = order.lines
+        .filter(line => line.quantity >= 1)
+        .map(line => {
         const variant = variants.find(variant => variant.id === line.productVariant.id);
         if (!variant) {
             throw Error(`Cannot create SendCloud parcelInputItems, because productVariant with id ${line.productVariant.id} cannot be found.`);

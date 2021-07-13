@@ -33,12 +33,12 @@
                       collection.name
                     }}
                   </g-link>
-                  <g-link v-for="subCollection of collection.children"
+<!--                  <g-link v-for="subCollection of collection.children"
                           class="sub-collection"
                           :key="subCollection.slug"
                           :to="`/${categoryPrefix}/${subCollection.slug}`">
                     {{ subCollection.name }}
-                  </g-link>
+                  </g-link>-->
                 </li>
               </ul>
             </li>
