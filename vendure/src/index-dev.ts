@@ -7,13 +7,13 @@ import localtunnel from 'localtunnel';
  * Dev env settings
  */
 (async () => {
-    const tunnel = await localtunnel({port: 3000});
+/*    const tunnel = await localtunnel({port: 3000});
     // the assigned public url for your tunnel
     process.env.VENDURE_HOST = tunnel.url;
     console.log('Localtunnel set up', tunnel.url);
     tunnel.on('close', () => {
         console.error('tunnel closed');
-    });
+    });*/
 })();
 
 bootstrap({

@@ -24,6 +24,7 @@ import {orderConfirmationHandler, passwordResetHandler} from './email/email.hand
 import {NumericOrderCodeStrategy} from './order/numeric-order-code-strategy';
 import {OrderExportPlugin} from "./order-export/order-export.plugin";
 import {DutchPostalCodePlugin} from "vendure-plugin-dutch-postalcode";
+import {KeepAlivePlugin} from "./keep-alive/keep-alive.plugin";
 
 export const config: VendureConfig = {
     orderOptions: {
@@ -80,6 +81,7 @@ export const config: VendureConfig = {
         ]
     },
     plugins: [
+        KeepAlivePlugin,
         OrderExportPlugin,
         DutchPostalCodePlugin.init(process.env.POSTCODE_APIKEY as string),
         ReviewsPlugin,
