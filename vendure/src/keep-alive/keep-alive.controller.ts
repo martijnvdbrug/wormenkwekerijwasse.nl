@@ -10,7 +10,7 @@ export class KeepAliveController {
     @Get('/')
     async keepAlive(): Promise<void> {
         await new Promise(function(resolve) {
-            setTimeout(resolve, 5000)
+            setTimeout(resolve, 10000)
         });
     }
 
